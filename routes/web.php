@@ -91,8 +91,8 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'en|es|fr|ur']], f
     */
 Route::prefix('/admin')->group(function () {
     // Dashboard
-    Route::get('/', [DashboardController::class, 'index'])
-      ->name('admin.dashboard')
+    Route::get('/home', [DashboardController::class, 'index'])
+      ->name('admin.dashboard');
 });
 
     /*
