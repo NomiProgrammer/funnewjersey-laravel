@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Admin\DashboardController;
 // Breeze Package Includes
 
 // Our Includes Area(start)
@@ -88,8 +89,11 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'en|es|fr|ur']], f
     | Front dashboard Routes(end)
     |--------------------------------------------------------------------------
     */
-
-
+Route::prefix('/admin')->group(function () {
+    // Dashboard
+    Route::get('/', [DashboardController::class, 'index'])
+      ->name('admin.dashboard')
+});
 
     /*
     |--------------------------------------------------------------------------
