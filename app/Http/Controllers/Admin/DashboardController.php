@@ -9,7 +9,7 @@ class DashboardController extends Controller
 {
   public function index()
   {
-    dd("adsfsd");
+
     return view('dashboard.admin.pages.index');
   }
 }
