@@ -89,11 +89,11 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'en|es|fr|ur']], f
     | Front dashboard Routes(end)
     |--------------------------------------------------------------------------
     */
-Route::prefix('/admin')->group(function () {
-    // Dashboard
-    Route::get('/', [DashboardController::class, 'index'])
-      ->name('admin.dashboard')
-});
+    Route::prefix('/admin')->group(function () {
+        // Dashboard
+        Route::get('/', [DashboardController::class, 'index'])
+            ->name('admin.dashboard');
+    });
 
     /*
     |--------------------------------------------------------------------------
