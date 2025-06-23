@@ -101,6 +101,11 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'en|es|fr|ur']], f
             // Dashboard
             Route::get('/home', [DashboardController::class, 'index'])
             ->name('admin.dashboard');
+            //Base Routes
+            Route::get('/create', [DashboardController::class, 'create'])
+            ->name('base.create');
+            Route::get('/index', [DashboardController::class, 'manage'])
+            ->name('base.index');
         });
 
 
