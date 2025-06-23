@@ -25,8 +25,7 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <!-- left column -->
-          <div class="col-md-6">
+          <div class="col-md-12">
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
@@ -44,6 +43,32 @@
                     <label for="exampleInputPassword1">Password</label>
                     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                   </div>
+                <div class="form-group">
+                  <label>Multiple</label>
+                  <select class="select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
+                    <option>Alabama</option>
+                    <option>Alaska</option>
+                    <option>California</option>
+                    <option>Delaware</option>
+                    <option>Tennessee</option>
+                    <option>Texas</option>
+                    <option>Washington</option>
+                  </select>
+                </div>
+                <!-- /.form-group -->
+                <div class="form-group">
+                  <label>Disabled Result</label>
+                  <select class="form-control select2" style="width: 100%;">
+                    <option selected="selected">Alabama</option>
+                    <option>Alaska</option>
+                    <option disabled="disabled">California (disabled)</option>
+                    <option>Delaware</option>
+                    <option>Tennessee</option>
+                    <option>Texas</option>
+                    <option>Washington</option>
+                  </select>
+                </div>
+                <!-- /.form-group -->
                   <div class="form-group">
                     <label for="exampleInputFile">File input</label>
                     <div class="input-group">
@@ -70,9 +95,8 @@
             </div>
             <!-- /.card -->
           </div>
-          <!--/.col (left) -->
         </div>
-        <!-- /.row -->
+        <!--row -->
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
