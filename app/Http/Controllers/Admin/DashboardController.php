@@ -21,9 +21,13 @@ public function manage(Request $request)
 {
     if ($request->ajax()) {
         $data = [
-            ['name' => 'Ali', 'email' => 'ali@example.com', 'created_at' => '2024-01-01'],
-            ['name' => 'Sara', 'email' => 'sara@example.com', 'created_at' => '2024-02-01'],
-            ['name' => 'John', 'email' => 'john@example.com', 'created_at' => '2024-03-15'],
+            ['engine' => 'Trident', 'browser' => 'IE 4.0', 'platform' => 'Win 95+', 'version' => '4', 'grade' => 'X'],
+            ['engine' => 'Trident', 'browser' => 'IE 5.0', 'platform' => 'Win 95+', 'version' => '5', 'grade' => 'C'],
+            ['engine' => 'Trident', 'browser' => 'IE 5.5', 'platform' => 'Win 95+', 'version' => '5.5', 'grade' => 'A'],
+            ['engine' => 'Trident', 'browser' => 'IE 6', 'platform' => 'Win 98+', 'version' => '6', 'grade' => 'A'],
+            ['engine' => 'Trident', 'browser' => 'IE 7', 'platform' => 'Win XP SP2+', 'version' => '7', 'grade' => 'A'],
+            ['engine' => 'Trident', 'browser' => 'AOL Browser', 'platform' => 'Win XP', 'version' => '6', 'grade' => 'A'],
+            ['engine' => 'Other', 'browser' => 'All others', 'platform' => '-', 'version' => '-', 'grade' => 'U'],
         ];
 
         return DataTables::of($data)->make(true);
