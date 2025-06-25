@@ -1,5 +1,5 @@
 @extends('dashboard.admin.layouts.app')
-@section('page_title', 'Dashboard')
+@section('page_title', 'Manage User')
 
 @section('css')
     <!-- DataTables CSS -->
