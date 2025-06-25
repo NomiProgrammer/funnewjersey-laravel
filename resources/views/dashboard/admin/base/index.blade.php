@@ -23,7 +23,7 @@
 
 @include('components.datatables-script', [
     'tableId' => 'datatable',
-    'ajaxUrl' => route('users.index'), // Your ajax route
+    'ajaxUrl' => route('base.index'), // Your ajax route
     'columns' => [
         ['data' => 'name', 'name' => 'name'],
         ['data' => 'email', 'name' => 'email'],
