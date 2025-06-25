@@ -2,55 +2,51 @@
 @section('page_title', 'Dashboard')
 
 @section('css')
-    <!-- Bootstrap 4 DataTables CSS -->
+    <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <style>
         table.dataTable thead {
             background-color: #f1f5f9;
-            /* soft light-blue-gray background */
             color: #1f2937;
-            /* dark gray text for contrast */
             font-weight: 600;
         }
 
         table.dataTable thead th {
             border-bottom: 2px solid #cbd5e1;
-            /* subtle bottom border */
         }
 
         .dt-buttons .btn {
             margin-right: 8px;
+            background-color: transparent !important;
+            border: 1px solid #ccc !important;
+            color: inherit !important;
+            box-shadow: none !important;
+            padding: 4px 10px !important;
         }
 
-        /* Active page number */
+        .dt-buttons .btn:hover {
+            background-color: #f8f9fa !important;
+            color: #000 !important;
+        }
+
         .paginate_button.page-item.active a {
             background-color: #17a2b8 !important;
-            /* Bootstrap info color */
             color: white !important;
         }
 
-        /* On hover */
         .paginate_button.page-item a:hover {
             background-color: #e0f7fa !important;
             color: #000 !important;
         }
 
-        /* Soft professional header */
-        table.dataTable thead {
-            background-color: #f8fafc;
-            color: #1f2937;
-            font-weight: 600;
-        }
-
-        /* Hover row effect */
         table.dataTable tbody tr:hover {
             background-color: #f1f5f9;
         }
     </style>
-
 @endsection
 
 @section('admin-content')
@@ -101,7 +97,6 @@
                                     </tfoot>
                                     <tbody></tbody>
                                 </table>
-
                             </div>
                         </div>
                     </div>
@@ -112,16 +107,15 @@
 @endsection
 
 @section('js')
-    <!-- jQuery first -->
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 
-    <!-- Bootstrap 4 DataTables JS -->
+    <!-- DataTables & Export Plugins -->
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap4.min.js"></script>
 
-    <!-- Optional: Export buttons -->
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.bootstrap4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
@@ -129,6 +123,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+
     <script>
         $('#example2').DataTable({
             processing: true,
@@ -157,7 +152,9 @@
                     name: 'created_at'
                 }
             ],
-            dom: "<'d-flex justify-content-start mb-2'B>frtip", // buttons with spacing
+            dom: "<'d-flex justify-content-between align-items-center mb-3'<'dt-buttons'B><'dataTables_filter'f>>" +
+                "<'table-responsive'tr>" +
+                "<'d-flex justify-content-between align-items-center mt-3'lip>",
             buttons: [{
                     extend: 'copyHtml5',
                     text: '<i class="fas fa-copy"></i> Copy',
@@ -179,7 +176,6 @@
                     className: 'btn btn-outline-primary btn-sm me-2'
                 }
             ]
-
         });
     </script>
 @endsection
