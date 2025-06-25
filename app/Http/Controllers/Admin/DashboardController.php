@@ -25,7 +25,6 @@ class DashboardController extends Controller
             $data = User::select(['id', 'name', 'email', 'email_verified_at', 'created_at']);
             return DataTables::of($data)->make(true);
         }
-
         return view('dashboard.admin.base.index');
     }
 }

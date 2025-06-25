@@ -9,28 +9,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
+        /* Header */
         table.dataTable thead {
-            background-color: #f1f5f9;
-            color: #1f2937;
+            background-color: #17a2b8;
+            color: white;
             font-weight: 600;
         }
 
-        table.dataTable thead th {
-            border-bottom: 2px solid #cbd5e1;
+        /* Footer */
+        table.dataTable tfoot {
+            background-color: #17a2b8;
+            color: white;
+            font-weight: 600;
         }
 
-        .dt-buttons .btn {
-            margin-right: 8px;
-            background-color: transparent !important;
-            border: 1px solid #ccc !important;
-            color: inherit !important;
-            box-shadow: none !important;
-            padding: 4px 10px !important;
-        }
-
-        .dt-buttons .btn:hover {
-            background-color: #f8f9fa !important;
-            color: #000 !important;
+        /* Sorting arrows on white */
+        table.dataTable thead th.sorting:before,
+        table.dataTable thead th.sorting:after,
+        table.dataTable tfoot th.sorting:before,
+        table.dataTable tfoot th.sorting:after {
+            color: rgba(255, 255, 255, 0.8) !important;
         }
 
         .paginate_button.page-item.active a {
@@ -43,24 +41,57 @@
             color: #000 !important;
         }
 
-        table.dataTable tbody tr:hover {
-            background-color: #f1f5f9;
+        /* Button styles with icon-colored borders */
+        .dt-buttons .btn-outline-secondary {
+            color: #6c757d !important;
+            border-color: #6c757d !important;
+        }
+
+        .dt-buttons .btn-outline-success {
+            color: #28a745 !important;
+            border-color: #28a745 !important;
+        }
+
+        .dt-buttons .btn-outline-danger {
+            color: #dc3545 !important;
+            border-color: #dc3545 !important;
+        }
+
+        .dt-buttons .btn-outline-primary {
+            color: #007bff !important;
+            border-color: #007bff !important;
+        }
+
+        .dt-buttons .btn {
+            margin-right: 8px;
+            background-color: transparent !important;
+            box-shadow: none !important;
+            padding: 4px 10px !important;
+        }
+
+        .dt-buttons .btn:hover {
+            background-color: transparent !important;
+            opacity: 0.85;
         }
     </style>
 @endsection
 
 @section('admin-content')
+    @php
+        $pageName = 'Manage Users';
+        $pageName2 = 'User Records';
+    @endphp
     <div class="content-wrapper">
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Users DataTable</h1>
+                        <h1>{{ $pageName }}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Users</li>
+                            <li class="breadcrumb-item active">{{ $pageName }}</li>
                         </ol>
                     </div>
                 </div>
@@ -73,7 +104,14 @@
                     <div class="col-12">
                         <div class="card card-info">
                             <div class="card-header">
-                                <h3 class="card-title">User Records</h3>
+                                <h3 class="card-title">{{ $pageName2 }}</h3>
+                                <div class="card-tools">
+                                    <a href="" class="float-right btn btn-block btn-success btn-sm"><i
+                                            class="fas fa-plus"></i>
+                                        &nbsp;
+                                        Add New
+                                    </a>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <table id="example2" class="table table-bordered table-striped table-hover">
