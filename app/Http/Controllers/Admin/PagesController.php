@@ -5,15 +5,26 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Pages;
+use Illuminate\Support\Str;
+use Yajra\DataTables\DataTables;
 
 class PagesController extends Controller
 {
     // List all pages
-    public function index()
-    {
-        $pages = Pages::all();
-        return response()->json($pages);
+public function index(Request $request)
+{
+    if ($request->ajax()) {
+        $data = Pages::select(['id', 'title', 'content', 'status']);
+
+        return datatables()->of($data)
+            ->addColumn('content', function ($row) {
+                return Str::limit(strip_tags($row->content), 50);
+            })
+            ->make(true);
     }
+
+    return view('dashboard.admin.pages_menu.index');
+}
 
     // Show a single page
     public function show($id)

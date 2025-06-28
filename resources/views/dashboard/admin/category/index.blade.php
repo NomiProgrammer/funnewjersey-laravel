@@ -1,6 +1,5 @@
 @extends('dashboard.admin.layouts.app')
-@section('page_title', 'Manage Parallax Slides')
-
+@section('page_title', 'Manage Categories')
 
 @section('css')
     <!-- DataTables CSS -->
@@ -10,21 +9,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
-        /* Header */
         table.dataTable thead {
             background-color: #17a2b8;
             color: white;
             font-weight: 600;
         }
 
-        /* Footer */
         table.dataTable tfoot {
             background-color: #17a2b8;
             color: white;
             font-weight: 600;
         }
 
-        /* Sorting arrows on white */
         table.dataTable thead th.sorting:before,
         table.dataTable thead th.sorting:after,
         table.dataTable tfoot th.sorting:before,
@@ -42,7 +38,6 @@
             color: #000 !important;
         }
 
-        /* Button styles with icon-colored borders */
         .dt-buttons .btn-outline-secondary {
             color: #6c757d !important;
             border-color: #6c757d !important;
@@ -79,8 +74,8 @@
 
 @section('admin-content')
     @php
-        $pageName = 'Manage Parallax Slides';
-        $pageName2 = 'Parallax Slider Records';
+        $pageName = 'Manage Categories';
+        $pageName2 = 'Categories Records';
     @endphp
 
     <div class="content-wrapper">
@@ -118,31 +113,29 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Slide Order</th>
-                                            <th>Featured Img</th>
                                             <th>Title</th>
-                                            <th>Description</th>
-                                            <th>Status</th>
-                                            <th>Category</th>
-                                            <th>Expires</th>
-                                            <th>Starts</th>
+                                            <th>Private or Public</th>
+                                            <th>Type</th>
+                                            <th>Parent</th>
+                                            <th>Image</th>
+                                            <th>FA icon class</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Slide Order</th>
-                                            <th>Featured Img</th>
                                             <th>Title</th>
-                                            <th>Description</th>
-                                            <th>Status</th>
-                                            <th>Category</th>
-                                            <th>Expires</th>
-                                            <th>Starts</th>
+                                            <th>Private or Public</th>
+                                            <th>Type</th>
+                                            <th>Parent</th>
+                                            <th>Image</th>
+                                            <th>FA icon class</th>
                                         </tr>
                                     </tfoot>
                                     <tbody></tbody>
                                 </table>
+
+
                             </div>
                         </div>
                     </div>
@@ -153,16 +146,11 @@
 @endsection
 
 @section('js')
-    <!-- Same JS CDN scripts as you have -->
-    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-
-    <!-- DataTables & Export Plugins -->
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap4.min.js"></script>
-
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.bootstrap4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
@@ -171,74 +159,33 @@
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
 
-    <script>
-        $('#example2').DataTable({
-            processing: true,
-            serverSide: true,
-            responsive: false,
-            autoWidth: false,
-            ajax: "{{ route('parallax.index') }}",
-            columns: [{
-                    data: 'id',
-                    name: 'id'
-                },
-                {
-                    data: 'slide_order',
-                    name: 'slide_order'
-                },
-                {
-                    data: 'featured_img',
-                    name: 'featured_img'
-                },
-                {
-                    data: 'title',
-                    name: 'title'
-                },
-                {
-                    data: 'description',
-                    name: 'description'
-                },
-                {
-                    data: 'status',
-                    name: 'status'
-                },
-                {
-                    data: 'category',
-                    name: 'category'
-                },
-                {
-                    data: 'expires',
-                    name: 'expires'
-                },
-                {
-                    data: 'starts',
-                    name: 'starts'
-                },
-            ],
-            dom: "<'d-flex justify-content-between align-items-center mb-3'<'dt-buttons'B><'dataTables_filter'f>>" +
-                "<'table-responsive'tr>" +
-                "<'d-flex justify-content-between align-items-center mt-3'lip>",
-            buttons: [{
-                    extend: 'copyHtml5',
-                    text: '<i class="fas fa-copy"></i> Copy',
-                    className: 'btn btn-outline-secondary btn-sm me-2'
-                },
-                {
-                    extend: 'excelHtml5',
-                    text: '<i class="fas fa-file-excel"></i> Excel',
-                    className: 'btn btn-outline-success btn-sm me-2'
-                },
-                {
-                    extend: 'pdfHtml5',
-                    text: '<i class="fas fa-file-pdf"></i> PDF',
-                    className: 'btn btn-outline-danger btn-sm me-2'
-                },
-                {
-                    extend: 'print',
-                    text: '<i class="fas fa-print"></i> Print',
-                    className: 'btn btn-outline-primary btn-sm me-2'
-                }
-            ]
-        });
-    </script>
+<script>
+    $('#example2').DataTable({
+        processing: true,
+        serverSide: true,
+        responsive: true,
+        autoWidth: false,
+        ajax: "{{ route('category.index') }}",
+        columns: [
+            { data: 'id', name: 'id' },
+            { data: 'title', name: 'title' },
+            { data: 'not_public', name: 'not_public' },
+            { data: 'islink', name: 'islink' },
+            { data: 'parent', name: 'parent' },
+            { data: 'featured_img', name: 'featured_img' },
+            { data: 'fa_icon', name: 'fa_icon' },
+        ],
+        dom: "<'d-flex justify-content-between align-items-center mb-3'<'dt-buttons'B><'dataTables_filter'f>>" +
+            "<'table-responsive'tr>" +
+            "<'d-flex justify-content-between align-items-center mt-3'lip>",
+        buttons: [
+            { extend: 'copyHtml5', text: '<i class="fas fa-copy"></i> Copy', className: 'btn btn-outline-secondary btn-sm me-2' },
+            { extend: 'excelHtml5', text: '<i class="fas fa-file-excel"></i> Excel', className: 'btn btn-outline-success btn-sm me-2' },
+            { extend: 'pdfHtml5', text: '<i class="fas fa-file-pdf"></i> PDF', className: 'btn btn-outline-danger btn-sm me-2' },
+            { extend: 'print', text: '<i class="fas fa-print"></i> Print', className: 'btn btn-outline-primary btn-sm me-2' }
+        ]
+    });
+</script>
+
+
 @endsection

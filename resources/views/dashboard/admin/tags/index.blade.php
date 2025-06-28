@@ -1,6 +1,5 @@
 @extends('dashboard.admin.layouts.app')
-@section('page_title', 'Manage Parallax Slides')
-
+@section('page_title', 'Manage Tags')
 
 @section('css')
     <!-- DataTables CSS -->
@@ -10,66 +9,52 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
-        /* Header */
         table.dataTable thead {
             background-color: #17a2b8;
             color: white;
             font-weight: 600;
         }
-
-        /* Footer */
         table.dataTable tfoot {
             background-color: #17a2b8;
             color: white;
             font-weight: 600;
         }
-
-        /* Sorting arrows on white */
         table.dataTable thead th.sorting:before,
         table.dataTable thead th.sorting:after,
         table.dataTable tfoot th.sorting:before,
         table.dataTable tfoot th.sorting:after {
             color: rgba(255, 255, 255, 0.8) !important;
         }
-
         .paginate_button.page-item.active a {
             background-color: #17a2b8 !important;
             color: white !important;
         }
-
         .paginate_button.page-item a:hover {
             background-color: #e0f7fa !important;
             color: #000 !important;
         }
-
-        /* Button styles with icon-colored borders */
         .dt-buttons .btn-outline-secondary {
             color: #6c757d !important;
             border-color: #6c757d !important;
         }
-
         .dt-buttons .btn-outline-success {
             color: #28a745 !important;
             border-color: #28a745 !important;
         }
-
         .dt-buttons .btn-outline-danger {
             color: #dc3545 !important;
             border-color: #dc3545 !important;
         }
-
         .dt-buttons .btn-outline-primary {
             color: #007bff !important;
             border-color: #007bff !important;
         }
-
         .dt-buttons .btn {
             margin-right: 8px;
             background-color: transparent !important;
             box-shadow: none !important;
             padding: 4px 10px !important;
         }
-
         .dt-buttons .btn:hover {
             background-color: transparent !important;
             opacity: 0.85;
@@ -79,8 +64,8 @@
 
 @section('admin-content')
     @php
-        $pageName = 'Manage Parallax Slides';
-        $pageName2 = 'Parallax Slider Records';
+        $pageName = 'Manage Tags';
+        $pageName2 = 'Tags Records';
     @endphp
 
     <div class="content-wrapper">
@@ -114,35 +99,24 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <table id="example2" class="table table-bordered table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Slide Order</th>
-                                            <th>Featured Img</th>
-                                            <th>Title</th>
-                                            <th>Description</th>
-                                            <th>Status</th>
-                                            <th>Category</th>
-                                            <th>Expires</th>
-                                            <th>Starts</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Slide Order</th>
-                                            <th>Featured Img</th>
-                                            <th>Title</th>
-                                            <th>Description</th>
-                                            <th>Status</th>
-                                            <th>Category</th>
-                                            <th>Expires</th>
-                                            <th>Starts</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody></tbody>
-                                </table>
+<table id="example2" class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Title</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>#</th>
+            <th>Title</th>
+        </tr>
+    </tfoot>
+    <tbody></tbody>
+</table>
+
+
+
                             </div>
                         </div>
                     </div>
@@ -153,16 +127,11 @@
 @endsection
 
 @section('js')
-    <!-- Same JS CDN scripts as you have -->
-    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-
-    <!-- DataTables & Export Plugins -->
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap4.min.js"></script>
-
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.bootstrap4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
@@ -171,74 +140,29 @@
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
 
-    <script>
-        $('#example2').DataTable({
-            processing: true,
-            serverSide: true,
-            responsive: false,
-            autoWidth: false,
-            ajax: "{{ route('parallax.index') }}",
-            columns: [{
-                    data: 'id',
-                    name: 'id'
-                },
-                {
-                    data: 'slide_order',
-                    name: 'slide_order'
-                },
-                {
-                    data: 'featured_img',
-                    name: 'featured_img'
-                },
-                {
-                    data: 'title',
-                    name: 'title'
-                },
-                {
-                    data: 'description',
-                    name: 'description'
-                },
-                {
-                    data: 'status',
-                    name: 'status'
-                },
-                {
-                    data: 'category',
-                    name: 'category'
-                },
-                {
-                    data: 'expires',
-                    name: 'expires'
-                },
-                {
-                    data: 'starts',
-                    name: 'starts'
-                },
-            ],
-            dom: "<'d-flex justify-content-between align-items-center mb-3'<'dt-buttons'B><'dataTables_filter'f>>" +
-                "<'table-responsive'tr>" +
-                "<'d-flex justify-content-between align-items-center mt-3'lip>",
-            buttons: [{
-                    extend: 'copyHtml5',
-                    text: '<i class="fas fa-copy"></i> Copy',
-                    className: 'btn btn-outline-secondary btn-sm me-2'
-                },
-                {
-                    extend: 'excelHtml5',
-                    text: '<i class="fas fa-file-excel"></i> Excel',
-                    className: 'btn btn-outline-success btn-sm me-2'
-                },
-                {
-                    extend: 'pdfHtml5',
-                    text: '<i class="fas fa-file-pdf"></i> PDF',
-                    className: 'btn btn-outline-danger btn-sm me-2'
-                },
-                {
-                    extend: 'print',
-                    text: '<i class="fas fa-print"></i> Print',
-                    className: 'btn btn-outline-primary btn-sm me-2'
-                }
-            ]
-        });
-    </script>
+<script>
+$('#example2').DataTable({
+    processing: true,
+    serverSide: true,
+    responsive: true,
+    autoWidth: false,
+    ajax: "{{ route('tags.index') }}",
+    columns: [
+        { data: 'id', name: 'id' },
+        { data: 'title', name: 'title' }
+    ],
+    dom: "<'d-flex justify-content-between align-items-center mb-3'<'dt-buttons'B><'dataTables_filter'f>>" +
+         "<'table-responsive'tr>" +
+         "<'d-flex justify-content-between align-items-center mt-3'lip>",
+    buttons: [
+        { extend: 'copyHtml5', text: '<i class="fas fa-copy"></i> Copy', className: 'btn btn-outline-secondary btn-sm me-2' },
+        { extend: 'excelHtml5', text: '<i class="fas fa-file-excel"></i> Excel', className: 'btn btn-outline-success btn-sm me-2' },
+        { extend: 'pdfHtml5', text: '<i class="fas fa-file-pdf"></i> PDF', className: 'btn btn-outline-danger btn-sm me-2' },
+        { extend: 'print', text: '<i class="fas fa-print"></i> Print', className: 'btn btn-outline-primary btn-sm me-2' }
+    ]
+});
+
+</script>
+
+
 @endsection

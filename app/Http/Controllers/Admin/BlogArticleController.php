@@ -5,15 +5,31 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\BlogArticle;
-
+use Yajra\DataTables\DataTables;
+use Illuminate\Support\Str;
 class BlogArticleController extends Controller
 {
     // List all blog articles
-    public function index()
-    {
-        $articles = BlogArticle::all();
-        return response()->json($articles);
+public function index(Request $request)
+{
+    if ($request->ajax()) {
+        $data = BlogArticle::select(['id', 'type', 'title', 'description', 'status']);
+
+        return datatables()->of($data)
+            ->addColumn('title', function ($row) {
+                // Decode JSON and get 'en'
+                $title = json_decode($row->title, true);
+                return $title['en'] ?? '-';
+            })
+            ->addColumn('description', function ($row) {
+                // Shorten description
+                return Str::limit(strip_tags($row->description), 50);
+            })
+            ->make(true);
     }
+
+    return view('dashboard.admin.blog.index');
+}
 
     // Show a single blog article
     public function show($id)

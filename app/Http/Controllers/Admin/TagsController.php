@@ -5,15 +5,21 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Tags;
+use Yajra\DataTables\DataTables;
 
 class TagsController extends Controller
 {
     // List all tags
-    public function index()
-    {
-        $tags = Tags::all();
-        return response()->json($tags);
+public function index(Request $request)
+{
+    if ($request->ajax()) {
+        $data = Tags::select(['id', 'title']);
+        return datatables()->of($data)->make(true);
     }
+
+    return view('dashboard.admin.tags.index');
+}
+
 
     // Show a single tag
     public function show($id)
