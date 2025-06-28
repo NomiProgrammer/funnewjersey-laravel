@@ -5,15 +5,30 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Invoices;
+use Yajra\DataTables\DataTables;
 
 class InvoicesController extends Controller
 {
     // List all invoices
-    public function index()
-    {
-        $invoices = Invoices::all();
-        return response()->json($invoices);
+public function index(Request $request)
+{
+    if ($request->ajax()) {
+        $data = Invoices::select([
+            'id',
+            'total',
+            'title',
+            'description',
+            'created_by',
+            'assigned_to',
+            'expires',
+            'status'
+        ]);
+
+        return DataTables::of($data)->make(true);
     }
+
+    return view('dashboard.admin.invoice.index'); // 👉 adjust your Blade path
+}
 
     // Show a single invoice
     public function show($id)

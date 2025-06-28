@@ -17,11 +17,14 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PackagesController;
 use App\Http\Controllers\Admin\PagesController;
+use App\Http\Controllers\Admin\BlogArticleController;
 use App\Http\Controllers\Admin\ParallaxController;
 use App\Http\Controllers\Admin\BannersAdsController;
+use App\Http\Controllers\Admin\InvoicesController;
 use App\Http\Controllers\Admin\ProductsController;
-use App\Http\Controllers\Admin\TagsController;
 use App\Http\Controllers\Admin\WidgetsController;
+use App\Http\Controllers\Admin\TagsController;
+use App\Http\Controllers\Admin\CategoryController;
 // Admin Includes (End)
 
 
@@ -123,6 +126,34 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'en|es|fr|ur']], f
         // BannerAds Slider
         Route::controller(BannersAdsController::class)->group(function () {
         Route::get('/banners-ads/manage', 'index')->name('bannersads.index');
+        });
+        // Invoice Controller
+        Route::controller(InvoicesController::class)->group(function () {
+        Route::get('/invoices/manage', 'index')->name('invoice.index');
+        });
+        // Category Controller
+        Route::controller(CategoryController::class)->group(function () {
+        Route::get('/category/manage', 'index')->name('category.index');
+        });
+        // Tags Controller
+        Route::controller(TagsController::class)->group(function () {
+        Route::get('/tags/manage', 'index')->name('tags.index');
+        });
+        // Package Controller
+        Route::controller(PackagesController::class)->group(function () {
+        Route::get('/packages/manage', 'index')->name('package.index');
+        });
+        // BlogArticleController Controller
+        Route::controller(BlogArticleController::class)->group(function () {
+        Route::get('/blog/manage', 'index')->name('blog.index');
+        });
+        // PageController Controller
+        Route::controller(PagesController::class)->group(function () {
+        Route::get('/pages/manage', 'index')->name('pages.index');
+        });
+        // Widgets Controller
+        Route::controller(WidgetsController::class)->group(function () {
+        Route::get('/widgets/manage', 'index')->name('widgets.index');
         });
     });
 

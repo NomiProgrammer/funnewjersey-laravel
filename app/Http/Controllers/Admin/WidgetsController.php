@@ -5,15 +5,22 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Widgets;
+use Yajra\DataTables\DataTables;
 
 class WidgetsController extends Controller
 {
     // List all widgets
-    public function index()
-    {
-        $widgets = Widgets::all();
-        return response()->json($widgets);
+public function index(Request $request)
+{
+    if ($request->ajax()) {
+        $data = Widgets::select(['id', 'name', 'status']);
+
+        return datatables()->of($data)
+            ->make(true);
     }
+
+    return view('dashboard.admin.widgets.index');
+}
 
     // Show a single widget
     public function show($id)

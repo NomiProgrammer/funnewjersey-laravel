@@ -5,15 +5,30 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Yajra\DataTables\DataTables;
 
 class CategoryController extends Controller
 {
     // List all categories
-    public function index()
-    {
-        $categories = Category::all();
-        return response()->json($categories);
+public function index(Request $request)
+{
+    if ($request->ajax()) {
+        $data = Category::select([
+            'id',
+            'title',
+            'not_public',
+            'islink',
+            'parent',
+            'featured_img',
+            'fa_icon'
+        ]);
+
+        return DataTables::of($data)->make(true);
     }
+
+    return view('dashboard.admin.category.index');
+}
+
 
     // Show a single category
     public function show($id)

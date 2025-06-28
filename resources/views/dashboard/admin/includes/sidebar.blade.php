@@ -53,14 +53,14 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                <li class="nav-item has-treeview {{ request()->routeIs('parallax.*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link" {{ request()->routeIs('parallax.*') ? 'active' : '' }}>
                         <i class="nav-icon far fa-image"></i>
                         <p>Parallax Slider<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/slider/all"
-                                class="nav-link"><i class="fas fa-images nav-icon"></i>
+                        <li class="nav-item"><a href="{{ route('parallax.index') }}"
+                                class="nav-link {{ request()->routeIs('parallax.index') ? 'active' : '' }}"><i class="fas fa-images nav-icon"></i>
                                 <p>All</p>
                             </a></li>
                         <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/slider/manage"
@@ -69,14 +69,14 @@
                             </a></li>
                     </ul>
                 </li>
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                <li class="nav-item has-treeview {{ request()->routeIs('bannersads.*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('bannersads.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-ad"></i>
                         <p>Banner Ads<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/banner/all"
-                                class="nav-link"><i class="fas fa-flag nav-icon"></i>
+                        <li class="nav-item"><a href="{{ route('bannersads.index') }}"
+                                class="nav-link {{ request()->routeIs('bannersads.index') ? 'active' : '' }}"><i class="fas fa-flag nav-icon"></i>
                                 <p>All</p>
                             </a></li>
                         <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/banner/manage"

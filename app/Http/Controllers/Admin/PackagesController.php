@@ -5,15 +5,20 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Packages;
+use Yajra\DataTables\DataTables;
 
 class PackagesController extends Controller
 {
     // List all packages
-    public function index()
-    {
-        $packages = Packages::all();
-        return response()->json($packages);
+public function index(Request $request)
+{
+    if ($request->ajax()) {
+        $data = Packages::select(['id', 'title', 'price', 'type', 'expiration_time']);
+        return DataTables::of($data)->make(true);
     }
+
+    return view('dashboard.admin.packages.index');
+}
 
     // Show a single package
     public function show($id)
