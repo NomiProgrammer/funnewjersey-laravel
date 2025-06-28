@@ -10,9 +10,9 @@ class ParallaxController extends Controller
 {
 public function index(Request $request)
 {
-dd($data);
 
     if ($request->ajax()) {
+        dd("ASdfd");
         $data = Parallax::select([
             'id',
             'slide_order',
