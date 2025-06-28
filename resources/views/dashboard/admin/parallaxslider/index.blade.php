@@ -201,28 +201,12 @@
                     name: 'description'
                 },
                 {
-                    data: 'created_by',
-                    name: 'created_by'
-                },
-                {
-                    data: 'create_time',
-                    name: 'create_time'
-                },
-                {
                     data: 'status',
                     name: 'status'
                 },
                 {
                     data: 'category',
                     name: 'category'
-                },
-                {
-                    data: 'link',
-                    name: 'link'
-                },
-                {
-                    data: 'alttag',
-                    name: 'alttag'
                 },
                 {
                     data: 'button',
@@ -235,14 +219,6 @@
                 {
                     data: 'starts',
                     name: 'starts'
-                },
-                {
-                    data: 'city',
-                    name: 'city'
-                },
-                {
-                    data: 'county',
-                    name: 'county'
                 },
             ],
             dom: "<'d-flex justify-content-between align-items-center mb-3'<'dt-buttons'B><'dataTables_filter'f>>" +
