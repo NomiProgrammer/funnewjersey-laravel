@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PackagesController;
 use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Admin\ParallaxController;
+use App\Http\Controllers\Admin\BannersAdsController;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\TagsController;
 use App\Http\Controllers\Admin\WidgetsController;
