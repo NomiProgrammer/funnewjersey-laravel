@@ -10,8 +10,7 @@ class ParallaxController extends Controller
 public function index(Request $request)
 {
     if ($request->ajax()) {
-$data = Parallax::select('*');
-
+$data = Parallax::select('*'); dd($data->first());
         return DataTables::of($data)->make(true);
     }
 
