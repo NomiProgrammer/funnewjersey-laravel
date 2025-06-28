@@ -14,8 +14,7 @@ public function index(Request $request)
 {
     if ($request->ajax()) {
         $data = Tags::select(['id', 'title']);
-
-        return DataTables::of($data)->make(true);
+        return datatables()->of($data)->make(true);
     }
 
     return view('dashboard.admin.tags.index');

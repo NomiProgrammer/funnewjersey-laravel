@@ -85,8 +85,8 @@
                             </a></li>
                     </ul>
                 </li>
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                <li class="nav-item has-treeview {{ request()->routeIs('invoice.*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('invoice.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-file-invoice-dollar"></i>
                         <p>Invoices &amp; Billing<i class="right fas fa-angle-left"></i></p>
                     </a>
@@ -95,8 +95,8 @@
                                 class="nav-link"><i class="fas fa-money-check-alt nav-icon"></i>
                                 <p>Payment History</p>
                             </a></li>
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/invoice/all/"
-                                class="nav-link"><i class="fas fa-file-invoice nav-icon"></i>
+                        <li class="nav-item"><a href="{{ route('invoice.index') }}"
+                                class="nav-link {{ request()->routeIs('invoices.index') ? 'active' : '' }}"><i class="fas fa-file-invoice nav-icon"></i>
                                 <p>All</p>
                             </a></li>
                         <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/invoice/manage"
@@ -195,14 +195,14 @@
                             </a></li>
                     </ul>
                 </li>
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                <li class="nav-item has-treeview {{ request()->routeIs('category.*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('category.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-th-list"></i>
                         <p>Category<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/category/all"
-                                class="nav-link"><i class="fas fa-list nav-icon"></i>
+                        <li class="nav-item"><a href="{{route('category.index')}}"
+                                class="nav-link {{ request()->routeIs('category.index') ? 'active' : '' }}"><i class="fas fa-list nav-icon"></i>
                                 <p>All categories</p>
                             </a></li>
                         <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/category/newcategory"
@@ -211,14 +211,14 @@
                             </a></li>
                     </ul>
                 </li>
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                <li class="nav-item has-treeview {{ request()->routeIs('tags.*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('tags.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tag"></i>
                         <p>Tags<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/tag/all"
-                                class="nav-link"><i class="fas fa-tags nav-icon"></i>
+                        <li class="nav-item"><a href="{{route('tags.index')}}"
+                                class="nav-link {{ request()->routeIs('tags.index') ? 'active' : '' }}"><i class="fas fa-tags nav-icon"></i>
                                 <p>All Tags</p>
                             </a></li>
                         <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/tag/newtag"
@@ -250,14 +250,14 @@
                         <p>Profile</p>
                     </a>
                 </li>
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                <li class="nav-item has-treeview {{ request()->routeIs('package.*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('package.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-box"></i>
                         <p>Packages<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/package/all"
-                                class="nav-link"><i class="fas fa-boxes nav-icon"></i>
+                        <li class="nav-item"><a href="{{route('package.index')}}"
+                                class="nav-link {{ request()->routeIs('package.index') ? 'active' : '' }}"><i class="fas fa-boxes nav-icon"></i>
                                 <p>All packages</p>
                             </a></li>
                         <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/package/newpackage"
@@ -276,14 +276,14 @@
                         <p>Users</p>
                     </a>
                 </li>
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                <li class="nav-item has-treeview {{ request()->routeIs('widgets.*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('widgets.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-th-large"></i>
                         <p>Widgets<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/widgets/all"
-                                class="nav-link"><i class="fas fa-th nav-icon"></i>
+                        <li class="nav-item"><a href="{{route('widgets.index')}}"
+                                class="nav-link {{ request()->routeIs('widgets.index') ? 'active' : '' }}"><i class="fas fa-th nav-icon"></i>
                                 <p>All Widgets</p>
                             </a></li>
                         <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/widgets/widgetpositions"
@@ -298,14 +298,14 @@
                         <p>Upload</p>
                     </a>
                 </li>
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                <li class="nav-item has-treeview {{ request()->routeIs('blog.*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('blog.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-newspaper"></i>
                         <p>Blog/News/Article<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/blog/all"
-                                class="nav-link"><i class="fas fa-list-alt nav-icon"></i>
+                        <li class="nav-item"><a href="{{route('blog.index')}}"
+                                class="nav-link {{ request()->routeIs('blog.index') ? 'active' : '' }}"><i class="fas fa-list-alt nav-icon"></i>
                                 <p>All posts</p>
                             </a></li>
                         <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/blog/manage"
@@ -324,7 +324,7 @@
                         <p>Products/E-Commerce<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/product/all"
+                        <li class="nav-item"><a href="#"
                                 class="nav-link"><i class="fas fa-box-open nav-icon"></i>
                                 <p>All posts</p>
                             </a></li>
@@ -334,14 +334,14 @@
                             </a></li>
                     </ul>
                 </li>
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                <li class="nav-item has-treeview {{ request()->routeIs('pages.*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('pages.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-file-alt"></i>
                         <p>Pages &amp; Menu<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/page/all"
-                                class="nav-link"><i class="fas fa-file-alt nav-icon"></i>
+                        <li class="nav-item"><a href="{{route('pages.index')}}"
+                                class="nav-link {{ request()->routeIs('pages.index') ? 'active' : '' }}"><i class="fas fa-file-alt nav-icon"></i>
                                 <p>All pages</p>
                             </a></li>
                         <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/page/index"
