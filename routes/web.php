@@ -16,7 +16,7 @@ use App\Http\Controllers\Admin\DashboardController;
 // Breeze Package Includes
 
 // Our Includes Area(start)
-
+use App\Http\Controllers\Admin\ParallaxController;
 // Our Includes Area(end)
 
 
@@ -105,6 +105,18 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'en|es|fr|ur']], f
             ->name('base.create');
         Route::get('/index', [DashboardController::class, 'manage'])
             ->name('base.index');
+        // Parallax Slider
+        Route::controller(ParallaxController::class)->group(function () {
+            Route::get('/parallax/manage/', 'index')->name('parallax.manage');
+            Route::get('/parallax/add/', 'create')->name('parallax.create');
+            Route::post('/parallax/store/', 'store')->name('parallax.store');
+            Route::get('/parallax/edit//{id}', 'edit')->name('parallax.edit');
+            Route::put('/parallax/update//{id}', 'update')->name('parallax.update');
+            Route::delete('/parallax/destroy//{id}', 'destroy')->name('parallax.destroy');
+        });
+
+
+
     });
 
 

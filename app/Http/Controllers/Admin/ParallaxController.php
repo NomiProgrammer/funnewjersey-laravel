@@ -7,5 +7,7 @@ use Illuminate\Http\Request;
 
 class ParallaxController extends Controller
 {
-    //
+    public function index(){
+
+    }
 }
