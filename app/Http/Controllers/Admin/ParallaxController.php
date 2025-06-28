@@ -28,7 +28,7 @@ public function index(Request $request)
             'city',
             'county',
         ]);
-
+dd($data);
         return DataTables::of($data)->make(true);
     }
 
