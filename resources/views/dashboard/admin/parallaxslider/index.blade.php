@@ -189,7 +189,7 @@
         $('#example2').DataTable({
             processing: true,
             serverSide: true,
-            responsive: true,
+            responsive: false,
             autoWidth: false,
             ajax: "{{ route('parallax.index') }}",
             columns: [{
