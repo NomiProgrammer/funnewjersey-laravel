@@ -86,7 +86,7 @@
 <!-- Parallax Slider -->
                   <li class="nav-item">
                       <a href="#" class="nav-link">
-                          <i class="nav-icon fas fa-table"></i>
+                           <i class="nav-icon fas fa-images"></i>
                           <p>
                               Parallax Slider
                               <i class="fas fa-angle-left right"></i>
@@ -111,7 +111,7 @@
 <!-- Banner Ads -->
                   <li class="nav-item">
                       <a href="#" class="nav-link">
-                          <i class="nav-icon fas fa-table"></i>
+                         <i class="nav-icon fas fa-ad"></i>
                           <p>
                               Banner Ads
                               <i class="fas fa-angle-left right"></i>
@@ -136,7 +136,7 @@
 <!-- Invoices and Billing -->
                   <li class="nav-item">
                       <a href="#" class="nav-link">
-                          <i class="nav-icon fas fa-table"></i>
+                          <i class="nav-icon fas fa-file-invoice-dollar"></i>
                           <p>
                               Invoices and Billing
                               <i class="fas fa-angle-left right"></i>
@@ -167,7 +167,7 @@
 <!-- Add/Manage Listings -->
                   <li class="nav-item">
                       <a href="#" class="nav-link">
-                          <i class="nav-icon fas fa-table"></i>
+                         <i class="nav-icon fas fa-list"></i>
                           <p>
                               Add/Manage Listings
                               <i class="fas fa-angle-left right"></i>
@@ -192,7 +192,7 @@
 <!-- Custom Mega Menus Tags -->
                   <li class="nav-item">
                       <a href="#" class="nav-link">
-                          <i class="nav-icon fas fa-table"></i>
+                           <i class="nav-icon fas fa-tags"></i>
                           <p>
                               Custom Mega Menus Tags
                               <i class="fas fa-angle-left right"></i>
@@ -217,7 +217,7 @@
 <!-- Custom Mega Menus -->
                   <li class="nav-item">
                       <a href="#" class="nav-link">
-                          <i class="nav-icon fas fa-table"></i>
+                            <i class="nav-icon fas fa-bars"></i>
                           <p>
                               Custom Mega Menus
                               <i class="fas fa-angle-left right"></i>
@@ -242,7 +242,7 @@
 <!-- Category -->
                   <li class="nav-item">
                       <a href="#" class="nav-link">
-                          <i class="nav-icon fas fa-table"></i>
+                          <i class="nav-icon fas fa-folder"></i>
                           <p>
                               Category
                               <i class="fas fa-angle-left right"></i>
@@ -267,7 +267,7 @@
 <!-- Tags -->
                   <li class="nav-item">
                       <a href="#" class="nav-link">
-                          <i class="nav-icon fas fa-table"></i>
+                          <i class="nav-icon fas fa-tag"></i>
                           <p>
                               Tags
                               <i class="fas fa-angle-left right"></i>
@@ -292,7 +292,7 @@
 <!-- Fun Deals -->
                   <li class="nav-item">
                       <a href="#" class="nav-link">
-                          <i class="nav-icon fas fa-table"></i>
+                          <i class="nav-icon fas fa-gift"></i>
                           <p>
                               Fun Deals
                               <i class="fas fa-angle-left right"></i>
@@ -316,11 +316,10 @@
 <!-- Fun Deals -->
 <!-- Profile -->
                   <li class="nav-item">
-                      <a href="#">
-                          <i class="nav-icon fas fa-table"></i>
+                      <a href="#" class="nav-link">
+                         <i class="nav-icon fas fa-user"></i>
                           <p>
                               Profile
-                              <i class="fas fa-angle-left right"></i>
                           </p>
                       </a>
                   </li>
@@ -328,7 +327,7 @@
 <!-- Packages -->
                   <li class="nav-item">
                       <a href="#" class="nav-link">
-                          <i class="nav-icon fas fa-table"></i>
+                          <i class="nav-icon fas fa-box-open"></i>
                           <p>
                               Packages
                               <i class="fas fa-angle-left right"></i>
@@ -359,10 +358,9 @@
 <!-- Users -->
                   <li class="nav-item">
                       <a href="#" class="nav-link">
-                          <i class="nav-icon fas fa-table"></i>
+                            <i class="nav-icon fas fa-users"></i>
                           <p>
                               Users
-                              <i class="fas fa-angle-left right"></i>
                           </p>
                       </a>
                   </li>
@@ -370,7 +368,7 @@
 <!-- Widgets -->
                   <li class="nav-item">
                       <a href="#" class="nav-link">
-                          <i class="nav-icon fas fa-table"></i>
+                         <i class="nav-icon fas fa-th-large"></i>
                           <p>
                               Widgets
                               <i class="fas fa-angle-left right"></i>
@@ -395,10 +393,9 @@
 <!-- Upload -->
                   <li class="nav-item">
                       <a href="#" class="nav-link">
-                          <i class="nav-icon fas fa-table"></i>
+                           <i class="nav-icon fas fa-upload"></i>
                           <p>
                               Upload
-                              <i class="fas fa-angle-left right"></i>
                           </p>
                       </a>
                   </li>
@@ -406,7 +403,7 @@
 <!-- Blog/News/Article -->
                   <li class="nav-item">
                       <a href="#" class="nav-link">
-                          <i class="nav-icon fas fa-table"></i>
+                          <i class="nav-icon fas fa-newspaper"></i>
                           <p>
                               Blog/News/Article
                               <i class="fas fa-angle-left right"></i>
@@ -437,7 +434,7 @@
 <!-- Products/E-Commerce -->
                   <li class="nav-item">
                       <a href="#" class="nav-link">
-                          <i class="nav-icon fas fa-table"></i>
+                           <i class="nav-icon fas fa-shopping-cart"></i>
                           <p>
                               Products/E-Commerce
                               <i class="fas fa-angle-left right"></i>
@@ -462,7 +459,7 @@
 <!-- Pages & Menu -->
                   <li class="nav-item">
                       <a href="#" class="nav-link">
-                          <i class="nav-icon fas fa-table"></i>
+                            <i class="nav-icon fas fa-copy"></i>
                           <p>
                               Pages & Menu
                               <i class="fas fa-angle-left right"></i>
@@ -493,7 +490,7 @@
 <!-- System -->
                   <li class="nav-item">
                       <a href="#" class="nav-link">
-                          <i class="nav-icon fas fa-table"></i>
+                          <i class="nav-icon fas fa-cogs"></i>
                           <p>
                               System
                               <i class="fas fa-angle-left right"></i>
