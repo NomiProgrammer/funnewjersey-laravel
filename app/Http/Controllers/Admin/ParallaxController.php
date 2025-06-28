@@ -12,7 +12,6 @@ public function index(Request $request)
 {
 
     if ($request->ajax()) {
-        dd("ASdfd");
         $data = Parallax::select([
             'id',
             'slide_order',
