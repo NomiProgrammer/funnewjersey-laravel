@@ -10,24 +10,7 @@ class ParallaxController extends Controller
 public function index(Request $request)
 {
     if ($request->ajax()) {
-        $data = Parallax::select([
-            'id',
-            'slide_order',
-            'featured_img',
-            'title',
-            'description',
-            'created_by',
-            'create_time',
-            'status',
-            'category',
-            'link',
-            'alttag',
-            'button',
-            'expires',
-            'starts',
-            'city',
-            'county',
-        ]);
+$data = Parallax::select('*');
 
         return DataTables::of($data)->make(true);
     }
