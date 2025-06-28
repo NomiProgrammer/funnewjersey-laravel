@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-// Breeze Package Includes
+// Breeze Package Includes (Start)
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
@@ -12,12 +12,17 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+// Breeze Package Includes (End)
+// Admin Includes (Start)
 use App\Http\Controllers\Admin\DashboardController;
-// Breeze Package Includes
+use App\Http\Controllers\Admin\PackagesController;
+use App\Http\Controllers\Admin\PagesController;
+use App\Http\Controllers\Admin\ParallaxController;
+use App\Http\Controllers\Admin\ProductsController;
+use App\Http\Controllers\Admin\TagsController;
+use App\Http\Controllers\Admin\WidgetsController;
+// Admin Includes (End)
 
-// Our Includes Area(start)
-
-// Our Includes Area(end)
 
 
 
@@ -105,6 +110,12 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'en|es|fr|ur']], f
             ->name('base.create');
         Route::get('/index', [DashboardController::class, 'manage'])
             ->name('base.index');
+        Route::resource('packages', PackagesController::class);
+        Route::resource('pages', PagesController::class);
+        Route::resource('parallax', ParallaxController::class);
+        Route::resource('products', ProductsController::class);
+        Route::resource('tags', TagsController::class);
+        Route::resource('widgets', WidgetsController::class);
     });
 
 

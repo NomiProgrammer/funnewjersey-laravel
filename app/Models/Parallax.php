@@ -6,5 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Parallax extends Model
 {
+    protected $table = 'slider';
     //
 }

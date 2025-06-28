@@ -6,5 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class FunDeals extends Model
 {
+    protected $table = 'fun_deals';
     //
 }
