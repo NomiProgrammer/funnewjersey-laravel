@@ -122,17 +122,11 @@
                                             <th>Featured Img</th>
                                             <th>Title</th>
                                             <th>Description</th>
-                                            <th>Created By</th>
-                                            <th>Create Time</th>
                                             <th>Status</th>
                                             <th>Category</th>
-                                            <th>Link</th>
-                                            <th>Alt Tag</th>
                                             <th>Button</th>
                                             <th>Expires</th>
                                             <th>Starts</th>
-                                            <th>City</th>
-                                            <th>County</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -142,17 +136,11 @@
                                             <th>Featured Img</th>
                                             <th>Title</th>
                                             <th>Description</th>
-                                            <th>Created By</th>
-                                            <th>Create Time</th>
                                             <th>Status</th>
                                             <th>Category</th>
-                                            <th>Link</th>
-                                            <th>Alt Tag</th>
                                             <th>Button</th>
                                             <th>Expires</th>
                                             <th>Starts</th>
-                                            <th>City</th>
-                                            <th>County</th>
                                         </tr>
                                     </tfoot>
                                     <tbody></tbody>
