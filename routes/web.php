@@ -107,7 +107,7 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'en|es|fr|ur']], f
             ->name('base.index');
         // Parallax Slider
         Route::controller(ParallaxController::class)->group(function () {
-            Route::get('/parallax/manage/', 'index')->name('parallax.manage');
+            Route::get('/parallax/manage/', 'index')->name('parallax.index');
             Route::get('/parallax/add/', 'create')->name('parallax.create');
             Route::post('/parallax/store/', 'store')->name('parallax.store');
             Route::get('/parallax/edit//{id}', 'edit')->name('parallax.edit');
