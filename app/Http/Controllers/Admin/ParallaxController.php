@@ -5,10 +5,13 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Parallax;
+use Illuminate\Support\Facades\Log;
 class ParallaxController extends Controller
 {
 public function index(Request $request)
 {
+dd($data);
+
     if ($request->ajax()) {
         $data = Parallax::select([
             'id',
@@ -28,7 +31,6 @@ public function index(Request $request)
             'city',
             'county',
         ]);
-dd($data);
         return DataTables::of($data)->make(true);
     }
 
