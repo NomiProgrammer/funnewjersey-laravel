@@ -6,7 +6,7 @@
                   <i class="fas fa-user-circle"></i>
                   Logged in as :
               </span>
-              <span style="color: #c00; margin-left: 4px; font-weight: bold;">{{ Auth::user()->name }}</span>
+              <span style="color: #c00; margin-left: 4px; font-weight: bold;"></span>
           </li>
       </ul>
 
@@ -31,7 +31,7 @@
           <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
-                  <i class="fas fa-user"></i> {{ Auth::user()->email }}
+                  <i class="fas fa-user"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                   <a class="dropdown-item" href="/logout">Logout</a>

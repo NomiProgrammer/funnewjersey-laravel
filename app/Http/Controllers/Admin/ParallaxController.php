@@ -8,46 +8,31 @@ use App\Models\Parallax;
 
 class ParallaxController extends Controller
 {
-    // List all parallax sliders
-    public function index()
+    public function index(Request $request)
     {
-        $parallax = Parallax::all();
-        return response()->json($parallax);
-    }
+        if ($request->ajax()) {
+            $data = Parallax::select([
+                'id',
+                'slide_order',
+                'featured_img',
+                'title',
+                'description',
+                'created_by',
+                'create_time',
+                'status',
+                'category',
+                'link',
+                'alttag',
+                'button',
+                'expires',
+                'starts',
+                'city',
+                'county',
+            ]);
 
-    // Show a single parallax slider
-    public function show($id)
-    {
-        $item = Parallax::findOrFail($id);
-        return response()->json($item);
-    }
+            return DataTables::of($data)->make(true);
+        }
 
-    // Store a new parallax slider (demo data)
-    public function store(Request $request)
-    {
-        $item = Parallax::create([
-            'title' => 'Demo Parallax',
-            'image' => 'parallax.jpg',
-        ]);
-        return response()->json($item);
-    }
-
-    // Update a parallax slider (demo data)
-    public function update(Request $request, $id)
-    {
-        $item = Parallax::findOrFail($id);
-        $item->update([
-            'title' => 'Updated Parallax',
-            'image' => 'updated.jpg',
-        ]);
-        return response()->json($item);
-    }
-
-    // Delete a parallax slider
-    public function destroy($id)
-    {
-        $item = Parallax::findOrFail($id);
-        $item->delete();
-        return response()->json(['message' => 'Parallax slider deleted']);
+        return view('dashboard.admin.parallaxslider.index');
     }
 }

@@ -110,12 +110,15 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'en|es|fr|ur']], f
             ->name('base.create');
         Route::get('/index', [DashboardController::class, 'manage'])
             ->name('base.index');
-        Route::resource('packages', PackagesController::class);
-        Route::resource('pages', PagesController::class);
-        Route::resource('parallax', ParallaxController::class);
-        Route::resource('products', ProductsController::class);
-        Route::resource('tags', TagsController::class);
-        Route::resource('widgets', WidgetsController::class);
+        // Parallax Slider
+        Route::controller(ParallaxController::class)->group(function () {
+            Route::get('/parallax/manage/', 'index')->name('parallax.index');
+            Route::get('/parallax/add/', 'create')->name('parallax.create');
+            Route::post('/parallax/store/', 'store')->name('parallax.store');
+            Route::get('/parallax/edit//{id}', 'edit')->name('parallax.edit');
+            Route::put('/parallax/update//{id}', 'update')->name('parallax.update');
+            Route::delete('/parallax/destroy//{id}', 'destroy')->name('parallax.destroy');
+        });
     });
 
 
