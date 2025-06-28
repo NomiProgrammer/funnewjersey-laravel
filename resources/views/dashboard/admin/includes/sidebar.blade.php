@@ -146,6 +146,12 @@
                           <li class="nav-item">
                               <a href="pages/tables/simple.html" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
+                                  <p>Payment History</p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="pages/tables/simple.html" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
                                   <p>All</p>
                               </a>
                           </li>
@@ -196,7 +202,7 @@
                           <li class="nav-item">
                               <a href="pages/tables/simple.html" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-                                  <p>All</p>
+                                  <p>Custom Meta Tags</p>
                               </a>
                           </li>
                           <li class="nav-item">
@@ -221,7 +227,7 @@
                           <li class="nav-item">
                               <a href="pages/tables/simple.html" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-                                  <p>All</p>
+                                  <p>Custom Mega Menus</p>
                               </a>
                           </li>
                           <li class="nav-item">
@@ -246,7 +252,7 @@
                           <li class="nav-item">
                               <a href="pages/tables/simple.html" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-                                  <p>All</p>
+                                  <p>All Categories</p>
                               </a>
                           </li>
                           <li class="nav-item">
@@ -271,7 +277,7 @@
                           <li class="nav-item">
                               <a href="pages/tables/simple.html" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-                                  <p>All</p>
+                                  <p>All Tags</p>
                               </a>
                           </li>
                           <li class="nav-item">
@@ -296,7 +302,7 @@
                           <li class="nav-item">
                               <a href="pages/tables/simple.html" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-                                  <p>All</p>
+                                  <p>All Fun Deals</p>
                               </a>
                           </li>
                           <li class="nav-item">
@@ -321,13 +327,19 @@
                           <li class="nav-item">
                               <a href="pages/tables/simple.html" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-                                  <p>All</p>
+                                  <p>All Packages  </p>
                               </a>
                           </li>
                           <li class="nav-item">
                               <a href="pages/tables/simple.html" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
                                   <p>Add New</p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="pages/tables/simple.html" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Package Settings</p>
                               </a>
                           </li>
                       </ul>
@@ -371,13 +383,13 @@
                           <li class="nav-item">
                               <a href="pages/tables/simple.html" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-                                  <p>All</p>
+                                  <p>All Widgets</p>
                               </a>
                           </li>
                           <li class="nav-item">
                               <a href="pages/tables/simple.html" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-                                  <p>Add New</p>
+                                  <p>Widget Positions</p>
                               </a>
                           </li>
                       </ul>
@@ -421,38 +433,19 @@
                           <li class="nav-item">
                               <a href="pages/tables/simple.html" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-                                  <p>All</p>
+                                  <p>All Posts</p>
                               </a>
                           </li>
                           <li class="nav-item">
                               <a href="pages/tables/simple.html" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-                                  <p>Add New</p>
-                              </a>
-                          </li>
-                      </ul>
-                  </li>
-<!-- Blog/News/Article -->
-<!-- Blog/News/Article -->
-                  <li class="nav-item">
-                      <a href="#" class="nav-link">
-                          <i class="nav-icon fas fa-table"></i>
-                          <p>
-                              Blog/News/Article
-                              <i class="fas fa-angle-left right"></i>
-                          </p>
-                      </a>
-                      <ul class="nav nav-treeview">
-                          <li class="nav-item">
-                              <a href="pages/tables/simple.html" class="nav-link">
-                                  <i class="far fa-circle nav-icon"></i>
-                                  <p>All</p>
+                                  <p>New Post</p>
                               </a>
                           </li>
                           <li class="nav-item">
                               <a href="pages/tables/simple.html" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-                                  <p>Add New</p>
+                                  <p>Trash Post</p>
                               </a>
                           </li>
                       </ul>
@@ -471,7 +464,7 @@
                           <li class="nav-item">
                               <a href="pages/tables/simple.html" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-                                  <p>All</p>
+                                  <p>All Posts</p>
                               </a>
                           </li>
                           <li class="nav-item">
@@ -496,13 +489,19 @@
                           <li class="nav-item">
                               <a href="pages/tables/simple.html" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-                                  <p>All</p>
+                                  <p>All Pages</p>
                               </a>
                           </li>
                           <li class="nav-item">
                               <a href="pages/tables/simple.html" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-                                  <p>Add New</p>
+                                  <p>New Page</p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="pages/tables/simple.html" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Menu</p>
                               </a>
                           </li>
                       </ul>
@@ -521,13 +520,49 @@
                           <li class="nav-item">
                               <a href="pages/tables/simple.html" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-                                  <p>All</p>
+                                  <p>Manage Backups</p>
                               </a>
                           </li>
                           <li class="nav-item">
                               <a href="pages/tables/simple.html" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-                                  <p>Add New</p>
+                                  <p>SMTP Email Settings</p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="pages/tables/simple.html" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Auto Translate</p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="pages/tables/simple.html" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Edit Email Text</p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="pages/tables/simple.html" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Debug Email</p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="pages/tables/simple.html" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Default Site Settings</p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="pages/tables/simple.html" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Web Admin Settings</p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="pages/tables/simple.html" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Site Map</p>
                               </a>
                           </li>
                       </ul>
