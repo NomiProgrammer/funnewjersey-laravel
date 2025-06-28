@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-// Breeze Package Includes
+// Breeze Package Includes (Start)
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
@@ -12,12 +12,17 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+// Breeze Package Includes (End)
+// Admin Includes (Start)
 use App\Http\Controllers\Admin\DashboardController;
-// Breeze Package Includes
-
-// Our Includes Area(start)
+use App\Http\Controllers\Admin\PackagesController;
+use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Admin\ParallaxController;
-// Our Includes Area(end)
+use App\Http\Controllers\Admin\ProductsController;
+use App\Http\Controllers\Admin\TagsController;
+use App\Http\Controllers\Admin\WidgetsController;
+// Admin Includes (End)
+
 
 
 
@@ -114,9 +119,6 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'en|es|fr|ur']], f
             Route::put('/parallax/update//{id}', 'update')->name('parallax.update');
             Route::delete('/parallax/destroy//{id}', 'destroy')->name('parallax.destroy');
         });
-
-
-
     });
 
 
