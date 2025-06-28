@@ -119,6 +119,10 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'en|es|fr|ur']], f
             Route::put('/parallax/update//{id}', 'update')->name('parallax.update');
             Route::delete('/parallax/destroy//{id}', 'destroy')->name('parallax.destroy');
         });
+        // BannerAds Slider
+        Route::controller(BannersAdsController::class)->group(function () {
+        Route::get('/banners-ads/manage', 'index')->name('bannersads.index');
+        });
     });
 
 

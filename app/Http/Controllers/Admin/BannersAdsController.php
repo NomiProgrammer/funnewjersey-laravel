@@ -5,15 +5,34 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\BannersAds;
+use Yajra\DataTables\DataTables;
 
 class BannersAdsController extends Controller
 {
     // List all banner ads
-    public function index()
-    {
-        $banners = BannersAds::all();
-        return response()->json($banners);
+public function index(Request $request)
+{
+    if ($request->ajax()) {
+        $data = BannersAds::select([
+            'id',
+            'featured_img',
+            'title',
+            'description',
+            'slot',
+            'type',
+            'category',
+            'region',
+            'created_by',
+            'expires',
+            'status',
+        ]);
+
+        return DataTables::of($data)->make(true);
     }
+
+    return view('dashboard.admin.bannersads.index');
+}
+
 
     // Show a single banner ad
     public function show($id)
