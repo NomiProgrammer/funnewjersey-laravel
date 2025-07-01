@@ -5,15 +5,41 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Listings;
+use Yajra\DataTables\DataTables;
 
 class ListingController extends Controller
 {
     // List all listings
-    public function index()
-    {
-        $listings = Listings::all();
-        return response()->json($listings);
+public function index(Request $request)
+{
+    if ($request->ajax()) {
+        $data = Listings::select([
+            'id',
+            'featured_img',
+            'title',
+            'category',
+            'email',
+            'city',
+            'status',
+            'expirtion_date',
+            'featured'
+        ]);
+
+        // Add a computed column for Days Left if needed
+        return datatables()->of($data)
+            ->addColumn('days_left', function ($row) {
+                if ($row->expirtion_date) {
+                    $days = \Carbon\Carbon::parse($row->expirtion_date)->diffInDays(now());
+                    return $days . ' days';
+                }
+                return 'N/A';
+            })
+            ->rawColumns(['days_left'])
+            ->make(true);
     }
+
+    return view('dashboard.admin.listings.index');
+}
 
     // Show a single listing
     public function show($id)

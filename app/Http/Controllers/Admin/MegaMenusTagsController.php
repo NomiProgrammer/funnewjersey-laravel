@@ -5,15 +5,31 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\MegaMenusTags;
+use Yajra\DataTables\DataTables;
 
 class MegaMenusTagsController extends Controller
 {
     // List all mega menu tags
-    public function index()
-    {
-        $tags = MegaMenusTags::all();
-        return response()->json($tags);
+public function index(Request $request)
+{
+    if ($request->ajax()) {
+        $data = MegaMenusTags::select([
+            'id',
+            'category',
+            'county',
+            'city',
+            'region',
+            'h1',
+            'metatitle',
+            'metadesc',
+            'metakeywords'
+        ]);
+
+        return datatables()->of($data)->make(true);
     }
+
+    return view('dashboard.admin.meta_tags.index');
+}
 
     // Show a single mega menu tag
     public function show($id)

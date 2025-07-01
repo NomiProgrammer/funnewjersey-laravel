@@ -96,7 +96,7 @@
                                 <p>Payment History</p>
                             </a></li>
                         <li class="nav-item"><a href="{{ route('invoice.index') }}"
-                                class="nav-link {{ request()->routeIs('invoices.index') ? 'active' : '' }}"><i class="fas fa-file-invoice nav-icon"></i>
+                                class="nav-link  "><i class="fas fa-file-invoice nav-icon"></i>
                                 <p>All</p>
                             </a></li>
                         <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/invoice/manage"
@@ -106,14 +106,14 @@
                     </ul>
                 </li>
                 <li class="nav-header">LISTINGS</li>
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                <li class="nav-item has-treeview {{ request()->routeIs('listings.*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('listings.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-plus-circle"></i>
                         <p>Add/Manage Listings<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/business/allposts"
-                                class="nav-link"><i class="fas fa-list nav-icon"></i>
+                        <li class="nav-item"><a href="{{ route('listings.index') }}"
+                                class="nav-link {{ request()->routeIs('listings.index') ? 'active' : '' }}"><i class="fas fa-list nav-icon"></i>
                                 <p>All Current Listings</p>
                             </a></li>
                         <li class="nav-item"><a href="https://www.funnewjersey.com/en/list-business" class="nav-link"><i
@@ -163,14 +163,14 @@
                     </ul>
                 </li>
                 <li class="nav-header">CONTENT</li>
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                <li class="nav-item has-treeview {{ request()->routeIs('meta_tags.*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('meta_tags.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tags"></i>
                         <p>Custom Combo Meta Tags<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/metas"
-                                class="nav-link"><i class="fas fa-tags nav-icon"></i>
+                        <li class="nav-item"><a href="{{route('meta_tags.index')}}"
+                                class="nav-link {{ request()->routeIs('meta_tags.index') ? 'active' : '' }}"><i class="fas fa-tags nav-icon"></i>
                                 <p>Custom Meta Tags</p>
                             </a></li>
                         <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/metas/add"
