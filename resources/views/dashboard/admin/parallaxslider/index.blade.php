@@ -183,12 +183,10 @@
                     name: 'id'
                 },
                 {
-                    data: 'slide_order',
-                    name: 'slide_order'
-                },
-                {
                     data: 'featured_img',
-                    name: 'featured_img'
+                    name: 'featured_img',
+                    orderable: false,
+                    searchable: false
                 },
                 {
                     data: 'title',
@@ -197,6 +195,10 @@
                 {
                     data: 'description',
                     name: 'description'
+                },
+                {
+                    data: 'slide_order',
+                    name: 'slide_order'
                 },
                 {
                     data: 'status',
