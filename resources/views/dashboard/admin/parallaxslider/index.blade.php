@@ -74,6 +74,7 @@
             background-color: transparent !important;
             opacity: 0.85;
         }
+
     </style>
 @endsection
 
@@ -117,32 +118,37 @@
                                 <table id="example2" class="table table-bordered table-striped table-hover">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
-                                            <th>Slide Order</th>
-                                            <th>Featured Img</th>
+                                            <th>Image</th>
                                             <th>Title</th>
                                             <th>Description</th>
-                                            <th>Status</th>
+                                            <th>Slide Order</th>
+                                            <th>Customer</th>
+                                            <th>Company</th>
                                             <th>Category</th>
-                                            <th>Expires</th>
                                             <th>Starts</th>
+                                            <th>Expires</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>ID</th>
-                                            <th>Slide Order</th>
-                                            <th>Featured Img</th>
+                                            <th>Image</th>
                                             <th>Title</th>
                                             <th>Description</th>
-                                            <th>Status</th>
+                                            <th>Slide Order</th>
+                                            <th>Customer</th>
+                                            <th>Company</th>
                                             <th>Category</th>
-                                            <th>Expires</th>
                                             <th>Starts</th>
+                                            <th>Expires</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </tfoot>
                                     <tbody></tbody>
                                 </table>
+
                             </div>
                         </div>
                     </div>
@@ -178,10 +184,7 @@
             responsive: false,
             autoWidth: false,
             ajax: "{{ route('parallax.index') }}",
-            columns: [{
-                    data: 'id',
-                    name: 'id'
-                },
+            columns: [
                 {
                     data: 'featured_img',
                     name: 'featured_img',
@@ -201,21 +204,35 @@
                     name: 'slide_order'
                 },
                 {
-                    data: 'status',
-                    name: 'status'
+                    data: 'created_by',
+                    name: 'created_by'
+                },
+                {
+                    data: 'create_time',
+                    name: 'create_time'
                 },
                 {
                     data: 'category',
                     name: 'category'
                 },
                 {
+                    data: 'starts',
+                    name: 'starts'
+                },
+                {
                     data: 'expires',
                     name: 'expires'
                 },
                 {
-                    data: 'starts',
-                    name: 'starts'
+                    data: 'status',
+                    name: 'status'
                 },
+                {
+                    data: 'actions',
+                    name: 'actions',
+                    orderable: false,
+                    searchable: false
+                }
             ],
             dom: "<'d-flex justify-content-between align-items-center mb-3'<'dt-buttons'B><'dataTables_filter'f>>" +
                 "<'table-responsive'tr>" +

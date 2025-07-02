@@ -152,7 +152,7 @@
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
 
-    <script>
+<script>
 $('#example2').DataTable({
     processing: true,
     serverSide: true,
@@ -160,15 +160,15 @@ $('#example2').DataTable({
     autoWidth: false,
     ajax: "{{ route('listings.index') }}",
     columns: [
-        { data: 'id', name: 'id' },
-        { data: 'featured_img', name: 'featured_img' },
+        { data: 'featured_img', name: 'featured_img', orderable: false, searchable: false },
         { data: 'title', name: 'title' },
         { data: 'category', name: 'category' },
         { data: 'email', name: 'email' },
         { data: 'city', name: 'city' },
         { data: 'status', name: 'status' },
-        { data: 'days_left', name: 'days_left' },
+        { data: 'days_left', name: 'days_left', orderable: false, searchable: false },
         { data: 'featured', name: 'featured' },
+        { data: 'actions', name: 'actions', orderable: false, searchable: false }
     ],
     dom: "<'d-flex justify-content-between align-items-center mb-3'<'dt-buttons'B><'dataTables_filter'f>>" +
          "<'table-responsive'tr>" +
@@ -180,6 +180,6 @@ $('#example2').DataTable({
         { extend: 'print', text: '<i class="fas fa-print"></i> Print', className: 'btn btn-outline-primary btn-sm me-2' }
     ]
 });
+</script>
 
-    </script>
 @endsection

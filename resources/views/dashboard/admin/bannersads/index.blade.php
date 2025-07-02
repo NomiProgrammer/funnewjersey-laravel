@@ -14,47 +14,57 @@
             color: white;
             font-weight: 600;
         }
+
         table.dataTable tfoot {
             background-color: #17a2b8;
             color: white;
             font-weight: 600;
         }
+
         table.dataTable thead th.sorting:before,
         table.dataTable thead th.sorting:after,
         table.dataTable tfoot th.sorting:before,
         table.dataTable tfoot th.sorting:after {
             color: rgba(255, 255, 255, 0.8) !important;
         }
+
         .paginate_button.page-item.active a {
             background-color: #17a2b8 !important;
             color: white !important;
         }
+
         .paginate_button.page-item a:hover {
             background-color: #e0f7fa !important;
             color: #000 !important;
         }
+
         .dt-buttons .btn-outline-secondary {
             color: #6c757d !important;
             border-color: #6c757d !important;
         }
+
         .dt-buttons .btn-outline-success {
             color: #28a745 !important;
             border-color: #28a745 !important;
         }
+
         .dt-buttons .btn-outline-danger {
             color: #dc3545 !important;
             border-color: #dc3545 !important;
         }
+
         .dt-buttons .btn-outline-primary {
             color: #007bff !important;
             border-color: #007bff !important;
         }
+
         .dt-buttons .btn {
             margin-right: 8px;
             background-color: transparent !important;
             box-shadow: none !important;
             padding: 4px 10px !important;
         }
+
         .dt-buttons .btn:hover {
             background-color: transparent !important;
             opacity: 0.85;
@@ -102,7 +112,6 @@
                                 <table id="example2" class="table table-bordered table-striped table-hover">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
                                             <th>Image</th>
                                             <th>Title</th>
                                             <th>Description</th>
@@ -113,11 +122,12 @@
                                             <th>User</th>
                                             <th>Expires</th>
                                             <th>Status</th>
+                                            <th>Actions</th>
+
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>ID</th>
                                             <th>Image</th>
                                             <th>Title</th>
                                             <th>Description</th>
@@ -128,6 +138,8 @@
                                             <th>User</th>
                                             <th>Expires</th>
                                             <th>Status</th>
+                                            <th>Actions</th>
+
                                         </tr>
                                     </tfoot>
                                     <tbody></tbody>
@@ -162,28 +174,84 @@
             responsive: true,
             autoWidth: false,
             ajax: "{{ route('bannersads.index') }}",
-            columns: [
-                { data: 'id', name: 'id' },
-                { data: 'featured_img', name: 'featured_img' },
-                { data: 'title', name: 'title' },
-                { data: 'description', name: 'description' },
-                { data: 'slot', name: 'slot' },
-                { data: 'type', name: 'type' },
-                { data: 'category', name: 'category' },
-                { data: 'region', name: 'region' },
-                { data: 'created_by', name: 'created_by' },
-                { data: 'expires', name: 'expires' },
-                { data: 'status', name: 'status' }
+            order: [
+                [0, 'desc']
+            ],
+            columns: [{
+                    data: 'featured_img',
+                    name: 'featured_img',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'title',
+                    name: 'title'
+                },
+                {
+                    data: 'description',
+                    name: 'description'
+                },
+                {
+                    data: 'slot',
+                    name: 'slot'
+                },
+                {
+                    data: 'type',
+                    name: 'type'
+                },
+                {
+                    data: 'category',
+                    name: 'category'
+                },
+                {
+                    data: 'region',
+                    name: 'region'
+                },
+                {
+                    data: 'created_by',
+                    name: 'created_by'
+                },
+                {
+                    data: 'expires',
+                    name: 'expires'
+                },
+                {
+                    data: 'status',
+                    name: 'status'
+                },
+                {
+                    data: 'actions',
+                    name: 'actions',
+                    orderable: false,
+                    searchable: false
+                },
             ],
             dom: "<'d-flex justify-content-between align-items-center mb-3'<'dt-buttons'B><'dataTables_filter'f>>" +
                 "<'table-responsive'tr>" +
                 "<'d-flex justify-content-between align-items-center mt-3'lip>",
-            buttons: [
-                { extend: 'copyHtml5', text: '<i class="fas fa-copy"></i> Copy', className: 'btn btn-outline-secondary btn-sm me-2' },
-                { extend: 'excelHtml5', text: '<i class="fas fa-file-excel"></i> Excel', className: 'btn btn-outline-success btn-sm me-2' },
-                { extend: 'pdfHtml5', text: '<i class="fas fa-file-pdf"></i> PDF', className: 'btn btn-outline-danger btn-sm me-2' },
-                { extend: 'print', text: '<i class="fas fa-print"></i> Print', className: 'btn btn-outline-primary btn-sm me-2' }
+            buttons: [{
+                    extend: 'copyHtml5',
+                    text: '<i class="fas fa-copy"></i> Copy',
+                    className: 'btn btn-outline-secondary btn-sm me-2'
+                },
+                {
+                    extend: 'excelHtml5',
+                    text: '<i class="fas fa-file-excel"></i> Excel',
+                    className: 'btn btn-outline-success btn-sm me-2'
+                },
+                {
+                    extend: 'pdfHtml5',
+                    text: '<i class="fas fa-file-pdf"></i> PDF',
+                    className: 'btn btn-outline-danger btn-sm me-2'
+                },
+                {
+                    extend: 'print',
+                    text: '<i class="fas fa-print"></i> Print',
+                    className: 'btn btn-outline-primary btn-sm me-2'
+                }
             ]
         });
     </script>
+
+
 @endsection

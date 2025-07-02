@@ -13,12 +13,29 @@ class TagsController extends Controller
 public function index(Request $request)
 {
     if ($request->ajax()) {
-        $data = Tags::select(['id', 'title']);
-        return datatables()->of($data)->make(true);
+        $data = Tags::orderBy('id', 'desc')->select(['id', 'title']);
+
+        return datatables()->of($data)
+            ->addColumn('actions', function ($item) {
+                return '
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-success dropdown-toggle" type="button" id="actionDropdown' . $item->id . '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-cog"></i> Actions
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="actionDropdown' . $item->id . '">
+                        <a class="dropdown-item" href="#"><i class="fas fa-edit text-dark"></i> &nbsp;Edit</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-trash text-dark"></i> &nbsp;Delete</a>
+                    </div>
+                </div>
+                ';
+            })
+            ->rawColumns(['actions'])
+            ->make(true);
     }
 
     return view('dashboard.admin.tags.index');
 }
+
 
 
     // Show a single tag
