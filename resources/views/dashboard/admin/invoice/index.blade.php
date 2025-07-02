@@ -102,26 +102,26 @@
                                 <table id="example2" class="table table-bordered table-striped table-hover">
     <thead>
         <tr>
-            <th>#</th>
-            <th>Total</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Customer</th>
-            <th>Paid Date</th>
-            <th>Due Date</th>
-            <th>Status</th>
+        <th>Total</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Customer</th>
+        <th>Paid Date</th>
+        <th>Due Date</th>
+        <th>Status</th>
+        <th>Actions</th>
         </tr>
     </thead>
     <tfoot>
         <tr>
-            <th>#</th>
-            <th>Total</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Customer</th>
-            <th>Paid Date</th>
-            <th>Due Date</th>
-            <th>Status</th>
+        <th>Total</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Customer</th>
+        <th>Paid Date</th>
+        <th>Due Date</th>
+        <th>Status</th>
+        <th>Actions</th>
         </tr>
     </tfoot>
     <tbody></tbody>
@@ -156,16 +156,17 @@
         serverSide: true,
         responsive: true,
         autoWidth: false,
-        ajax: "{{ route('invoice.index') }}", // 👉 make sure this route exists!
+        ajax: "{{ route('invoice.index') }}",
+        order: [[0, 'desc']],
         columns: [
-            { data: 'id', name: 'id' },
             { data: 'total', name: 'total' },
             { data: 'title', name: 'title' },
             { data: 'description', name: 'description' },
-            { data: 'created_by', name: 'created_by' }, // Assuming 'Customer' means 'created_by'
-            { data: 'assigned_to', name: 'assigned_to' }, // Using 'assigned_to' as Paid Date? Adjust if needed!
-            { data: 'expires', name: 'expires' }, // Due Date = 'expires'
-            { data: 'status', name: 'status' }
+            { data: 'assigned_to', name: 'assigned_to' }, // Customer
+            { data: 'expires', name: 'expires' }, // Paid Date (adjust if needed) but other table
+            { data: 'expires', name: 'expires' }, // Due Date
+            { data: 'status', name: 'status' },
+            { data: 'actions', name: 'actions', orderable: false, searchable: false }
         ],
         dom: "<'d-flex justify-content-between align-items-center mb-3'<'dt-buttons'B><'dataTables_filter'f>>" +
             "<'table-responsive'tr>" +
@@ -178,5 +179,6 @@
         ]
     });
 </script>
+
 
 @endsection

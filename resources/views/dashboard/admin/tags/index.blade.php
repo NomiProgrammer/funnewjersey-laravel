@@ -102,14 +102,14 @@
 <table id="example2" class="table table-bordered table-striped table-hover">
     <thead>
         <tr>
-            <th>#</th>
             <th>Title</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tfoot>
         <tr>
-            <th>#</th>
             <th>Title</th>
+            <th>Actions</th>
         </tr>
     </tfoot>
     <tbody></tbody>
@@ -148,8 +148,8 @@ $('#example2').DataTable({
     autoWidth: false,
     ajax: "{{ route('tags.index') }}",
     columns: [
-        { data: 'id', name: 'id' },
-        { data: 'title', name: 'title' }
+        { data: 'title', name: 'title' },
+        { data: 'actions', name: 'actions', orderable: false, searchable: false }
     ],
     dom: "<'d-flex justify-content-between align-items-center mb-3'<'dt-buttons'B><'dataTables_filter'f>>" +
          "<'table-responsive'tr>" +
@@ -161,8 +161,8 @@ $('#example2').DataTable({
         { extend: 'print', text: '<i class="fas fa-print"></i> Print', className: 'btn btn-outline-primary btn-sm me-2' }
     ]
 });
-
 </script>
+
 
 
 @endsection

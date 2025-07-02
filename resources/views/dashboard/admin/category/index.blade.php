@@ -112,7 +112,6 @@
                                 <table id="example2" class="table table-bordered table-striped table-hover">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
                                             <th>Title</th>
                                             <th>Private or Public</th>
                                             <th>Type</th>
@@ -123,7 +122,6 @@
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>ID</th>
                                             <th>Title</th>
                                             <th>Private or Public</th>
                                             <th>Type</th>
@@ -167,7 +165,6 @@
         autoWidth: false,
         ajax: "{{ route('category.index') }}",
         columns: [
-            { data: 'id', name: 'id' },
             { data: 'title', name: 'title' },
             { data: 'not_public', name: 'not_public' },
             { data: 'islink', name: 'islink' },

@@ -13,12 +13,33 @@ class PackagesController extends Controller
 public function index(Request $request)
 {
     if ($request->ajax()) {
-        $data = Packages::select(['id', 'title', 'price', 'type', 'expiration_time']);
-        return DataTables::of($data)->make(true);
+        $data = Packages::orderBy('id', 'desc')
+            ->select(['id', 'title', 'price', 'type', 'expiration_time']);
+
+        return datatables()->of($data)
+            ->editColumn('expiration_time', function($row) {
+        return $row->expiration_time . ' Days';
+    })
+            ->addColumn('actions', function ($item) {
+                return '
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-success dropdown-toggle" type="button" id="actionDropdown' . $item->id . '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-cog"></i> Actions
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="actionDropdown' . $item->id . '">
+                        <a class="dropdown-item" href="#"><i class="fas fa-edit text-dark"></i> &nbsp;Edit</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-trash text-dark"></i> &nbsp;Delete</a>
+                    </div>
+                </div>
+                ';
+            })
+            ->rawColumns(['actions'])
+            ->make(true);
     }
 
     return view('dashboard.admin.packages.index');
 }
+
 
     // Show a single package
     public function show($id)

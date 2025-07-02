@@ -102,20 +102,20 @@
                               <table id="example2" class="table table-bordered table-striped table-hover">
     <thead>
         <tr>
-            <th>#</th>
             <th>Title</th>
             <th>Price $(USD)</th>
             <th>Type</th>
             <th>Expiration Time (days)</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tfoot>
         <tr>
-            <th>#</th>
             <th>Title</th>
             <th>Price $(USD)</th>
             <th>Type</th>
             <th>Expiration Time (days)</th>
+            <th>Actions</th>
         </tr>
     </tfoot>
     <tbody></tbody>
@@ -145,30 +145,31 @@
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
 
 <script>
-    $('#example2').DataTable({
-        processing: true,
-        serverSide: true,
-        responsive: true,
-        autoWidth: false,
-        ajax: "{{ route('package.index') }}",
-        columns: [
-            { data: 'id', name: 'id' },
-            { data: 'title', name: 'title' },
-            { data: 'price', name: 'price' },
-            { data: 'type', name: 'type' },
-            { data: 'expiration_time', name: 'expiration_time' }
-        ],
-        dom: "<'d-flex justify-content-between align-items-center mb-3'<'dt-buttons'B><'dataTables_filter'f>>" +
-            "<'table-responsive'tr>" +
-            "<'d-flex justify-content-between align-items-center mt-3'lip>",
-        buttons: [
-            { extend: 'copyHtml5', text: '<i class="fas fa-copy"></i> Copy', className: 'btn btn-outline-secondary btn-sm me-2' },
-            { extend: 'excelHtml5', text: '<i class="fas fa-file-excel"></i> Excel', className: 'btn btn-outline-success btn-sm me-2' },
-            { extend: 'pdfHtml5', text: '<i class="fas fa-file-pdf"></i> PDF', className: 'btn btn-outline-danger btn-sm me-2' },
-            { extend: 'print', text: '<i class="fas fa-print"></i> Print', className: 'btn btn-outline-primary btn-sm me-2' }
-        ]
-    });
+$('#example2').DataTable({
+    processing: true,
+    serverSide: true,
+    responsive: true,
+    autoWidth: false,
+    ajax: "{{ route('package.index') }}",
+    columns: [
+        { data: 'title', name: 'title' },
+        { data: 'price', name: 'price' },
+        { data: 'type', name: 'type' },
+        { data: 'expiration_time', name: 'expiration_time' },
+        { data: 'actions', name: 'actions', orderable: false, searchable: false }
+    ],
+    dom: "<'d-flex justify-content-between align-items-center mb-3'<'dt-buttons'B><'dataTables_filter'f>>" +
+         "<'table-responsive'tr>" +
+         "<'d-flex justify-content-between align-items-center mt-3'lip>",
+    buttons: [
+        { extend: 'copyHtml5', text: '<i class="fas fa-copy"></i> Copy', className: 'btn btn-outline-secondary btn-sm me-2' },
+        { extend: 'excelHtml5', text: '<i class="fas fa-file-excel"></i> Excel', className: 'btn btn-outline-success btn-sm me-2' },
+        { extend: 'pdfHtml5', text: '<i class="fas fa-file-pdf"></i> PDF', className: 'btn btn-outline-danger btn-sm me-2' },
+        { extend: 'print', text: '<i class="fas fa-print"></i> Print', className: 'btn btn-outline-primary btn-sm me-2' }
+    ]
+});
 </script>
+
 
 
 @endsection
