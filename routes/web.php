@@ -25,6 +25,8 @@ use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\WidgetsController;
 use App\Http\Controllers\Admin\TagsController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\MegaMenusTagsController;
+use App\Http\Controllers\Admin\ListingController;
 // Admin Includes (End)
 
 
@@ -154,6 +156,14 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'en|es|fr|ur']], f
         // Widgets Controller
         Route::controller(WidgetsController::class)->group(function () {
         Route::get('/widgets/manage', 'index')->name('widgets.index');
+        });
+        // MegaMenusTag Controller
+        Route::controller(MegaMenusTagsController::class)->group(function () {
+        Route::get('/meta_tags/manage', 'index')->name('meta_tags.index');
+        });
+        // Listing Controller
+        Route::controller(ListingController::class)->group(function () {
+        Route::get('/listings/manage', 'index')->name('listings.index');
         });
     });
 
