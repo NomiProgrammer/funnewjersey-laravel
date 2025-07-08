@@ -102,7 +102,6 @@
 <table id="example2" class="table table-bordered table-striped table-hover">
     <thead>
         <tr>
-            <th>#</th>
             <th>Category</th>
             <th>County</th>
             <th>City</th>
@@ -111,11 +110,11 @@
             <th>Meta Title</th>
             <th>Meta Desc</th>
             <th>Meta Keywords</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tfoot>
         <tr>
-            <th>#</th>
             <th>Category</th>
             <th>County</th>
             <th>City</th>
@@ -124,6 +123,7 @@
             <th>Meta Title</th>
             <th>Meta Desc</th>
             <th>Meta Keywords</th>
+            <th>Actions</th>
         </tr>
     </tfoot>
     <tbody></tbody>
@@ -152,34 +152,34 @@
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
 
-    <script>
-$('#example2').DataTable({
-    processing: true,
-    serverSide: true,
-    responsive: true,
-    autoWidth: false,
-    ajax: "{{ route('meta_tags.index') }}",
-    columns: [
-        { data: 'id', name: 'id' },
-        { data: 'category', name: 'category' },
-        { data: 'county', name: 'county' },
-        { data: 'city', name: 'city' },
-        { data: 'region', name: 'region' },
-        { data: 'h1', name: 'h1' },
-        { data: 'metatitle', name: 'metatitle' },
-        { data: 'metadesc', name: 'metadesc' },
-        { data: 'metakeywords', name: 'metakeywords' }
-    ],
-    dom: "<'d-flex justify-content-between align-items-center mb-3'<'dt-buttons'B><'dataTables_filter'f>>" +
-         "<'table-responsive'tr>" +
-         "<'d-flex justify-content-between align-items-center mt-3'lip>",
-    buttons: [
-        { extend: 'copyHtml5', text: '<i class="fas fa-copy"></i> Copy', className: 'btn btn-outline-secondary btn-sm me-2' },
-        { extend: 'excelHtml5', text: '<i class="fas fa-file-excel"></i> Excel', className: 'btn btn-outline-success btn-sm me-2' },
-        { extend: 'pdfHtml5', text: '<i class="fas fa-file-pdf"></i> PDF', className: 'btn btn-outline-danger btn-sm me-2' },
-        { extend: 'print', text: '<i class="fas fa-print"></i> Print', className: 'btn btn-outline-primary btn-sm me-2' }
-    ]
-});
+<script>
+    $('#example2').DataTable({
+        processing: true,
+        serverSide: true,
+        responsive: true,
+        autoWidth: false,
+        ajax: "{{ route('meta_tags.index') }}",
+        columns: [
+            { data: 'category', name: 'category' },
+            { data: 'county', name: 'county' },
+            { data: 'city', name: 'city' },
+            { data: 'region', name: 'region' },
+            { data: 'h1', name: 'h1' },
+            { data: 'metatitle', name: 'metatitle' },
+            { data: 'metadesc', name: 'metadesc' },
+            { data: 'metakeywords', name: 'metakeywords' },
+            { data: 'actions', name: 'actions', orderable: false, searchable: false }
+        ],
+        dom: "<'d-flex justify-content-between align-items-center mb-3'<'dt-buttons'B><'dataTables_filter'f>>" +
+             "<'table-responsive'tr>" +
+             "<'d-flex justify-content-between align-items-center mt-3'lip>",
+        buttons: [
+            { extend: 'copyHtml5', text: '<i class="fas fa-copy"></i> Copy', className: 'btn btn-outline-secondary btn-sm me-2' },
+            { extend: 'excelHtml5', text: '<i class="fas fa-file-excel"></i> Excel', className: 'btn btn-outline-success btn-sm me-2' },
+            { extend: 'pdfHtml5', text: '<i class="fas fa-file-pdf"></i> PDF', className: 'btn btn-outline-danger btn-sm me-2' },
+            { extend: 'print', text: '<i class="fas fa-print"></i> Print', className: 'btn btn-outline-primary btn-sm me-2' }
+        ]
+    });
+</script>
 
-    </script>
 @endsection

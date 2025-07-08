@@ -102,18 +102,18 @@
 <table id="example2" class="table table-bordered table-striped table-hover">
     <thead>
         <tr>
-            <th>#</th>
             <th>Title</th>
             <th>Description</th>
             <th>Status</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tfoot>
         <tr>
-            <th>#</th>
             <th>Title</th>
             <th>Description</th>
             <th>Status</th>
+            <th>Actions</th>
         </tr>
     </tfoot>
     <tbody></tbody>
@@ -152,10 +152,10 @@ $('#example2').DataTable({
     autoWidth: false,
     ajax: "{{ route('pages.index') }}",
     columns: [
-        { data: 'id', name: 'id' },
         { data: 'title', name: 'title' },
         { data: 'content', name: 'content' }, // handled by addColumn
         { data: 'status', name: 'status' },
+        { data: 'actions', name: 'actions', orderable: false, searchable: false }
     ],
     dom: "<'d-flex justify-content-between align-items-center mb-3'<'dt-buttons'B><'dataTables_filter'f>>" +
          "<'table-responsive'tr>" +

@@ -13,7 +13,7 @@ class PackagesController extends Controller
 public function index(Request $request)
 {
     if ($request->ajax()) {
-        $data = Packages::orderBy('id', 'desc')
+        $data = Packages::orderBy('id', 'asc')
             ->select(['id', 'title', 'price', 'type', 'expiration_time']);
 
         return datatables()->of($data)

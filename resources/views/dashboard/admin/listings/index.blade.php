@@ -102,7 +102,6 @@
                               <table id="example2" class="table table-bordered table-striped table-hover">
     <thead>
         <tr>
-            <th>#</th>
             <th>Image</th>
             <th>Title</th>
             <th>Category</th>
@@ -111,11 +110,11 @@
             <th>Status</th>
             <th>Days Left</th>
             <th>Featured</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tfoot>
         <tr>
-            <th>#</th>
             <th>Image</th>
             <th>Title</th>
             <th>Category</th>
@@ -124,6 +123,8 @@
             <th>Status</th>
             <th>Days Left</th>
             <th>Featured</th>
+            <th>Actions</th>
+
         </tr>
     </tfoot>
     <tbody></tbody>

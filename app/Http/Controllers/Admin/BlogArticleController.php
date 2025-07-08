@@ -13,23 +13,47 @@ class BlogArticleController extends Controller
 public function index(Request $request)
 {
     if ($request->ajax()) {
-        $data = BlogArticle::select(['id', 'type', 'title', 'description', 'status']);
+        $data = BlogArticle::select(['type', 'title', 'description', 'status']);
 
         return datatables()->of($data)
-            ->addColumn('title', function ($row) {
-                // Decode JSON and get 'en'
+            ->editColumn('title', function ($row) {
                 $title = json_decode($row->title, true);
                 return $title['en'] ?? '-';
             })
-            ->addColumn('description', function ($row) {
-                // Shorten description
-                return Str::limit(strip_tags($row->description), 50);
+            ->editColumn('description', function ($row) {
+                return trim(Str::limit(strip_tags($row->description), 50));
             })
+            ->editColumn('status', function ($row) {
+                if ($row->status == 1) {
+                    return '<span class="badge badge-success">Published</span>';
+                } elseif ($row->status == 0) {
+                    return '<span class="badge badge-danger">Unpublished</span>';
+                } elseif ($row->status == 2) {
+                    return '<span class="badge badge-warning">Drafted</span>';
+                } else {
+                    return '<span class="badge badge-secondary">Unknown</span>';
+                }
+            })
+            ->addColumn('actions', function ($row) {
+                return '
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-success dropdown-toggle" type="button" id="actionDropdown' . $row->id . '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-cog"></i> Actions
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="actionDropdown' . $row->id . '">
+                        <a class="dropdown-item" href="#"><i class="fas fa-edit text-dark"></i> &nbsp;Edit</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-trash text-dark"></i> &nbsp;Delete</a>
+                    </div>
+                </div>
+                ';
+            })
+            ->rawColumns(['status', 'actions'])
             ->make(true);
     }
 
     return view('dashboard.admin.blog.index');
 }
+
 
     // Show a single blog article
     public function show($id)

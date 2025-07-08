@@ -14,7 +14,6 @@ public function index(Request $request)
 {
     if ($request->ajax()) {
         $data = MegaMenusTags::select([
-            'id',
             'category',
             'county',
             'city',
@@ -25,11 +24,27 @@ public function index(Request $request)
             'metakeywords'
         ]);
 
-        return datatables()->of($data)->make(true);
+        return datatables()->of($data)
+            ->addColumn('actions', function ($item) {
+                return '
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-success dropdown-toggle" type="button" id="actionDropdown' . $item->id . '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-cog"></i> Actions
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="actionDropdown' . $item->id . '">
+                            <a class="dropdown-item" href="#"><i class="fas fa-edit"></i> &nbsp;Edit</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-trash"></i> &nbsp;Delete</a>
+                        </div>
+                    </div>
+                ';
+            })
+            ->rawColumns(['actions'])
+            ->make(true);
     }
 
     return view('dashboard.admin.meta_tags.index');
 }
+
 
     // Show a single mega menu tag
     public function show($id)

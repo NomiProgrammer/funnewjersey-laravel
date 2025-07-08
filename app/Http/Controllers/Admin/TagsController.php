@@ -13,7 +13,7 @@ class TagsController extends Controller
 public function index(Request $request)
 {
     if ($request->ajax()) {
-        $data = Tags::orderBy('id', 'desc')->select(['id', 'title']);
+        $data = Tags::orderBy('id', 'asc')->select(['id', 'title']);
 
         return datatables()->of($data)
             ->addColumn('actions', function ($item) {

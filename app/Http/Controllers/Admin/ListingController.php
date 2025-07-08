@@ -29,6 +29,13 @@ public function index(Request $request)
                 $url = asset('front_assets/uploads/listings/' . $item->featured_img);
                 return '<img src="' . $url . '" alt="Image" width="90" height="60" loading="lazy">';
             })
+->editColumn('title', function ($item) {
+    $title = json_decode($item->title);
+    if (isset($title->en)) {
+        return ucwords(strtolower($title->en));
+    }
+    return '';
+})
             ->addColumn('days_left', function ($row) {
                 if ($row->expirtion_date) {
                     $days = \Carbon\Carbon::parse($row->expirtion_date)->diffInDays(now());

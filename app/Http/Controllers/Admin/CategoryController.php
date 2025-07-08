@@ -13,9 +13,8 @@ class CategoryController extends Controller
 public function index(Request $request)
 {
     if ($request->ajax()) {
-        $data = Category::orderBy('id', 'desc')
+        $data = Category::orderBy('id', 'asc')
             ->select([
-                'id',
                 'title',
                 'not_public',
                 'islink',
@@ -35,10 +34,9 @@ public function index(Request $request)
                 $url = asset('front_assets/uploads/category/' . $item->featured_img);
                 return '<img src="' . $url . '" alt="Image" width="80" height="50" loading="lazy">';
             })
-->editColumn('fa_icon', function ($item) {
-    return '<i class="' . $item->fa_icon . '"></i>';
-})
-
+            ->editColumn('fa_icon', function ($item) {
+                return '<i class="' . e($item->fa_icon) . '"></i>';
+            })
             ->addColumn('actions', function ($item) {
                 return '
                 <div class="dropdown">
@@ -58,6 +56,7 @@ public function index(Request $request)
 
     return view('dashboard.admin.category.index');
 }
+
 
 
 

@@ -118,6 +118,7 @@
                                             <th>Parent</th>
                                             <th>Image</th>
                                             <th>FA icon class</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -128,6 +129,7 @@
                                             <th>Parent</th>
                                             <th>Image</th>
                                             <th>FA icon class</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </tfoot>
                                     <tbody></tbody>
@@ -171,6 +173,12 @@
             { data: 'parent', name: 'parent' },
             { data: 'featured_img', name: 'featured_img' },
             { data: 'fa_icon', name: 'fa_icon' },
+                            {
+                    data: 'actions',
+                    name: 'actions',
+                    orderable: false,
+                    searchable: false
+                }
         ],
         dom: "<'d-flex justify-content-between align-items-center mb-3'<'dt-buttons'B><'dataTables_filter'f>>" +
             "<'table-responsive'tr>" +
