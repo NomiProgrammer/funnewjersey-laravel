@@ -163,7 +163,7 @@ $('#example2').DataTable({
     columns: [
         { data: 'featured_img', name: 'featured_img', orderable: false, searchable: false },
         { data: 'title', name: 'title' },
-        { data: 'category', name: 'category' },
+                        { data: 'category', name: 'category' },
         { data: 'email', name: 'email' },
         { data: 'city', name: 'city' },
         { data: 'status', name: 'status' },

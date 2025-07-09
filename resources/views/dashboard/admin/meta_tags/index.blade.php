@@ -161,7 +161,10 @@
         ajax: "{{ route('meta_tags.index') }}",
         columns: [
             { data: 'category', name: 'category' },
-            { data: 'county', name: 'county' },
+                            {
+                    data: 'location',
+                    name: 'location'
+                },
             { data: 'city', name: 'city' },
             { data: 'region', name: 'region' },
             { data: 'h1', name: 'h1' },

@@ -8,4 +8,8 @@ class Listings extends Model
 {
     protected $table = 'posts';
     //
+        public function categoryid()
+    {
+        return $this->belongsTo(Category::class, 'category');
+    }
 }

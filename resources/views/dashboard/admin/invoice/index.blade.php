@@ -162,9 +162,9 @@
             { data: 'total', name: 'total' },
             { data: 'title', name: 'title' },
             { data: 'description', name: 'description' },
-            { data: 'assigned_to', name: 'assigned_to' }, // Customer
-            { data: 'expires', name: 'expires' }, // Paid Date (adjust if needed) but other table
-            { data: 'expires', name: 'expires' }, // Due Date
+            { data: 'customer', name: 'customer' },
+            { data: 'expires', name: 'expires' }, // Not Found
+            { data: 'expires', name: 'expires' }, // Due Date(this is true)
             { data: 'status', name: 'status' },
             { data: 'actions', name: 'actions', orderable: false, searchable: false }
         ],

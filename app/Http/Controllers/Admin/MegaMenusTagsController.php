@@ -13,7 +13,7 @@ class MegaMenusTagsController extends Controller
 public function index(Request $request)
 {
     if ($request->ajax()) {
-        $data = MegaMenusTags::select([
+        $data = MegaMenusTags::with(['categoryid','location'])->orderBy('id', 'asc')->select([
             'category',
             'county',
             'city',
@@ -25,6 +25,12 @@ public function index(Request $request)
         ]);
 
         return datatables()->of($data)
+                    ->addColumn('category', function ($item) {
+    return $item->categoryid ? $item->categoryid->title : '-';
+})
+            ->addColumn('location', function ($item) {
+    return $item->location ? $item->location->name : '-';
+})
             ->addColumn('actions', function ($item) {
                 return '
                     <div class="dropdown">

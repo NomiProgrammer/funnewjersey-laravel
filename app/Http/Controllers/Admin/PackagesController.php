@@ -20,6 +20,9 @@ public function index(Request $request)
             ->editColumn('expiration_time', function($row) {
         return $row->expiration_time . ' Days';
     })
+    ->editColumn('type', function ($item) {
+    return ucwords(str_replace('_', ' ', $item->type));
+})
             ->addColumn('actions', function ($item) {
                 return '
                 <div class="dropdown">

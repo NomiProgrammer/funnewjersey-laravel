@@ -34,9 +34,9 @@ public function index(Request $request)
                 $url = asset('front_assets/uploads/category/' . $item->featured_img);
                 return '<img src="' . $url . '" alt="Image" width="80" height="50" loading="lazy">';
             })
-            ->editColumn('fa_icon', function ($item) {
-                return '<i class="' . e($item->fa_icon) . '"></i>';
-            })
+->editColumn('fa_icon', function ($item) {
+    return '<i class="fa ' . e($item->fa_icon) . '"></i>';
+})
             ->addColumn('actions', function ($item) {
                 return '
                 <div class="dropdown">

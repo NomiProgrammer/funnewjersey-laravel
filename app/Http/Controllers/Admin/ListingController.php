@@ -13,7 +13,7 @@ class ListingController extends Controller
 public function index(Request $request)
 {
     if ($request->ajax()) {
-        $data = Listings::orderBy('id', 'desc')->select([
+        $data = Listings::with('categoryid')->orderBy('id', 'desc')->select([
             'featured_img',
             'title',
             'category',
@@ -35,24 +35,34 @@ public function index(Request $request)
         return ucwords(strtolower($title->en));
     }
     return '';
+})            ->addColumn('category', function ($item) {
+    return $item->categoryid ? $item->categoryid->title : '-';
 })
-            ->addColumn('days_left', function ($row) {
-                if ($row->expirtion_date) {
-                    $days = \Carbon\Carbon::parse($row->expirtion_date)->diffInDays(now());
-                    return $days . ' days';
-                }
-                return 'N/A';
-            })
-            ->editColumn('status', function ($item) {
-                if ($item->status == 1) {
-                    return '<span class="badge badge-success">Published</span>';
-                } elseif ($item->status == 0) {
-                    return '<span class="badge badge-danger">Unpublished</span>';
-                } elseif ($item->status == 2) {
-                    return '<span class="badge badge-warning">Drafted</span>';
-                }
-                return '<span class="badge badge-dark">Unknown</span>';
-            })
+->editColumn('featured', function ($item) {
+    return $item->featured == 1
+        ? '<span class="badge badge-success">Yes</span>'
+        : '<span class="badge badge-danger">No</span>';
+})
+->addColumn('days_left', function ($row) {
+    if ($row->expirtion_date) {
+        $days = \Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::parse($row->expirtion_date), false);
+        return intval($days) . ' days';
+    }
+    return 'N/A';
+})
+->editColumn('status', function ($item) {
+    if ($item->status == 1) {
+        return '<span class="badge badge-success">Published</span>';
+    } elseif ($item->status == 0) {
+        return '<span class="badge badge-danger">Unpublished</span>';
+    } elseif ($item->status == 2) {
+        return '<span class="badge badge-warning">Drafted</span>';
+    } elseif ($item->status == 4) {
+        return '<span class="badge badge-secondary">Expired</span>';
+    }
+    return '<span class="badge badge-dark">Unknown</span>';
+})
+
             ->addColumn('actions', function ($item) {
                 return '
                 <div class="dropdown">
@@ -72,7 +82,7 @@ public function index(Request $request)
                 </div>
                 ';
             })
-            ->rawColumns(['featured_img', 'status', 'actions'])
+            ->rawColumns(['featured_img', 'status', 'actions','featured'])
             ->make(true);
     }
 

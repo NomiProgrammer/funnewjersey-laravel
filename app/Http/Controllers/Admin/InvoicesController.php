@@ -13,7 +13,7 @@ class InvoicesController extends Controller
 public function index(Request $request)
 {
     if ($request->ajax()) {
-        $data = Invoices::orderBy('id', 'desc')->select([
+        $data = Invoices::with('customer')->orderBy('id', 'desc')->select([
             'total',
             'title',
             'description',
@@ -37,8 +37,15 @@ public function index(Request $request)
                 }
                 return '<span class="badge badge-dark">Unknown</span>';
             })
+                ->editColumn('total', function ($item) {
+        return '$' . $item->total;
+    })
             ->editColumn('expires', function ($item) {
     return \Carbon\Carbon::parse($item->expires)->format('d M Y');
+})->addColumn('customer', function ($item) {
+    return $item->customer
+        ? trim($item->customer->first_name . ' ' . $item->customer->last_name)
+        : '-';
 })
             ->addColumn('actions', function ($item) {
                 return '
