@@ -14,47 +14,57 @@
             color: white;
             font-weight: 600;
         }
+
         table.dataTable tfoot {
             background-color: #17a2b8;
             color: white;
             font-weight: 600;
         }
+
         table.dataTable thead th.sorting:before,
         table.dataTable thead th.sorting:after,
         table.dataTable tfoot th.sorting:before,
         table.dataTable tfoot th.sorting:after {
             color: rgba(255, 255, 255, 0.8) !important;
         }
+
         .paginate_button.page-item.active a {
             background-color: #17a2b8 !important;
             color: white !important;
         }
+
         .paginate_button.page-item a:hover {
             background-color: #e0f7fa !important;
             color: #000 !important;
         }
+
         .dt-buttons .btn-outline-secondary {
             color: #6c757d !important;
             border-color: #6c757d !important;
         }
+
         .dt-buttons .btn-outline-success {
             color: #28a745 !important;
             border-color: #28a745 !important;
         }
+
         .dt-buttons .btn-outline-danger {
             color: #dc3545 !important;
             border-color: #dc3545 !important;
         }
+
         .dt-buttons .btn-outline-primary {
             color: #007bff !important;
             border-color: #007bff !important;
         }
+
         .dt-buttons .btn {
             margin-right: 8px;
             background-color: transparent !important;
             box-shadow: none !important;
             padding: 4px 10px !important;
         }
+
         .dt-buttons .btn:hover {
             background-color: transparent !important;
             opacity: 0.85;
@@ -84,7 +94,6 @@
                 </div>
             </div>
         </section>
-
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -93,31 +102,58 @@
                             <div class="card-header">
                                 <h3 class="card-title">{{ $pageName2 }}</h3>
                                 <div class="card-tools">
-                                    <a href="" class="float-right btn btn-block btn-success btn-sm">
+                                    <a href="{{ route('widgets.create') }}"
+                                        class="float-right btn btn-block btn-success btn-sm">
                                         <i class="fas fa-plus"></i>&nbsp; Add New
                                     </a>
                                 </div>
                             </div>
                             <div class="card-body">
-<table id="example2" class="table table-bordered table-striped table-hover">
-    <thead>
-        <tr>
-            <th>Widget Name</th>
-            <th>Activate/De-Activate</th>
-            <th>Actions</th>
+                                <div id="alert-container"
+                                    style="position: fixed; top: 17px; right: 20px; z-index: 9999; max-width: 300px;">
+                                    @if (session('success'))
+                                        <div class="alert-message"
+                                            style="padding: 10px 15px; border-radius: 5px; margin-bottom: 10px; font-size: 20px; color: #fff; background: #47C363; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);height: 71px;width: 106%;align-content: center;">
+                                            {{ session('success') }}
+                                        </div>
+                                    @endif
 
-        </tr>
-    </thead>
-    <tfoot>
-        <tr>
-            <th>Widget Name</th>
-            <th>Activate/De-Activate</th>
-            <th>Actions</th>
+                                    @if (session('error'))
+                                        <div class="alert-message"
+                                            style="padding: 10px 15px; border-radius: 5px; margin-bottom: 10px; font-size: 14px; color: #fff; background: #ff0018; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);">
+                                            {{ session('error') }}
+                                        </div>
+                                    @endif
 
-        </tr>
-    </tfoot>
-    <tbody></tbody>
-</table>
+                                    @if (session('info'))
+                                        <div class="alert-message"
+                                            style="padding: 10px 15px; border-radius: 5px; margin-bottom: 10px; font-size: 14px; color: #fff; background: #17a2b8; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);">
+                                            {{ session('info') }}
+                                        </div>
+                                    @endif
+                                </div>
+
+                                <table id="example2" class="table table-bordered table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Widget Name</th>
+                                            <th>Activate/De-Activate</th>
+                                            <th>Actions</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Widget Name</th>
+                                            <th>Activate/De-Activate</th>
+                                            <th>Actions</th>
+
+                                        </tr>
+                                    </tfoot>
+                                    <tbody></tbody>
+                                </table>
 
 
 
@@ -144,30 +180,95 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Hide the alert messages after 5 seconds
+        setTimeout(function() {
+            document.querySelectorAll('.alert-message').forEach(function(alert) {
+                alert.style.transition = "opacity 0.5s";
+                alert.style.opacity = "0";
+                setTimeout(() => alert.remove(), 500); // Remove after fade-out
+            });
+        }, 5000);
+    </script>
 
-<script>
-    $('#example2').DataTable({
-        processing: true,
-        serverSide: true,
-        responsive: true,
-        autoWidth: false,
-        ajax: "{{ route('widgets.index') }}",
-        columns: [
-            { data: 'name', name: 'name' },
-            { data: 'status', name: 'status', orderable: false, searchable: false },
-            { data: 'actions', name: 'actions', orderable: false, searchable: false }
-        ],
-        dom: "<'d-flex justify-content-between align-items-center mb-3'<'dt-buttons'B><'dataTables_filter'f>>" +
-            "<'table-responsive'tr>" +
-            "<'d-flex justify-content-between align-items-center mt-3'lip>",
-        buttons: [
-            { extend: 'copyHtml5', text: '<i class="fas fa-copy"></i> Copy', className: 'btn btn-outline-secondary btn-sm me-2' },
-            { extend: 'excelHtml5', text: '<i class="fas fa-file-excel"></i> Excel', className: 'btn btn-outline-success btn-sm me-2' },
-            { extend: 'pdfHtml5', text: '<i class="fas fa-file-pdf"></i> PDF', className: 'btn btn-outline-danger btn-sm me-2' },
-            { extend: 'print', text: '<i class="fas fa-print"></i> Print', className: 'btn btn-outline-primary btn-sm me-2' }
-        ]
-    });
-</script>
 
+    <script>
+        $('#example2').DataTable({
+            processing: true,
+            serverSide: true,
+            responsive: true,
+            autoWidth: false,
+            ajax: "{{ route('widgets.index') }}",
+            columns: [{
+                    data: 'id',
+                    name: 'id'
+                }, // ✅ Just to see
+                {
+                    data: 'name',
+                    name: 'name'
+                },
+                {
+                    data: 'status',
+                    name: 'status',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'actions',
+                    name: 'actions',
+                    orderable: false,
+                    searchable: false
+                }
+            ],
+            dom: "<'d-flex justify-content-between align-items-center mb-3'<'dt-buttons'B><'dataTables_filter'f>>" +
+                "<'table-responsive'tr>" +
+                "<'d-flex justify-content-between align-items-center mt-3'lip>",
+            buttons: [{
+                    extend: 'copyHtml5',
+                    text: '<i class="fas fa-copy"></i> Copy',
+                    className: 'btn btn-outline-secondary btn-sm me-2'
+                },
+                {
+                    extend: 'excelHtml5',
+                    text: '<i class="fas fa-file-excel"></i> Excel',
+                    className: 'btn btn-outline-success btn-sm me-2'
+                },
+                {
+                    extend: 'pdfHtml5',
+                    text: '<i class="fas fa-file-pdf"></i> PDF',
+                    className: 'btn btn-outline-danger btn-sm me-2'
+                },
+                {
+                    extend: 'print',
+                    text: '<i class="fas fa-print"></i> Print',
+                    className: 'btn btn-outline-primary btn-sm me-2'
+                }
+            ]
+        });
+    </script>
+    <script>
+        $(document).on('click', '.delete-widget', function(e) {
+            e.preventDefault();
+
+            let id = $(this).data('id');
+            if (confirm('Are you sure you want to delete this widget?')) {
+                $.ajax({
+                    url: "{{ url(app()->getLocale() . '/admin/widgets/destroy') }}/" + id,
+                    type: 'DELETE',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        alert(response.success);
+                        $('#example2').DataTable().ajax.reload(null, false); // reload DataTable
+                    },
+                    error: function(xhr) {
+                        alert('Something went wrong!');
+                    }
+                });
+            }
+        });
+    </script>
 
 @endsection

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Widgets;
 use Yajra\DataTables\DataTables;
-
+use Illuminate\Support\Str;
 class WidgetsController extends Controller
 {
     // List all widgets
@@ -23,20 +23,29 @@ public function index(Request $request)
                 } else {
                     return '<span class="badge badge-success">Active</span>';
                 }
-            })
-            ->addColumn('actions', function ($item) {
-                return '
-                    <div class="dropdown">
-                        <button class="btn btn-sm btn-success dropdown-toggle" type="button" id="actionDropdown' . $item->id . '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-cog"></i> Actions
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="actionDropdown' . $item->id . '">
-                            <a class="dropdown-item" href="#"><i class="fas fa-edit"></i> &nbsp;Edit</a>
-                            <a class="dropdown-item" href="#"><i class="fas fa-trash"></i> &nbsp;Delete</a>
-                        </div>
-                    </div>
-                ';
-            })
+            })->addColumn('id', function ($item) {
+
+    return $item->id;
+})
+
+->addColumn('actions', function ($item) {
+  $editUrl = route('widgets.edit', ['locale' => app()->getLocale(), 'id' => $item->id]);
+    return '
+        <div class="dropdown">
+            <button class="btn btn-sm btn-success dropdown-toggle" type="button" id="actionDropdown' . $item->id . '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-cog"></i> Actions
+            </button>
+            <div class="dropdown-menu" aria-labelledby="actionDropdown' . $item->id . '">
+                <a class="dropdown-item" href="' . $editUrl . '">
+                    <i class="fas fa-edit"></i> &nbsp;Edit
+                </a>
+                <a class="dropdown-item text-danger delete-widget" href="javascript:void(0);" data-id="' . $item->id . '">
+                    <i class="fas fa-trash"></i> &nbsp;Delete
+                </a>
+            </div>
+        </div>
+    ';
+})
             ->rawColumns(['status', 'actions'])
             ->make(true);
     }
@@ -45,6 +54,11 @@ public function index(Request $request)
 }
 
 
+
+    public function create()
+    {
+        return view('dashboard.admin.widgets.create');
+    }
     // Show a single widget
     public function show($id)
     {
@@ -55,27 +69,53 @@ public function index(Request $request)
     // Store a new widget (demo data)
     public function store(Request $request)
     {
-        $widget = Widgets::create([
-            'name' => 'Demo Widget',
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'status' => 'required|in:1,2',
         ]);
-        return response()->json($widget);
+
+        Widgets::create([
+            'name' => $request->name,
+             'alias' => Str::slug($request->name, '_'),
+            'status' => $request->status,
+            'editable' => 1,
+        ]);
+
+        return redirect()->route('widgets.index')->with('success', 'Widget created successfully!');
+    }
+
+public function edit($locale, $id)
+{
+        $widget = Widgets::findOrFail($id);
+        return view('dashboard.admin.widgets.edit', compact('widget'));
     }
 
     // Update a widget (demo data)
-    public function update(Request $request, $id)
+    public function update(Request $request, $locale, $id)
     {
-        $widget = Widgets::findOrFail($id);
-        $widget->update([
-            'name' => 'Updated Widget',
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'status' => 'required|in:1,2',
         ]);
-        return response()->json($widget);
+        $widget = Widgets::findOrFail($id);
+
+
+        $widget->update([
+            'name' => $request->name,
+           'alias' => Str::slug($request->name, '_'),
+            'status' => $request->status,
+            'editable' => 1,
+        ]);
+
+        return redirect()->route('widgets.index')->with('success', 'Widget updated successfully!');
     }
 
-    // Delete a widget
-    public function destroy($id)
+
+    public function destroy($locale,$id)
     {
         $widget = Widgets::findOrFail($id);
         $widget->delete();
-        return response()->json(['message' => 'Widget deleted']);
+
+        return response()->json(['success' => 'Widget deleted successfully!']);
     }
 }

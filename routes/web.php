@@ -121,9 +121,9 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'en|es|fr|ur']], f
             Route::get('/parallax/manage/', 'index')->name('parallax.index');
             Route::get('/parallax/add/', 'create')->name('parallax.create');
             Route::post('/parallax/store/', 'store')->name('parallax.store');
-            Route::get('/parallax/edit//{id}', 'edit')->name('parallax.edit');
-            Route::put('/parallax/update//{id}', 'update')->name('parallax.update');
-            Route::delete('/parallax/destroy//{id}', 'destroy')->name('parallax.destroy');
+            Route::get('/parallax/edit/{id}', 'edit')->name('parallax.edit');
+            Route::put('/parallax/update/{id}', 'update')->name('parallax.update');
+            Route::delete('/parallax/destroy/{id}', 'destroy')->name('parallax.destroy');
         });
         // BannerAds Slider
         Route::controller(BannersAdsController::class)->group(function () {
@@ -140,6 +140,11 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'en|es|fr|ur']], f
         // Tags Controller
         Route::controller(TagsController::class)->group(function () {
         Route::get('/tags/manage', 'index')->name('tags.index');
+        Route::get('/tags/add/', 'create')->name('tags.create');
+        Route::post('/tags/store/', 'store')->name('tags.store');
+        Route::get('/tags/edit/{id}', 'edit')->name('tags.edit');
+        Route::put('/tags/update/{id}', 'update')->name('tags.update');
+        Route::delete('/tags/destroy/{id}', 'destroy')->name('tags.destroy');
         });
         // Package Controller
         Route::controller(PackagesController::class)->group(function () {
@@ -156,6 +161,11 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'en|es|fr|ur']], f
         // Widgets Controller
         Route::controller(WidgetsController::class)->group(function () {
         Route::get('/widgets/manage', 'index')->name('widgets.index');
+        Route::get('/widgets/add', 'create')->name('widgets.create');
+        Route::post('/widgets/store', 'store')->name('widgets.store');
+        Route::get('/widgets/edit/{id}', 'edit')->name('widgets.edit');
+        Route::put('/widgets/update/{id}', 'update')->name('widgets.update');
+        Route::delete('/widgets/destroy/{id}', 'destroy')->name('widgets.destroy');
         });
         // MegaMenusTag Controller
         Route::controller(MegaMenusTagsController::class)->group(function () {
