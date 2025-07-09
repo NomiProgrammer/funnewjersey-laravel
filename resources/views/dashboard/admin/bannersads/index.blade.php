@@ -199,18 +199,13 @@
                     data: 'type',
                     name: 'type'
                 },
+                { data: 'category', name: 'category' },
+
                 {
-                    data: 'category',
-                    name: 'category'
+                    data: 'location',
+                    name: 'location'
                 },
-                {
-                    data: 'region',
-                    name: 'region'
-                },
-                {
-                    data: 'created_by',
-                    name: 'created_by'
-                },
+                { data: 'customer', name: 'customer' },
                 {
                     data: 'expires',
                     name: 'expires'
