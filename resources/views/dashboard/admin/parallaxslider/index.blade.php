@@ -203,18 +203,13 @@
                     data: 'slide_order',
                     name: 'slide_order'
                 },
-                {
-                    data: 'created_by',
-                    name: 'created_by'
-                },
+                { data: 'customer', name: 'customer' },
                 {
                     data: 'create_time',
                     name: 'create_time'
                 },
-                {
-                    data: 'category',
-                    name: 'category'
-                },
+                { data: 'category', name: 'category' },
+
                 {
                     data: 'starts',
                     name: 'starts'

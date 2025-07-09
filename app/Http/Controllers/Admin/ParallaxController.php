@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Parallax;
+use App\Models\Category;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Log;
 
@@ -13,7 +14,7 @@ class ParallaxController extends Controller
 public function index(Request $request)
 {
     if ($request->ajax()) {
-        $data = Parallax::orderBy('id', 'desc')
+        $data = Parallax::with(['categoryid', 'customer'])->orderBy('id', 'desc')
             ->select([
                 'id',
                 'featured_img',
@@ -33,6 +34,14 @@ public function index(Request $request)
         $url = asset('front_assets/uploads/slider/' . $item->featured_img);
         return '<img src="' . $url . '" alt="Image" width="90" height="60" loading="lazy">';
     })
+->addColumn('customer', function ($item) {
+    return $item->customer
+        ? trim($item->customer->first_name . ' ' . $item->customer->last_name)
+        : '-';
+})
+->addColumn('category', function ($item) {
+    return $item->categoryid ? $item->categoryid->title : '-';
+})
     ->editColumn('description', function ($item) {
         return strlen($item->description) > 10 ? substr($item->description, 0, 10) . '...' : $item->description;
     })
