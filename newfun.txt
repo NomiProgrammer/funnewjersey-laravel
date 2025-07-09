@@ -1,0 +1,15 @@
+Parallax Slider All Manage Set(All Realations Done) Just company feild not found
+Banner All Manage Set(Just feild 'type' no Realations)
+
+
+Invoice(all realtion relation){ data: 'expires', name: 'expires' }, check tthis feild
+Listing (All realtion DOne) jsut city not done,status
+custom combo meta(city and region not found)region values and city realtion
+Tags All DOne
+Packages ALl DOne
+category all Done (no relation of parent feild)
+widgets All DOne
+blog article (staus ka sehi nai pata)
+Pages and Menu ALl DOne
+
+ABove Is Only FOr Manage Page
