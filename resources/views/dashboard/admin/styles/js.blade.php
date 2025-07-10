@@ -32,3 +32,7 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{asset('dashboard/dist/js/pages/dashboard.js')}}"></script>
 <script src="{{asset('dashboard/plugins/select2/js/select2.full.min.js')}}"></script>
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('content');
+</script>

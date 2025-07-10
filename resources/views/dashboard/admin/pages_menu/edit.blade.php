@@ -94,7 +94,7 @@
 
         <div class="form-group">
             <label>Content</label>
-            <textarea name="content" class="form-control" rows="4">{{ old('content', $page->content) }}</textarea>
+             <textarea id="content" name="content" class="form-control" rows="4">{{ old('content', $page->content) }}</textarea>
         </div>
 
         <h5>SEO Settings</h5>
@@ -158,4 +158,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+
 @endsection

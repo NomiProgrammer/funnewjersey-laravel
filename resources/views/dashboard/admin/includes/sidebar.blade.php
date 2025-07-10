@@ -260,8 +260,8 @@
                                 class="nav-link {{ request()->routeIs('package.index') ? 'active' : '' }}"><i class="fas fa-boxes nav-icon"></i>
                                 <p>All packages</p>
                             </a></li>
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/package/newpackage"
-                                class="nav-link"><i class="fas fa-plus nav-icon"></i>
+                        <li class="nav-item"><a href="{{route('package.create')}}"
+                                class="nav-link {{ request()->routeIs('package.create') ? 'active' : '' }}"><i class="fas fa-plus nav-icon"></i>
                                 <p>Create New Package</p>
                             </a></li>
                         <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/package/settings"
@@ -286,8 +286,8 @@
                                 class="nav-link {{ request()->routeIs('widgets.index') ? 'active' : '' }}"><i class="fas fa-th nav-icon"></i>
                                 <p>All Widgets</p>
                             </a></li>
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/widgets/widgetpositions"
-                                class="nav-link"><i class="fas fa-arrows-alt nav-icon"></i>
+                        <li class="nav-item"><a href="{{route('widgets.create')}}"
+                                class="nav-link {{ request()->routeIs('widgets.create') ? 'active' : '' }}"><i class="fas fa-arrows-alt nav-icon"></i>
                                 <p>Widget Positions</p>
                             </a></li>
                     </ul>
@@ -344,8 +344,8 @@
                                 class="nav-link {{ request()->routeIs('pages.index') ? 'active' : '' }}"><i class="fas fa-file-alt nav-icon"></i>
                                 <p>All pages</p>
                             </a></li>
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/page/index"
-                                class="nav-link"><i class="fas fa-plus nav-icon"></i>
+                        <li class="nav-item"><a href="{{route('pages.create')}}"
+                                class="nav-link {{ request()->routeIs('pages.create') ? 'active' : '' }}"><i class="fas fa-plus nav-icon"></i>
                                 <p>New Page</p>
                             </a></li>
                         <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/page/menu"

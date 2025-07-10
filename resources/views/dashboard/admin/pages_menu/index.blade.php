@@ -225,4 +225,6 @@ $('#example2').DataTable({
             }
         });
     </script>
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+
 @endsection

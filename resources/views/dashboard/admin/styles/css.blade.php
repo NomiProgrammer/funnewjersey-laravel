@@ -19,4 +19,4 @@
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('dashboard/plugins/summernote/summernote-bs4.min.css') }}">
 
-  <link rel="shortcut icon" href="{{ asset('dashboard/images/favicon.png') }}"
+  <link rel="shortcut icon" href="{{ asset('dashboard/images/favicon.png') }}">
