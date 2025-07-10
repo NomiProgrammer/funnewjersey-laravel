@@ -149,6 +149,11 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'en|es|fr|ur']], f
         // Package Controller
         Route::controller(PackagesController::class)->group(function () {
         Route::get('/packages/manage', 'index')->name('package.index');
+        Route::get('/package/add', 'create')->name('package.create');
+        Route::post('/package/store', 'store')->name('package.store');
+        Route::get('/package/edit/{id}', 'edit')->name('package.edit');
+        Route::put('/package/update/{id}', 'update')->name('package.update');
+        Route::delete('/package/destroy/{id}', 'destroy')->name('package.destroy');
         });
         // BlogArticleController Controller
         Route::controller(BlogArticleController::class)->group(function () {

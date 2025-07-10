@@ -47,31 +47,59 @@
                                 <h3 class="card-title">{{ $pageName2 }}</h3>
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('widgets.store') }}" method="POST">
-                                    @csrf
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="form-group col-md-6">
-                                                <label for="name">Name</label>
-                                                <input type="text" class="form-control" name="name"
-                                                    placeholder="Enter Name of Widget">
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="status">Status</label>
-                                                <select class="form-control" id="status" name="status">
-                                                    <option value="2">Active</option>
-                                                    <option value="1">Deactive</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- /.card-body -->
+                             <form action="{{ route('package.store') }}" method="POST">
+    @csrf
+    <div class="card-body">
+        <div class="row">
 
-                                    <div class="card-footer d-flex justify-content-between">
+            <div class="form-group col-md-6">
+                <label for="type">Type</label>
+                <select class="form-control" name="type" required>
+                    <option value="">-- Select Type --</option>
+                    <option value="post_package">Post Package</option>
+                    <option value="featured_package">Featured Package</option>
+                    <option value="banner_package">Banner Package</option>
+                    <option value="deal_package">Deal Package</option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" name="title" placeholder="Enter Package Title" required>
+            </div>
+
+            <div class="form-group col-md-12">
+                <label for="description">Description</label>
+                <textarea class="form-control" name="description" rows="3" placeholder="Enter Description"></textarea>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="price">Price</label>
+                <input type="number" class="form-control" name="price" placeholder="Enter Price" step="0.01" required>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="expiration_time">Expiration Time (Days)</label>
+                <input type="number" class="form-control" name="expiration_time" placeholder="Number of Days" required>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="status">Status</label>
+                <select class="form-control" name="status" required>
+                    <option value="1">Public</option>
+                    <option value="0">Admin Only</option>
+                </select>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="card-footer d-flex justify-content-between">
                                         <button type="submit" class="btn btn-primary">Submit</button>
-                                        <a href="{{ route('widgets.index') }}" class="btn btn-secondary">Cancel</a>
+                                        <a href="{{ route('package.index') }}" class="btn btn-secondary">Cancel</a>
                                     </div>
-                                </form>
+</form>
+
 
                             </div>
                         </div>
