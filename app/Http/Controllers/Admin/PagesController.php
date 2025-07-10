@@ -14,7 +14,7 @@ class PagesController extends Controller
 public function index(Request $request)
 {
     if ($request->ajax()) {
-        $data = Pages::select(['title', 'content', 'status']);
+        $data = Pages::select(['id','title', 'content', 'status']);
 
         return datatables()->of($data)
             ->editColumn('content', function ($row) {
@@ -29,18 +29,24 @@ public function index(Request $request)
                     return '<span class="badge badge-secondary">Unknown</span>';
                 }
             })
-            ->addColumn('actions', function ($row) {
-                return '
-                <div class="dropdown">
-                    <button class="btn btn-sm btn-success dropdown-toggle" type="button" id="actionDropdown' . $row->id . '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-cog"></i> Actions
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="actionDropdown' . $row->id . '">
-                        <a class="dropdown-item" href="#"><i class="fas fa-edit text-dark"></i> &nbsp;Edit</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-trash text-dark"></i> &nbsp;Delete</a>
-                    </div>
-                </div>';
-            })
+->addColumn('actions', function ($item) {
+  $editUrl = route('pages.edit', ['locale' => app()->getLocale(), 'id' => $item->id]);
+    return '
+        <div class="dropdown">
+            <button class="btn btn-sm btn-success dropdown-toggle" type="button" id="actionDropdown' . $item->id . '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-cog"></i> Actions
+            </button>
+            <div class="dropdown-menu" aria-labelledby="actionDropdown' . $item->id . '">
+                <a class="dropdown-item" href="' . $editUrl . '">
+                    <i class="fas fa-edit"></i> &nbsp;Edit
+                </a>
+                <a class="dropdown-item text-danger delete-page" href="javascript:void(0);" data-id="' . $item->id . '">
+                    <i class="fas fa-trash"></i> &nbsp;Delete
+                </a>
+            </div>
+        </div>
+    ';
+})
             ->rawColumns(['status', 'actions'])
             ->make(true);
     }
@@ -56,32 +62,104 @@ public function index(Request $request)
         return response()->json($page);
     }
 
-    // Store a new page (demo data)
+        public function create()
+    {
+        return view('dashboard.admin.pages_menu.create');
+    }
+
     public function store(Request $request)
     {
-        $page = Pages::create([
-            'title' => 'Demo Page',
-            'content' => 'This is a demo page.',
+        $request->validate([
+            'alias' => 'nullable|string|max:255',
+            'show_in_menu' => 'required|in:0,1',
+            'layout' => 'required|in:1,2,3',
+            'content_from' => 'required|in:url,manual',
+            'title' => 'required|string|max:255',
+            'url' => 'nullable|string|max:255',
+            'content' => 'nullable|string',
+            'seo_settings.meta_title' => 'nullable|string|max:255',
+            'seo_settings.meta_description' => 'nullable|string',
+            'seo_settings.key_words' => 'nullable|string',
+            'seo_settings.crawl_after' => 'nullable|integer',
+            'status' => 'required|in:1,2',
         ]);
-        return response()->json($page);
+
+        $seo = json_encode([
+            'meta_title' => $request->input('seo_settings.meta_title'),
+            'meta_description' => $request->input('seo_settings.meta_description'),
+            'key_words' => $request->input('seo_settings.key_words'),
+            'crawl_after' => $request->input('seo_settings.crawl_after'),
+        ]);
+
+        Pages::create([
+            'alias' => $request->alias ?: Str::slug($request->title, '_'),
+            'show_in_menu' => $request->show_in_menu,
+            'layout' => $request->layout,
+            'content_from' => $request->content_from,
+            'title' => $request->title,
+            'url' => $request->url,
+            'content' => $request->content,
+            'seo_settings' => $seo,
+            'create_time' => now(),
+            'status' => $request->status,
+        ]);
+
+        return redirect()->route('pages.index')->with('success', 'Page created successfully!');
     }
 
-    // Update a page (demo data)
-    public function update(Request $request, $id)
+    public function edit($locale, $id)
     {
         $page = Pages::findOrFail($id);
-        $page->update([
-            'title' => 'Updated Page',
-            'content' => 'This is an updated page.',
-        ]);
-        return response()->json($page);
+        $seo = json_decode($page->seo_settings, true);
+        return view('dashboard.admin.pages_menu.edit', compact('page', 'seo'));
     }
 
-    // Delete a page
-    public function destroy($id)
+    public function update(Request $request, $locale,$id)
+    {
+        $request->validate([
+            'alias' => 'nullable|string|max:255',
+            'show_in_menu' => 'required|in:0,1',
+            'layout' => 'required|in:1,2,3',
+            'content_from' => 'required|in:url,manual',
+            'title' => 'required|string|max:255',
+            'url' => 'nullable|string|max:255',
+            'content' => 'nullable|string',
+            'seo_settings.meta_title' => 'nullable|string|max:255',
+            'seo_settings.meta_description' => 'nullable|string',
+            'seo_settings.key_words' => 'nullable|string',
+            'seo_settings.crawl_after' => 'nullable|integer',
+            'status' => 'required|in:1,2',
+        ]);
+
+        $page = Pages::findOrFail($id);
+
+        $seo = json_encode([
+            'meta_title' => $request->input('seo_settings.meta_title'),
+            'meta_description' => $request->input('seo_settings.meta_description'),
+            'key_words' => $request->input('seo_settings.key_words'),
+            'crawl_after' => $request->input('seo_settings.crawl_after'),
+        ]);
+
+        $page->update([
+            'alias' => $request->alias ?: Str::slug($request->title, '_'),
+            'show_in_menu' => $request->show_in_menu,
+            'layout' => $request->layout,
+            'content_from' => $request->content_from,
+            'title' => $request->title,
+            'url' => $request->url,
+            'content' => $request->content,
+            'seo_settings' => $seo,
+            'status' => $request->status,
+        ]);
+
+        return redirect()->route('pages.index')->with('success', 'Page updated successfully!');
+    }
+
+    public function destroy($locale,$id)
     {
         $page = Pages::findOrFail($id);
         $page->delete();
-        return response()->json(['message' => 'Page deleted']);
+
+        return response()->json(['success' => 'Page deleted successfully!']);
     }
 }

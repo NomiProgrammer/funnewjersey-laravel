@@ -162,6 +162,11 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'en|es|fr|ur']], f
         // PageController Controller
         Route::controller(PagesController::class)->group(function () {
         Route::get('/pages/manage', 'index')->name('pages.index');
+        Route::get('/pages/add', 'create')->name('pages.create');
+        Route::post('/pages/store', 'store')->name('pages.store');
+        Route::get('/pages/edit/{id}', 'edit')->name('pages.edit');
+        Route::put('/pages/update/{id}', 'update')->name('pages.update');
+        Route::delete('/pages/destroy/{id}', 'destroy')->name('pages.destroy');
         });
         // Widgets Controller
         Route::controller(WidgetsController::class)->group(function () {

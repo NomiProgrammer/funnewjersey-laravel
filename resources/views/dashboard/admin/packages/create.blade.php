@@ -1,5 +1,5 @@
 @extends('dashboard.admin.layouts.app')
-@section('page_title', 'Add Widgets')
+@section('page_title', 'Add Package')
 
 @section('css')
     <!-- DataTables CSS -->
@@ -17,8 +17,8 @@
 
 @section('admin-content')
     @php
-        $pageName = 'Add Widgets';
-        $pageName2 = 'Add New Widgets Records';
+        $pageName = 'Add Package';
+        $pageName2 = 'Add New Package Records';
     @endphp
 
     <div class="content-wrapper">

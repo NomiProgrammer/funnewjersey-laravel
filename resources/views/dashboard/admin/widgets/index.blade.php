@@ -191,7 +191,29 @@
             });
         }, 5000);
     </script>
+    <script>
+        $(document).on('click', '.delete-widget', function(e) {
+            e.preventDefault();
 
+            let id = $(this).data('id');
+            if (confirm('Are you sure you want to delete this widget?')) {
+                $.ajax({
+                    url: "{{ url(app()->getLocale() . '/admin/widgets/destroy') }}/" + id,
+                    type: 'DELETE',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        alert(response.success);
+                        $('#example2').DataTable().ajax.reload(null, false); // reload DataTable
+                    },
+                    error: function(xhr) {
+                        alert('Something went wrong!');
+                    }
+                });
+            }
+        });
+    </script>
 
     <script>
         $('#example2').DataTable({
@@ -247,28 +269,6 @@
             ]
         });
     </script>
-    <script>
-        $(document).on('click', '.delete-widget', function(e) {
-            e.preventDefault();
 
-            let id = $(this).data('id');
-            if (confirm('Are you sure you want to delete this widget?')) {
-                $.ajax({
-                    url: "{{ url(app()->getLocale() . '/admin/widgets/destroy') }}/" + id,
-                    type: 'DELETE',
-                    data: {
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function(response) {
-                        alert(response.success);
-                        $('#example2').DataTable().ajax.reload(null, false); // reload DataTable
-                    },
-                    error: function(xhr) {
-                        alert('Something went wrong!');
-                    }
-                });
-            }
-        });
-    </script>
 
 @endsection
