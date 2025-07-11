@@ -99,12 +99,14 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Assigned To</label>
-                                            <select name="assigned_to" class="form-control">
+                                            <label>Created By</label>
+                                            <select name="created_by" class="form-control">
                                                 <option value="">-- None --</option>
                                                 @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}">{{ $user->first_name }}
-                                                        {{ $user->last_name }}</option>
+                                                    <option value="{{ $user->id }}"
+                                                        {{ $invoice->created_by == $user->id ? 'selected' : '' }}>
+                                                        {{ $user->first_name }} {{ $user->last_name }}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -120,12 +122,14 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Created By</label>
-                                            <select name="created_by" class="form-control">
+                                            <label>Assigned To</label>
+                                            <select name="assigned_to" class="form-control">
                                                 <option value="">-- None --</option>
                                                 @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}">{{ $user->first_name }}
-                                                        {{ $user->last_name }}</option>
+                                                    <option value="{{ $user->id }}"
+                                                        {{ $invoice->assigned_to == $user->id ? 'selected' : '' }}>
+                                                        {{ $user->first_name }} {{ $user->last_name }}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -149,9 +153,9 @@
                                         </div>
                                     </div>
 
-                                    <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary">Update Invoice</button>
-                                        <a href="{{ route('invoice.index') }}" class="btn btn-secondary">Cancel</a>
+                                    <div class="card-footer d-flex justify-content-between">
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <a href="{{ route('invoices.index') }}" class="btn btn-secondary">Cancel</a>
                                     </div>
                                 </form>
 

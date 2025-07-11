@@ -96,10 +96,12 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Created By</label>
-                                            <select name="created_by" class="form-control" required>
+                                            <label>Assigned By</label>
+                                            <select name="assigned_to" class="form-control">
+                                                <option value="">-- None --</option>
                                                 @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                                    <option value="{{ $user->id }}">{{ $user->first_name }}
+                                                        {{ $user->last_name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -150,9 +152,9 @@
                                         </div>
                                     </div>
 
-                                    <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary">Create Invoice</button>
-                                        <a href="{{ route('invoice.index') }}" class="btn btn-secondary">Cancel</a>
+                                     <div class="card-footer d-flex justify-content-between">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <a href="{{ route('invoices.index') }}" class="btn btn-secondary">Cancel</a>
                                     </div>
                                 </form>
 

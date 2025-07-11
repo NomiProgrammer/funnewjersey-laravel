@@ -136,7 +136,7 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'en|es|fr|ur']], f
         });
         // Invoice Controller
         Route::controller(InvoicesController::class)->group(function () {
-        Route::get('/invoices/manage', 'index')->name('invoice.index');
+        Route::get('/invoices/manage', 'index')->name('invoices.index');
         Route::get('/invoices/add/', 'create')->name('invoices.create');
         Route::post('/invoices/store/', 'store')->name('invoices.store');
         Route::get('/invoices/edit/{id}', 'edit')->name('invoices.edit');

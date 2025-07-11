@@ -79,14 +79,14 @@
                                 class="nav-link {{ request()->routeIs('bannersads.index') ? 'active' : '' }}"><i class="fas fa-flag nav-icon"></i>
                                 <p>All</p>
                             </a></li>
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/banner/manage"
-                                class="nav-link"><i class="fas fa-plus nav-icon"></i>
+                        <li class="nav-item"><a href="{{ route('banners-ads.create') }}"
+                                class="nav-link {{ request()->routeIs('banners-ads.create') ? 'active' : '' }}"><i class="fas fa-plus nav-icon"></i>
                                 <p>Add new</p>
                             </a></li>
                     </ul>
                 </li>
-                <li class="nav-item has-treeview {{ request()->routeIs('invoice.*') ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ request()->routeIs('invoice.*') ? 'active' : '' }}">
+                <li class="nav-item has-treeview {{ request()->routeIs('invoices.*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('invoices.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-file-invoice-dollar"></i>
                         <p>Invoices &amp; Billing<i class="right fas fa-angle-left"></i></p>
                     </a>
@@ -95,12 +95,12 @@
                                 class="nav-link"><i class="fas fa-money-check-alt nav-icon"></i>
                                 <p>Payment History</p>
                             </a></li>
-                        <li class="nav-item"><a href="{{ route('invoice.index') }}"
-                                class="nav-link  "><i class="fas fa-file-invoice nav-icon"></i>
+                        <li class="nav-item"><a href="{{ route('invoices.index') }}"
+                                class="nav-link {{ request()->routeIs('invoices.index') ? 'active' : '' }} "><i class="fas fa-file-invoice nav-icon"></i>
                                 <p>All</p>
                             </a></li>
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/invoice/manage"
-                                class="nav-link"><i class="fas fa-plus nav-icon"></i>
+                        <li class="nav-item"><a href="{{ route('invoices.create') }}"
+                                class="nav-link {{ request()->routeIs('invoices.create') ? 'active' : '' }}"><i class="fas fa-plus nav-icon"></i>
                                 <p>Add new</p>
                             </a></li>
                     </ul>

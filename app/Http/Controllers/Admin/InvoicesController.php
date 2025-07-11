@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Invoices;
+use App\Models\User;
 use Yajra\DataTables\DataTables;
 
 class InvoicesController extends Controller
@@ -14,6 +15,7 @@ public function index(Request $request)
 {
     if ($request->ajax()) {
         $data = Invoices::with('customer')->orderBy('id', 'desc')->select([
+            'id',
             'total',
             'title',
             'description',
@@ -48,7 +50,7 @@ public function index(Request $request)
         : '-';
 })
 ->addColumn('actions', function ($item) {
-  $editUrl = route('invoice.edit', ['locale' => app()->getLocale(), 'id' => $item->id]);
+  $editUrl = route('invoices.edit', ['locale' => app()->getLocale(), 'id' => $item->id]);
     return '
         <div class="dropdown">
             <button class="btn btn-sm btn-success dropdown-toggle" type="button" id="actionDropdown' . $item->id . '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -83,7 +85,7 @@ public function index(Request $request)
        public function create()
     {
         $users = User::all();
-        return view('dashboard.admin.invoices.create', compact('users'));
+        return view('dashboard.admin.invoice.create', compact('users'));
     }
 
     public function store(Request $request)
@@ -110,14 +112,14 @@ public function index(Request $request)
             'term' => $request->term,
         ]);
 
-        return redirect()->route('invoice.index')->with('success', 'Invoice created successfully!');
+        return redirect()->route('invoices.index')->with('success', 'Invoice created successfully!');
     }
 
     public function edit($locale, $id)
     {
         $invoice = Invoices::findOrFail($id);
         $users = User::all();
-        return view('dashboard.admin.invoices.edit', compact('invoice', 'users'));
+        return view('dashboard.admin.invoice.edit', compact('invoice', 'users'));
     }
 
     public function update(Request $request, $locale, $id)
@@ -145,7 +147,7 @@ public function index(Request $request)
             'term' => $request->term,
         ]);
 
-        return redirect()->route('invoice.index')->with('success', 'Invoice updated successfully!');
+        return redirect()->route('invoices.index')->with('success', 'Invoice updated successfully!');
     }
 
     public function destroy($locale,$id)
