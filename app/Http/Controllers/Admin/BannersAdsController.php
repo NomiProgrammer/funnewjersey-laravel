@@ -5,6 +5,9 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\BannersAds;
+use App\Models\Category;
+use App\Models\User;
+use App\Models\Locations;
 use Yajra\DataTables\DataTables;
 
 class BannersAdsController extends Controller
@@ -62,17 +65,21 @@ public function index(Request $request)
         : '-';
 })
 ->addColumn('actions', function ($item) {
+  $editUrl = route('banners-ads.edit', ['locale' => app()->getLocale(), 'id' => $item->id]);
     return '
-    <div class="dropdown">
-        <button class="btn btn-sm btn-success dropdown-toggle" type="button" id="actionDropdown' . $item->id . '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-cog"></i> Actions
-        </button>
-        <div class="dropdown-menu" aria-labelledby="actionDropdown' . $item->id . '">
-            <a class="dropdown-item" href="#"><i class="fas fa-edit text-primary"></i> &nbsp;Edit</a>
-            <a class="dropdown-item" href="#"><i class="fas fa-pause text-warning"></i> &nbsp;Pause</a>
-            <a class="dropdown-item" href="#"><i class="fas fa-trash text-danger"></i> &nbsp;Delete</a>
+        <div class="dropdown">
+            <button class="btn btn-sm btn-success dropdown-toggle" type="button" id="actionDropdown' . $item->id . '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-cog"></i> Actions
+            </button>
+            <div class="dropdown-menu" aria-labelledby="actionDropdown' . $item->id . '">
+                <a class="dropdown-item" href="' . $editUrl . '">
+                    <i class="fas fa-edit"></i> &nbsp;Edit
+                </a>
+                <a class="dropdown-item text-danger delete-banner" href="javascript:void(0);" data-id="' . $item->id . '">
+                    <i class="fas fa-trash"></i> &nbsp;Delete
+                </a>
+            </div>
         </div>
-    </div>
     ';
 })
             ->rawColumns(['featured_img', 'status', 'actions'])
@@ -92,34 +99,130 @@ public function index(Request $request)
         return response()->json($banner);
     }
 
-    // Store a new banner ad (demo data)
+     public function create()
+    {
+        $categories = Category::all();
+        $users = User::all();
+        $states = Locations::all();
+
+        return view('dashboard.admin.bannersads.create', compact('categories', 'users', 'states'));
+    }
+
     public function store(Request $request)
     {
-        $banner = BannersAds::create([
-            'title' => 'Demo Banner',
-            'image' => 'demo.jpg',
-            'link' => 'https://example.com',
+        $request->validate([
+            'slide_order' => 'required|integer',
+            'featured_img' => 'required|image',
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'created_by' => 'required|exists:users,id',
+            'status' => 'required|in:0,1,2',
+            'state' => 'required|exists:locations,id',
+            'link' => 'nullable|url',
+            'slot' => 'nullable|string|max:255',
+            'category' => 'required|exists:categories,id',
+            'expires' => 'nullable|date',
+            'assigned_to' => 'nullable|exists:users,id',
+            'type' => 'required|in:0,1,2',
+            'region' => 'required|in:1,2,3',
         ]);
-        return response()->json($banner);
+
+            // ✅ 2) Handle the image upload
+    if ($request->hasFile('featured_img')) {
+        $image = $request->file('featured_img');
+        $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
+
+        // Store in /public/front_assets/uploads/banner
+        $image->move(public_path('front_assets/uploads/banner'), $imageName);
+
+        // Save relative path for asset()
+        $path = 'front_assets/uploads/banner/' . $imageName;
+    } else {
+        $path = null;
     }
 
-    // Update a banner ad (demo data)
-    public function update(Request $request, $id)
+
+        BannersAds::create([
+            'slide_order' => $request->slide_order,
+            'featured_img' => $path,
+            'title' => $request->title,
+            'description' => $request->description,
+            'created_by' => $request->created_by,
+            'create_time' => time(),
+            'status' => $request->status,
+            'state' => $request->state,
+            'link' => $request->link,
+            'slot' => $request->slot,
+            'category' => $request->category,
+            'expires' => $request->expires,
+            'assigned_to' => $request->assigned_to,
+            'type' => $request->type,
+            'region' => $request->region,
+        ]);
+
+        return redirect()->route('bannersads.index')->with('success', 'Banner Ad created successfully!');
+    }
+
+    public function edit($locale, $id)
     {
         $banner = BannersAds::findOrFail($id);
-        $banner->update([
-            'title' => 'Updated Banner',
-            'image' => 'updated.jpg',
-            'link' => 'https://updated.com',
-        ]);
-        return response()->json($banner);
+        $categories = Category::all();
+        $users = User::all();
+        $states = Locations::all();
+
+        return view('dashboard.admin.bannersads.edit', compact('banner', 'categories', 'users', 'states'));
     }
 
-    // Delete a banner ad
-    public function destroy($id)
+    public function update(Request $request, $locale,$id)
+    {
+        $request->validate([
+            'slide_order' => 'required|integer',
+            'featured_img' => 'nullable|image',
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'created_by' => 'required|exists:users,id',
+            'status' => 'required|in:0,1,2',
+            'state' => 'required|exists:locations,id',
+            'link' => 'nullable|url',
+            'slot' => 'nullable|string|max:255',
+            'category' => 'required|exists:categories,id',
+            'expires' => 'nullable|date',
+            'assigned_to' => 'nullable|exists:users,id',
+            'type' => 'required|in:0,1,2',
+            'region' => 'required|in:1,2,3',
+        ]);
+
+        $banner = BannersAds::findOrFail($id);
+
+        if ($request->hasFile('featured_img')) {
+            $path = $request->file('featured_img')->store('front_assets/uploads/banner', 'public');
+            $banner->featured_img = $path;
+        }
+
+        $banner->update([
+            'slide_order' => $request->slide_order,
+            'title' => $request->title,
+            'description' => $request->description,
+            'created_by' => $request->created_by,
+            'status' => $request->status,
+            'state' => $request->state,
+            'link' => $request->link,
+            'slot' => $request->slot,
+            'category' => $request->category,
+            'expires' => $request->expires,
+            'assigned_to' => $request->assigned_to,
+            'type' => $request->type,
+            'region' => $request->region,
+        ]);
+
+        return redirect()->route('bannersads.index')->with('success', 'Banner Ad updated successfully!');
+    }
+
+    public function destroy($locale,$id)
     {
         $banner = BannersAds::findOrFail($id);
         $banner->delete();
-        return response()->json(['message' => 'Banner deleted']);
+
+        return response()->json(['success' => 'Banner Ad deleted successfully!']);
     }
 }

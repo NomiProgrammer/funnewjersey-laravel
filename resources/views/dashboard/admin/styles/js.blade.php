@@ -36,3 +36,13 @@
 <script>
     CKEDITOR.replace('content');
 </script>
+    <script>
+        // Hide the alert messages after 5 seconds
+        setTimeout(function() {
+            document.querySelectorAll('.alert-message').forEach(function(alert) {
+                alert.style.transition = "opacity 0.5s";
+                alert.style.opacity = "0";
+                setTimeout(() => alert.remove(), 500); // Remove after fade-out
+            });
+        }, 5000);
+    </script>

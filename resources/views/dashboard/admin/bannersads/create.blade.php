@@ -1,5 +1,5 @@
 @extends('dashboard.admin.layouts.app')
-@section('page_title', 'Edit Page')
+@section('page_title', 'Add Banner')
 
 @section('css')
     <!-- DataTables CSS -->
@@ -17,8 +17,8 @@
 
 @section('admin-content')
     @php
-        $pageName = 'Edit Page';
-        $pageName2 = 'Edit New Page Records';
+        $pageName = 'Add Banner';
+        $pageName2 = 'Add New Banner Records';
     @endphp
 
     <div class="content-wrapper">
@@ -81,111 +81,118 @@
                                         </div>
                                     @endif
                                 </div>
-                                <form action="{{ route('pages.update', $page->id) }}" method="POST">
+                                <form action="{{ route('banners-ads.store') }}" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
-                                    @method('PUT')
+
                                     <div class="card-body">
+                                        <div class="form-group">
+                                            <label>Slide Order</label>
+                                            <input type="number" name="slide_order" class="form-control" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Featured Image</label>
+                                            <input type="file" name="featured_img" class="form-control" required>
+                                        </div>
 
                                         <div class="form-group">
                                             <label>Title</label>
-                                            <input type="text" name="title" value="{{ old('title', $page->title) }}"
-                                                class="form-control" required>
+                                            <input type="text" name="title" class="form-control" required>
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Alias</label>
-                                            <input type="text" name="alias" value="{{ old('alias', $page->alias) }}"
-                                                class="form-control">
+                                            <label>Notes</label>
+                                            <textarea name="description" id="content" class="form-control" rows="4"></textarea>
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Show in Menu</label>
-                                            <select name="show_in_menu" class="form-control" required>
-                                                <option value="0" {{ $page->show_in_menu == 0 ? 'selected' : '' }}>No
-                                                </option>
-                                                <option value="1" {{ $page->show_in_menu == 1 ? 'selected' : '' }}>Yes
-                                                </option>
+                                            <label>Assigned To</label>
+                                            <select name="assigned_to" class="form-control">
+                                                <option value="">-- None --</option>
+                                                @foreach ($users as $user)
+                                                    <option value="{{ $user->id }}">{{ $user->first_name }}
+                                                        {{ $user->last_name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
 
-                                        <div class="form-group">
-                                            <label>Layout</label>
-                                            <select name="layout" class="form-control" required>
-                                                <option value="1" {{ $page->layout == 1 ? 'selected' : '' }}>Leftbar
-                                                    with Content</option>
-                                                <option value="2" {{ $page->layout == 2 ? 'selected' : '' }}>Rightbar
-                                                    with Content</option>
-                                                <option value="3" {{ $page->layout == 3 ? 'selected' : '' }}>Only
-                                                    Content</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Content From</label>
-                                            <select name="content_from" class="form-control" required>
-                                                <option value="url"
-                                                    {{ $page->content_from == 'url' ? 'selected' : '' }}>URL</option>
-                                                <option value="manual"
-                                                    {{ $page->content_from == 'manual' ? 'selected' : '' }}>Manual</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>URL</label>
-                                            <input type="text" name="url" value="{{ old('url', $page->url) }}"
-                                                class="form-control">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Content</label>
-                                            <textarea id="content" name="content" class="form-control" rows="4">{{ old('content', $page->content) }}</textarea>
-                                        </div>
-
-                                        <h5>SEO Settings</h5>
-                                        <div class="form-group">
-                                            <label>Meta Title</label>
-                                            <input type="text" name="seo_settings[meta_title]"
-                                                value="{{ old('seo_settings.meta_title', $seo['meta_title'] ?? '') }}"
-                                                class="form-control">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Meta Description</label>
-                                            <textarea name="seo_settings[meta_description]" class="form-control" rows="3">{{ old('seo_settings.meta_description', $seo['meta_description'] ?? '') }}</textarea>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Key Words</label>
-                                            <textarea name="seo_settings[key_words]" class="form-control" rows="2">{{ old('seo_settings.key_words', $seo['key_words'] ?? '') }}</textarea>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Crawl After (days)</label>
-                                            <input type="number" name="seo_settings[crawl_after]"
-                                                value="{{ old('seo_settings.crawl_after', $seo['crawl_after'] ?? '') }}"
-                                                class="form-control">
-                                        </div>
 
                                         <div class="form-group">
                                             <label>Status</label>
                                             <select name="status" class="form-control" required>
-                                                <option value="1" {{ $page->status == 1 ? 'selected' : '' }}>Published
-                                                </option>
-                                                <option value="2" {{ $page->status == 2 ? 'selected' : '' }}>Drafted
-                                                </option>
+                                                <option value="1">Published</option>
+                                                <option value="2">Drafted</option>
+                                                <option value="0">Unpublished</option>
                                             </select>
                                         </div>
 
+                                        <div class="form-group">
+                                            <label>State (County)</label>
+                                            <select name="state" class="form-control" required>
+                                                @foreach ($states as $state)
+                                                    <option value="{{ $state->id }}">{{ $state->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Created By</label>
+                                            <select name="created_by" class="form-control">
+                                                <option value="">-- None --</option>
+                                                @foreach ($users as $user)
+                                                    <option value="{{ $user->id }}">{{ $user->first_name }}
+                                                        {{ $user->last_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Link</label>
+                                            <input type="url" name="link" class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Slot</label>
+                                            <input type="text" name="slot" class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Category</label>
+                                            <select name="category" class="form-control" required>
+                                                @foreach ($categories as $cat)
+                                                    <option value="{{ $cat->id }}">{{ $cat->title }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Date Expires</label>
+                                            <input type="date" name="expires" class="form-control">
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label>Banner Type</label>
+                                            <select name="type" class="form-control" required>
+                                                <option value="1">Top Horizontal</option>
+                                                <option value="2">Sidebar Square</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Region</label>
+                                            <select name="region" class="form-control" required>
+                                                <option value="1">North NJ</option>
+                                                <option value="2">South NJ</option>
+                                                <option value="3">Southern NJ</option>
+                                            </select>
+                                        </div>
                                     </div>
 
                                     <div class="card-footer d-flex justify-content-between">
                                         <button type="submit" class="btn btn-primary">Submit</button>
-                                        <a href="{{ route('pages.index') }}" class="btn btn-secondary">Cancel</a>
+                                        <a href="{{ route('bannersads.index') }}" class="btn btn-secondary">Cancel</a>
                                     </div>
                                 </form>
-
-
-
                             </div>
                         </div>
                     </div>

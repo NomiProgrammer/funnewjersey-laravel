@@ -47,6 +47,40 @@
                                 <h3 class="card-title">{{ $pageName2 }}</h3>
                             </div>
                             <div class="card-body">
+                                    <div id="alert-container"
+                                    style="position: fixed; top: 17px; right: 20px; z-index: 9999; max-width: 300px;">
+                                    @if (session('success'))
+                                        <div class="alert-message"
+                                            style="padding: 10px 15px; border-radius: 5px; margin-bottom: 10px; font-size: 20px; color: #fff; background: #47C363; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); height: 71px; width: 106%; align-content: center;">
+                                            {{ session('success') }}
+                                        </div>
+                                    @endif
+
+                                    @if (session('error'))
+                                        <div class="alert-message"
+                                            style="padding: 10px 15px; border-radius: 5px; margin-bottom: 10px; font-size: 14px; color: #fff; background: #ff0018; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);">
+                                            {{ session('error') }}
+                                        </div>
+                                    @endif
+
+                                    @if (session('info'))
+                                        <div class="alert-message"
+                                            style="padding: 10px 15px; border-radius: 5px; margin-bottom: 10px; font-size: 14px; color: #fff; background: #17a2b8; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);">
+                                            {{ session('info') }}
+                                        </div>
+                                    @endif
+
+                                    @if ($errors->any())
+                                        <div class="alert-message"
+                                            style="padding: 10px 15px; border-radius: 5px; margin-bottom: 10px; font-size: 14px; color: #fff; background: #ff0018; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);">
+                                            <ul style="margin: 0; padding-left: 20px;">
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                </div>
                                 <form action="{{ route('widgets.store') }}" method="POST">
                                     @csrf
                                     <div class="card-body">

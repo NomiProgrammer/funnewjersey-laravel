@@ -128,6 +128,11 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'en|es|fr|ur']], f
         // BannerAds Slider
         Route::controller(BannersAdsController::class)->group(function () {
         Route::get('/banners-ads/manage', 'index')->name('bannersads.index');
+        Route::get('/banners-ads/add/', 'create')->name('banners-ads.create');
+        Route::post('/banners-ads/store/', 'store')->name('banners-ads.store');
+        Route::get('/banners-ads/edit/{id}', 'edit')->name('banners-ads.edit');
+        Route::put('/banners-ads/update/{id}', 'update')->name('banners-ads.update');
+        Route::delete('/banners-ads/destroy/{id}', 'destroy')->name('banners-ads.destroy');
         });
         // Invoice Controller
         Route::controller(InvoicesController::class)->group(function () {

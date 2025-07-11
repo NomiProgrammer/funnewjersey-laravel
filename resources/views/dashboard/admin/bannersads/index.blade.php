@@ -103,12 +103,36 @@
                             <div class="card-header">
                                 <h3 class="card-title">{{ $pageName2 }}</h3>
                                 <div class="card-tools">
-                                    <a href="" class="float-right btn btn-block btn-success btn-sm">
+                                    <a href="{{ route('banners-ads.create') }}"
+                                        class="float-right btn btn-block btn-success btn-sm">
                                         <i class="fas fa-plus"></i>&nbsp; Add New
                                     </a>
                                 </div>
                             </div>
                             <div class="card-body">
+                                <div id="alert-container"
+                                    style="position: fixed; top: 17px; right: 20px; z-index: 9999; max-width: 300px;">
+                                    @if (session('success'))
+                                        <div class="alert-message"
+                                            style="padding: 10px 15px; border-radius: 5px; margin-bottom: 10px; font-size: 20px; color: #fff; background: #47C363; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);height: 71px;width: 106%;align-content: center;">
+                                            {{ session('success') }}
+                                        </div>
+                                    @endif
+
+                                    @if (session('error'))
+                                        <div class="alert-message"
+                                            style="padding: 10px 15px; border-radius: 5px; margin-bottom: 10px; font-size: 14px; color: #fff; background: #ff0018; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);">
+                                            {{ session('error') }}
+                                        </div>
+                                    @endif
+
+                                    @if (session('info'))
+                                        <div class="alert-message"
+                                            style="padding: 10px 15px; border-radius: 5px; margin-bottom: 10px; font-size: 14px; color: #fff; background: #17a2b8; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);">
+                                            {{ session('info') }}
+                                        </div>
+                                    @endif
+                                </div>
                                 <table id="example2" class="table table-bordered table-striped table-hover">
                                     <thead>
                                         <tr>
@@ -199,13 +223,19 @@
                     data: 'type',
                     name: 'type'
                 },
-                { data: 'category', name: 'category' },
+                {
+                    data: 'category',
+                    name: 'category'
+                },
 
                 {
                     data: 'location',
                     name: 'location'
                 },
-                { data: 'customer', name: 'customer' },
+                {
+                    data: 'customer',
+                    name: 'customer'
+                },
                 {
                     data: 'expires',
                     name: 'expires'
@@ -247,6 +277,38 @@
             ]
         });
     </script>
+    <script>
+        // Hide the alert messages after 5 seconds
+        setTimeout(function() {
+            document.querySelectorAll('.alert-message').forEach(function(alert) {
+                alert.style.transition = "opacity 0.5s";
+                alert.style.opacity = "0";
+                setTimeout(() => alert.remove(), 500); // Remove after fade-out
+            });
+        }, 5000);
+    </script>
+    <script>
+        $(document).on('click', '.delete-banner', function(e) {
+            e.preventDefault();
 
+            let id = $(this).data('id');
+            if (confirm('Are you sure you want to delete this widget?')) {
+                $.ajax({
+                    url: "{{ url(app()->getLocale() . '/admin/banners-ads/destroy') }}/" + id,
+                    type: 'DELETE',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        alert(response.success);
+                        $('#example2').DataTable().ajax.reload(null, false); // reload DataTable
+                    },
+                    error: function(xhr) {
+                        alert('Something went wrong!');
+                    }
+                });
+            }
+        });
+    </script>
 
 @endsection
