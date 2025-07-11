@@ -9,6 +9,18 @@ class Invoices extends Model
 {
     protected $table = 'invoice';
     //
+        protected $fillable = [
+        'title',
+        'description',
+        'created_by',
+        'status',
+        'assigned_to',
+        'total',
+        'expires',
+        'term',
+    ];
+
+    public $timestamps = false;
            public function customer()
     {
         return $this->belongsTo(User::class, 'assigned_to');

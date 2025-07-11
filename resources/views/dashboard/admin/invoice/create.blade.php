@@ -1,5 +1,5 @@
 @extends('dashboard.admin.layouts.app')
-@section('page_title', 'Add Widgets')
+@section('page_title', 'Add Invoice')
 
 @section('css')
     <!-- DataTables CSS -->
@@ -17,8 +17,8 @@
 
 @section('admin-content')
     @php
-        $pageName = 'Add Widgets';
-        $pageName2 = 'Add New Widgets Records';
+        $pageName = 'Add Invoice';
+        $pageName2 = 'Add New Invoice Records';
     @endphp
 
     <div class="content-wrapper">
@@ -81,29 +81,78 @@
                                         </div>
                                     @endif
                                 </div>
-                                <form action="{{ route('widgets.store') }}" method="POST">
+                                <form action="{{ route('invoices.store') }}" method="POST">
                                     @csrf
+
                                     <div class="card-body">
-                                        <div class="row">
-                                            <div class="form-group col-md-6">
-                                                <label for="name">Name</label>
-                                                <input type="text" class="form-control" name="name"
-                                                    placeholder="Enter Name of Widget">
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="status">Status</label>
-                                                <select class="form-control" id="status" name="status">
-                                                    <option value="2">Active</option>
-                                                    <option value="1">Deactive</option>
-                                                </select>
-                                            </div>
+                                        <div class="form-group">
+                                            <label>Title</label>
+                                            <input type="text" name="title" class="form-control" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <textarea name="description" id="content" class="form-control" rows="4"></textarea>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Created By</label>
+                                            <select name="created_by" class="form-control" required>
+                                                @foreach ($users as $user)
+                                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Status</label>
+                                            <select name="status" class="form-control" required>
+                                                <option value="1">Paid</option>
+                                                <option value="2">Unpaid</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Assigned To</label>
+                                            <select name="assigned_to" class="form-control">
+                                                <option value="">-- None --</option>
+                                                @foreach ($users as $user)
+                                                    <option value="{{ $user->id }}">{{ $user->first_name }}
+                                                        {{ $user->last_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Total ($)</label>
+                                            <input type="number" step="0.01" name="total" class="form-control"
+                                                required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Due Date</label>
+                                            <input type="date" name="expires" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Created By</label>
+                                            <select name="created_by" class="form-control">
+                                                <option value="">-- None --</option>
+                                                @foreach ($users as $user)
+                                                    <option value="{{ $user->id }}">{{ $user->first_name }}
+                                                        {{ $user->last_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Term</label>
+                                            <input type="text" name="term" class="form-control"
+                                                placeholder="e.g. 1 year (renews Apr 1, 2023)">
                                         </div>
                                     </div>
-                                    <!-- /.card-body -->
 
-                                    <div class="card-footer d-flex justify-content-between">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                        <a href="{{ route('widgets.index') }}" class="btn btn-secondary">Cancel</a>
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-primary">Create Invoice</button>
+                                        <a href="{{ route('invoice.index') }}" class="btn btn-secondary">Cancel</a>
                                     </div>
                                 </form>
 
@@ -129,4 +178,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+
 @endsection

@@ -47,22 +47,24 @@ public function index(Request $request)
         ? trim($item->customer->first_name . ' ' . $item->customer->last_name)
         : '-';
 })
-            ->addColumn('actions', function ($item) {
-                return '
-                <div class="dropdown">
-                    <button class="btn btn-sm btn-success dropdown-toggle" type="button" id="actionDropdown' . $item->id . '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-cog"></i> Actions
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="actionDropdown' . $item->id . '">
-                        <a class="dropdown-item" href="#"><i class="fas fa-file-invoice-dollar text-dark"></i> &nbsp;View/Pay Invoice</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-edit text-dark"></i> &nbsp;Edit Invoice</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-credit-card text-dark"></i> &nbsp;Pay Invoice</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-check-circle text-dark"></i> &nbsp;Mark Paid</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-trash text-dark"></i> &nbsp;Delete Invoice</a>
-                    </div>
-                </div>
-                ';
-            })
+->addColumn('actions', function ($item) {
+  $editUrl = route('invoice.edit', ['locale' => app()->getLocale(), 'id' => $item->id]);
+    return '
+        <div class="dropdown">
+            <button class="btn btn-sm btn-success dropdown-toggle" type="button" id="actionDropdown' . $item->id . '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-cog"></i> Actions
+            </button>
+            <div class="dropdown-menu" aria-labelledby="actionDropdown' . $item->id . '">
+                <a class="dropdown-item" href="' . $editUrl . '">
+                    <i class="fas fa-edit"></i> &nbsp;Edit
+                </a>
+                <a class="dropdown-item text-danger delete-invoice" href="javascript:void(0);" data-id="' . $item->id . '">
+                    <i class="fas fa-trash"></i> &nbsp;Delete
+                </a>
+            </div>
+        </div>
+    ';
+})
             ->rawColumns(['status', 'actions'])
             ->make(true);
     }
@@ -78,32 +80,78 @@ public function index(Request $request)
         return response()->json($invoice);
     }
 
-    // Store a new invoice (demo data)
+       public function create()
+    {
+        $users = User::all();
+        return view('dashboard.admin.invoices.create', compact('users'));
+    }
+
     public function store(Request $request)
     {
-        $invoice = Invoices::create([
-            'amount' => 100.00,
-            'status' => 'pending',
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'created_by' => 'required|exists:users,id',
+            'status' => 'required|in:1,2',
+            'assigned_to' => 'nullable|exists:users,id',
+            'total' => 'required|numeric',
+            'expires' => 'nullable|date',
+            'term' => 'nullable|string|max:255',
         ]);
-        return response()->json($invoice);
+
+        Invoices::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'created_by' => $request->created_by,
+            'status' => $request->status,
+            'assigned_to' => $request->assigned_to,
+            'total' => $request->total,
+            'expires' => $request->expires,
+            'term' => $request->term,
+        ]);
+
+        return redirect()->route('invoice.index')->with('success', 'Invoice created successfully!');
     }
 
-    // Update an invoice (demo data)
-    public function update(Request $request, $id)
+    public function edit($locale, $id)
     {
         $invoice = Invoices::findOrFail($id);
-        $invoice->update([
-            'amount' => 200.00,
-            'status' => 'paid',
-        ]);
-        return response()->json($invoice);
+        $users = User::all();
+        return view('dashboard.admin.invoices.edit', compact('invoice', 'users'));
     }
 
-    // Delete an invoice
-    public function destroy($id)
+    public function update(Request $request, $locale, $id)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'created_by' => 'required|exists:users,id',
+            'status' => 'required|in:1,2',
+            'assigned_to' => 'nullable|exists:users,id',
+            'total' => 'required|numeric',
+            'expires' => 'nullable|date',
+            'term' => 'nullable|string|max:255',
+        ]);
+
+        $invoice = Invoices::findOrFail($id);
+        $invoice->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'created_by' => $request->created_by,
+            'status' => $request->status,
+            'assigned_to' => $request->assigned_to,
+            'total' => $request->total,
+            'expires' => $request->expires,
+            'term' => $request->term,
+        ]);
+
+        return redirect()->route('invoice.index')->with('success', 'Invoice updated successfully!');
+    }
+
+    public function destroy($locale,$id)
     {
         $invoice = Invoices::findOrFail($id);
         $invoice->delete();
-        return response()->json(['message' => 'Invoice deleted']);
+        return response()->json(['success' => 'Invoice deleted successfully!']);
     }
 }
