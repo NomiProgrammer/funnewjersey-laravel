@@ -4,7 +4,7 @@
           <li class="nav-item d-flex align-items-center">
               <span style="color: #c00; font-weight: bold;">
                   <i class="fas fa-user-circle"></i>
-                  Logged in as :
+                  Logged in as : {{Auth::user()->first_name;}}
               </span>
               <span style="color: #c00; margin-left: 4px; font-weight: bold;"></span>
           </li>
@@ -34,7 +34,10 @@
                   <i class="fas fa-user"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                  <a class="dropdown-item" href="/logout">Logout</a>
+                  <form method="POST" action="{{ route('logout', app()->getLocale()) }}">
+    @csrf
+    <button type="submit" class="dropdown-item">Logout</button>
+</form>
                   <!-- Add more user actions as needed -->
               </div>
           </li>

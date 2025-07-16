@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -101,6 +101,11 @@ public function index(Request $request)
 
      public function create()
     {
+            if (auth()->user()->hasRole('admin')) {
+        dd('User is an admin');
+    } else {
+        dd('User is NOT an admin');
+    }
         $categories = Category::all();
         $users = User::all();
         $states = Locations::all();

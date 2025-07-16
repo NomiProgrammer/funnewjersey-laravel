@@ -28,12 +28,12 @@
         {{-- <div class="login-title">FunNew<span>Jersey</span></div> --}}
         <div class="login-subtitle">Sign in to start your session</div>
 
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="{{ route('login', ['locale' => app()->getLocale()]) }}">
             @csrf
             <div class="mb-3">
                 <div class="input-group">
                     <span class="input-group-text"><i class="fas fa-envelope" style="color: #365264;"></i></span>
-                    <input type="email" name="email" class="form-control" placeholder="Email" required />
+                    <input type="email" name="user_email" class="form-control" placeholder="Email" required />
                 </div>
             </div>
             <div class="mb-3">

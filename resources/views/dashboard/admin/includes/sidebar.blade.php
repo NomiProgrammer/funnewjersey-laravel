@@ -26,7 +26,7 @@
                     alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block"></a>
+                <a href="#" class="d-block">{{Auth::user()->first_name;}}</a>
             </div>
         </div>
 
