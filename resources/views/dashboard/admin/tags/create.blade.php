@@ -118,11 +118,12 @@
                 <label>Tag Description Bottom</label>
                 <textarea name="catdesc2" id="content" class="form-control" rows="5"></textarea>
             </div>
-                                     <div class="card-footer d-flex justify-content-between">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                        <a href="{{ route('tags.index') }}" class="btn btn-secondary">Cancel</a>
-                                    </div>
         </div>
+
+     <div class="card-footer d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{{ route('tags.index') }}" class="btn btn-secondary">Cancel</a>
+    </div>
     </form>
 
                             </div>

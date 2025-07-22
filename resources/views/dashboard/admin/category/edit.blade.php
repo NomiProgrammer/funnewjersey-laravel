@@ -82,82 +82,163 @@
                                     @endif
                                 </div>
 
-                                <form action="{{ route('invoices.update', $invoice->id) }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
+<form action="{{ route('category.update', $category->id) }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    @method('PUT')
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label>Name</label>
+            <input type="text" name="title" class="form-control" value="{{ old('title', $category->title) }}" required>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label>Mini Title</label>
+            <input type="text" name="minititle" class="form-control" value="{{ old('minititle', $category->minititle) }}">
+        </div>
 
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <label>Title</label>
-                                            <input type="text" name="title" class="form-control"
-                                                value="{{ old('title', $invoice->title) }}" required>
-                                        </div>
+        <div class="col-md-6 mb-3">
+            <label>Category URL</label>
+            <input type="text" name="url" class="form-control" value="{{ old('url', $category->url) }}">
+        </div>
+        <div class="col-md-6 mb-3">
+            <label>Make Category Private</label>
+            <select name="not_public" class="form-control">
+                <option value="0" {{ old('not_public', $category->not_public) == 0 ? 'selected' : '' }}>Public</option>
+                <option value="1" {{ old('not_public', $category->not_public) == 1 ? 'selected' : '' }}>Private</option>
+            </select>
+        </div>
 
-                                        <div class="form-group">
-                                            <label>Description</label>
-                                            <textarea name="description" id="content" class="form-control" rows="4">{{ old('description', $invoice->description) }}</textarea>
-                                        </div>
+        <div class="col-md-6 mb-3">
+            <label>Disable H1</label>
+            <select name="noh1" class="form-control">
+                <option value="0" {{ old('noh1', $category->noh1) == 0 ? 'selected' : '' }}>No</option>
+                <option value="1" {{ old('noh1', $category->noh1) == 1 ? 'selected' : '' }}>Yes</option>
+            </select>
+        </div>
 
-                                        <div class="form-group">
-                                            <label>Created By</label>
-                                            <select name="created_by" class="form-control">
-                                                <option value="">-- None --</option>
-                                                @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}"
-                                                        {{ $invoice->created_by == $user->id ? 'selected' : '' }}>
-                                                        {{ $user->first_name }} {{ $user->last_name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+        <div class="col-md-6 mb-3">
+            <label>Hardlink Category to URL</label>
+            <select name="islink" class="form-control">
+                <option value="0" {{ old('islink', $category->islink) == 0 ? 'selected' : '' }}>No</option>
+                <option value="1" {{ old('islink', $category->islink) == 1 ? 'selected' : '' }}>Yes</option>
+            </select>
+        </div>
 
-                                        <div class="form-group">
-                                            <label>Status</label>
-                                            <select name="status" class="form-control" required>
-                                                <option value="1" {{ $invoice->status == 1 ? 'selected' : '' }}>Paid
-                                                </option>
-                                                <option value="2" {{ $invoice->status == 2 ? 'selected' : '' }}>Unpaid
-                                                </option>
-                                            </select>
-                                        </div>
+        <div class="col-md-6 mb-3">
+            <label>Listing Count Override</label>
+            <input type="number" name="countoverride" class="form-control" value="{{ old('countoverride', $category->countoverride) }}">
+        </div>
 
-                                        <div class="form-group">
-                                            <label>Assigned To</label>
-                                            <select name="assigned_to" class="form-control">
-                                                <option value="">-- None --</option>
-                                                @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}"
-                                                        {{ $invoice->assigned_to == $user->id ? 'selected' : '' }}>
-                                                        {{ $user->first_name }} {{ $user->last_name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+        <div class="col-md-6 mb-3">
+            <label>Parent</label>
+            <select name="parent" class="form-control">
+                <option value="">No Parent</option>
+                @foreach ($parent as $bc)
+                    <option value="{{ $bc->id }}" {{ old('parent', $category->parent) == $bc->id ? 'selected' : '' }}>{{ $bc->title }}</option>
+                @endforeach
+            </select>
+        </div>
 
-                                        <div class="form-group">
-                                            <label>Total ($)</label>
-                                            <input type="number" step="0.01" name="total" class="form-control"
-                                                value="{{ old('total', $invoice->total) }}" required>
-                                        </div>
+        <div class="col-md-6 mb-3">
+            <label>FA Icon</label>
+            <input type="text" name="fa_icon" class="form-control" value="{{ old('fa_icon', $category->fa_icon) }}">
+        </div>
 
-                                        <div class="form-group">
-                                            <label>Due Date</label>
-                                            <input type="date" name="expires" class="form-control"
-                                                value="{{ old('expires', $invoice->expires) }}">
-                                        </div>
+        <div class="col-md-6 mb-3">
+            <label>Category Thumbnail</label>
+            <input type="file" name="featured_img" class="form-control">
+            @if ($category->featured_img)
+                <img src="{{ asset('front_assets/uploads/catgoies/' . $category->featured_img) }}" class="img-thumbnail mt-1" width="100">
+            @endif
+        </div>
 
-                                        <div class="form-group">
-                                            <label>Term</label>
-                                            <input type="text" name="term" class="form-control"
-                                                value="{{ old('term', $invoice->term) }}">
-                                        </div>
-                                    </div>
+        <div class="col-md-6 mb-3">
+            <label>Thumbnail Alt Tag</label>
+            <input type="text" name="img_alt" class="form-control" value="{{ old('img_alt', $category->img_alt) }}">
+        </div>
 
-                                    <div class="card-footer d-flex justify-content-between">
-                                        <button type="submit" class="btn btn-primary">Update</button>
-                                        <a href="{{ route('invoices.index') }}" class="btn btn-secondary">Cancel</a>
-                                    </div>
-                                </form>
+        <div class="col-md-6 mb-3">
+            <label>Default Details Image</label>
+            <input type="file" name="featured_img2" class="form-control">
+            @if ($category->featured_img2)
+                <img src="{{ asset('front_assets/uploads/catgoies/' . $category->featured_img2) }}" class="img-thumbnail mt-1" width="100">
+            @endif
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label>Default Image Alt Tag</label>
+            <input type="text" name="img_alt2" class="form-control" value="{{ old('img_alt2', $category->img_alt2) }}">
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label>Featured Listing Image</label>
+            <input type="file" name="featured_img3" class="form-control">
+            @if ($category->featured_img3)
+                <img src="{{ asset('front_assets/uploads/catgoies/' . $category->featured_img3) }}" class="img-thumbnail mt-1" width="100">
+            @endif
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label>Featured Listing Alt Tag</label>
+            <input type="text" name="img_alt3" class="form-control" value="{{ old('img_alt3', $category->img_alt3) }}">
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label>Meta Title</label>
+            <input type="text" name="metatitle2" class="form-control" value="{{ old('metatitle2', $category->metatitle2) }}">
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label>Meta Keywords</label>
+            <input type="text" name="metakeywords2" class="form-control" value="{{ old('metakeywords2', $category->metakeywords2) }}">
+        </div>
+
+        <div class="col-md-12 mb-3">
+            <label>Meta Description</label>
+            <textarea name="metadescription2" class="form-control" rows="2">{{ old('metadescription2', $category->metadescription2) }}</textarea>
+        </div>
+
+        <div class="col-md-12 mb-3">
+            <label>Category Description Top</label>
+            <textarea name="catdesc" class="form-control" rows="3">{{ old('catdesc', $category->catdesc) }}</textarea>
+        </div>
+
+        <div class="col-md-12 mb-3">
+            <label>Category Description Bottom</label>
+            <textarea name="catdesc2" class="form-control" rows="3">{{ old('catdesc2', $category->catdesc2) }}</textarea>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label>Meta Title (Location)</label>
+            <input type="text" name="metatitle" class="form-control" value="{{ old('metatitle', $category->metatitle) }}">
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label>Meta Keywords (Location)</label>
+            <input type="text" name="metakeywords" class="form-control" value="{{ old('metakeywords', $category->metakeywords) }}">
+        </div>
+
+        <div class="col-md-12 mb-3">
+            <label>Meta Description (Location)</label>
+            <textarea name="metadescription" class="form-control" rows="2">{{ old('metadescription', $category->metadescription) }}</textarea>
+        </div>
+
+        <div class="col-md-12 mb-3">
+            <label>Category Description Top (variables)</label>
+            <textarea name="catdescvar" class="form-control" rows="3">{{ old('catdescvar', $category->catdescvar) }}</textarea>
+        </div>
+
+        <div class="col-md-12 mb-3">
+            <label>Category Description Bottom (variables)</label>
+            <textarea name="catdesc2var" class="form-control" rows="3">{{ old('catdesc2var', $category->catdesc2var) }}</textarea>
+        </div>
+    </div>
+
+    <div class="card-footer d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="{{ route('category.index') }}" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+
 
 
 

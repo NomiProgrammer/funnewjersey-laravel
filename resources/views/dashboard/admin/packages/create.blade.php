@@ -81,61 +81,65 @@
                                         </div>
                                     @endif
                                 </div>
-                                <form action="{{ route('package.store') }}" method="POST">
-                                    @csrf
-                                    <div class="card-body">
-                                        <div class="row">
+                        <form action="{{ route('package.store') }}" method="POST">
+    @csrf
+    <div class="card-body">
+        <div class="row">
 
-                                            <div class="form-group col-md-6">
-                                                <label for="type">Type</label>
-                                                <select class="form-control" name="type" required>
-                                                    <option value="">-- Select Type --</option>
-                                                    <option value="post_package">Post Package</option>
-                                                    <option value="featured_package">Featured Package</option>
-                                                    <option value="banner_package">Banner Package</option>
-                                                    <option value="deal_package">Deal Package</option>
-                                                </select>
-                                            </div>
+            {{-- Type --}}
+            <div class="form-group col-md-6">
+                <label for="type">Type</label>
+                <select class="form-control" name="type" required>
+                    <option value="">-- Select Type --</option>
+                    <option value="post_package">Post Package</option>
+                    <option value="featured_package">Featured Package</option>
+                    <option value="banner_package">Banner Package</option>
+                    <option value="deal_package">Deal Package</option>
+                </select>
+            </div>
 
-                                            <div class="form-group col-md-6">
-                                                <label for="title">Title</label>
-                                                <input type="text" class="form-control" name="title"
-                                                    placeholder="Enter Package Title" required>
-                                            </div>
+            {{-- Title --}}
+            <div class="form-group col-md-6">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" name="title" placeholder="Enter Package Title" required>
+            </div>
 
-                                            <div class="form-group col-md-12">
-                                                <label for="description">Description</label>
-                                                <textarea class="form-control" name="description" rows="3" placeholder="Enter Description"></textarea>
-                                            </div>
+            {{-- Description --}}
+            <div class="form-group col-md-12">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="content"name="description" rows="3" placeholder="Enter Description"></textarea>
+            </div>
 
-                                            <div class="form-group col-md-4">
-                                                <label for="price">Price</label>
-                                                <input type="number" class="form-control" name="price"
-                                                    placeholder="Enter Price" step="0.01" required>
-                                            </div>
+            {{-- Price --}}
+            <div class="form-group col-md-4">
+                <label for="price">Price</label>
+                <input type="number" class="form-control" name="price" placeholder="Enter Price" step="0.01" required>
+            </div>
 
-                                            <div class="form-group col-md-4">
-                                                <label for="expiration_time">Expiration Time (Days)</label>
-                                                <input type="number" class="form-control" name="expiration_time"
-                                                    placeholder="Number of Days" required>
-                                            </div>
+            {{-- Expiration Time --}}
+            <div class="form-group col-md-4">
+                <label for="expiration_time">Expiration Time (Days)</label>
+                <input type="number" class="form-control" name="expiration_time" placeholder="Number of Days" required>
+            </div>
 
-                                            <div class="form-group col-md-4">
-                                                <label for="status">Status</label>
-                                                <select class="form-control" name="status" required>
-                                                    <option value="1">Public</option>
-                                                    <option value="0">Admin Only</option>
-                                                </select>
-                                            </div>
+            {{-- Status --}}
+            <div class="form-group col-md-4">
+                <label for="status">Status</label>
+                <select class="form-control" name="status" required>
+                    <option value="1">Public</option>
+                    <option value="0">Admin Only</option>
+                </select>
+            </div>
 
-                                        </div>
-                                    </div>
+        </div>
+    </div>
 
-                                    <div class="card-footer d-flex justify-content-between">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                        <a href="{{ route('package.index') }}" class="btn btn-secondary">Cancel</a>
-                                    </div>
-                                </form>
+    <div class="card-footer d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{{ route('package.index') }}" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+
 
 
                             </div>

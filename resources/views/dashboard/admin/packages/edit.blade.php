@@ -115,7 +115,7 @@
 
                                             <div class="form-group col-md-12">
                                                 <label for="description">Description</label>
-                                                <textarea class="form-control" name="description" rows="3">{{ old('description', $package->description) }}</textarea>
+                                                <textarea class="form-control"id="content" name="description" rows="3">{{ old('description', $package->description) }}</textarea>
                                             </div>
 
                                             <div class="form-group col-md-4">

@@ -81,82 +81,80 @@
                                         </div>
                                     @endif
                                 </div>
-                                <form action="{{ route('invoices.store') }}" method="POST">
-                                    @csrf
+                              <form action="{{ route('invoices.store') }}" method="POST">
+    @csrf
 
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <label>Title</label>
-                                            <input type="text" name="title" class="form-control" required>
-                                        </div>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label>Title</label>
+            <input type="text" name="title" class="form-control" required>
+        </div>
 
-                                        <div class="form-group">
-                                            <label>Description</label>
-                                            <textarea name="description" id="content" class="form-control" rows="4"></textarea>
-                                        </div>
+        <div class="col-md-6 mb-3">
+            <label>Description</label>
+            <textarea name="description" id="content" class="form-control" rows="4"></textarea>
+        </div>
 
-                                        <div class="form-group">
-                                            <label>Assigned By</label>
-                                            <select name="assigned_to" class="form-control">
-                                                <option value="">-- None --</option>
-                                                @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}">{{ $user->first_name }}
-                                                        {{ $user->last_name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+        <div class="col-md-6 mb-3">
+            <label>Assigned By</label>
+            <select name="assigned_to" class="form-control">
+                <option value="">-- None --</option>
+                @foreach ($users as $user)
+                    <option value="{{ $user->id }}">{{ $user->first_name }} {{ $user->last_name }}</option>
+                @endforeach
+            </select>
+        </div>
 
-                                        <div class="form-group">
-                                            <label>Status</label>
-                                            <select name="status" class="form-control" required>
-                                                <option value="1">Paid</option>
-                                                <option value="2">Unpaid</option>
-                                            </select>
-                                        </div>
+        <div class="col-md-6 mb-3">
+            <label>Status</label>
+            <select name="status" class="form-control" required>
+                <option value="1">Paid</option>
+                <option value="2">Unpaid</option>
+            </select>
+        </div>
 
-                                        <div class="form-group">
-                                            <label>Assigned To</label>
-                                            <select name="assigned_to" class="form-control">
-                                                <option value="">-- None --</option>
-                                                @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}">{{ $user->first_name }}
-                                                        {{ $user->last_name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+        <div class="col-md-6 mb-3">
+            <label>Assigned To</label>
+            <select name="assigned_to" class="form-control">
+                <option value="">-- None --</option>
+                @foreach ($users as $user)
+                    <option value="{{ $user->id }}">{{ $user->first_name }} {{ $user->last_name }}</option>
+                @endforeach
+            </select>
+        </div>
 
-                                        <div class="form-group">
-                                            <label>Total ($)</label>
-                                            <input type="number" step="0.01" name="total" class="form-control"
-                                                required>
-                                        </div>
+        <div class="col-md-6 mb-3">
+            <label>Total ($)</label>
+            <input type="number" step="0.01" name="total" class="form-control" required>
+        </div>
 
-                                        <div class="form-group">
-                                            <label>Due Date</label>
-                                            <input type="date" name="expires" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Created By</label>
-                                            <select name="created_by" class="form-control">
-                                                <option value="">-- None --</option>
-                                                @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}">{{ $user->first_name }}
-                                                        {{ $user->last_name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Term</label>
-                                            <input type="text" name="term" class="form-control"
-                                                placeholder="e.g. 1 year (renews Apr 1, 2023)">
-                                        </div>
-                                    </div>
+        <div class="col-md-6 mb-3">
+            <label>Due Date</label>
+            <input type="date" name="expires" class="form-control">
+        </div>
 
-                                     <div class="card-footer d-flex justify-content-between">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                        <a href="{{ route('invoices.index') }}" class="btn btn-secondary">Cancel</a>
-                                    </div>
-                                </form>
+        <div class="col-md-6 mb-3">
+            <label>Created By</label>
+            <select name="created_by" class="form-control">
+                <option value="">-- None --</option>
+                @foreach ($users as $user)
+                    <option value="{{ $user->id }}">{{ $user->first_name }} {{ $user->last_name }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label>Term</label>
+            <input type="text" name="term" class="form-control" placeholder="e.g. 1 year (renews Apr 1, 2023)">
+        </div>
+    </div>
+
+    <div class="card-footer d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{{ route('invoices.index') }}" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+
 
                             </div>
                         </div>

@@ -112,7 +112,7 @@ public function update(Request $request, $locale, $id)
 }
 
 
-    public function destroy($id)
+    public function destroy($locale,$id)
     {
         $tag = Tags::findOrFail($id);
         $tag->delete();
