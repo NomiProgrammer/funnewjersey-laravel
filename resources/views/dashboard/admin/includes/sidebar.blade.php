@@ -308,8 +308,8 @@
                                 class="nav-link {{ request()->routeIs('blog.index') ? 'active' : '' }}"><i class="fas fa-list-alt nav-icon"></i>
                                 <p>All posts</p>
                             </a></li>
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/blog/manage"
-                                class="nav-link"><i class="fas fa-plus nav-icon"></i>
+                        <li class="nav-item"><a href="{{route('blog.create')}}"
+                                class="nav-link {{ request()->routeIs('blog.create') ? 'active' : '' }}"><i class="fas fa-plus nav-icon"></i>
                                 <p>New Post</p>
                             </a></li>
                         <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/blog/all2"

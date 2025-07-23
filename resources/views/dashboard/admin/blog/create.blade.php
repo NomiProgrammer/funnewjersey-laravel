@@ -1,5 +1,5 @@
 @extends('dashboard.admin.layouts.app')
-@section('page_title', 'Add Invoice')
+@section('page_title', 'Add Blog ')
 
 @section('css')
     <!-- DataTables CSS -->
@@ -17,8 +17,8 @@
 
 @section('admin-content')
     @php
-        $pageName = 'Add Invoice';
-        $pageName2 = 'Add New Invoice Records';
+        $pageName = 'Add Blog ';
+        $pageName2 = 'Add New Blog  Records';
     @endphp
 
     <div class="content-wrapper">
@@ -81,82 +81,108 @@
                                         </div>
                                     @endif
                                 </div>
-                                <form action="{{ route('invoices.store') }}" method="POST">
+                                <form action="{{ route('blog.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
-
                                     <div class="card-body">
-                                        <div class="form-group">
-                                            <label>Title</label>
-                                            <input type="text" name="title" class="form-control" required>
-                                        </div>
+                                        <div class="row">
 
-                                        <div class="form-group">
-                                            <label>Description</label>
-                                            <textarea name="description" id="content" class="form-control" rows="4"></textarea>
-                                        </div>
+                                            {{-- Type --}}
+                                            <div class="form-group col-md-6">
+                                                <label for="type">Type</label>
+                                                <select class="form-control" name="type" id="type">
+                                                    <option value="">Select Type</option>
+                                                    @php
+                                                        $types = [
+                                                            'blog' => 'Blog Post',
+                                                            'product' => 'Product',
+                                                            'article' => 'Article',
+                                                            'news' => 'Homepage News',
+                                                            'deal' => 'Fun Deals',
+                                                        ];
+                                                    @endphp
+                                                    @foreach ($types as $key => $label)
+                                                        <option value="{{ $key }}"
+                                                            {{ old('type') == $key ? 'selected' : '' }}>
+                                                            {{ $label }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
 
-                                        <div class="form-group">
-                                            <label>Assigned By</label>
-                                            <select name="assigned_to" class="form-control">
-                                                <option value="">-- None --</option>
-                                                @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}">{{ $user->first_name }}
-                                                        {{ $user->last_name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
 
-                                        <div class="form-group">
-                                            <label>Status</label>
-                                            <select name="status" class="form-control" required>
-                                                <option value="1">Paid</option>
-                                                <option value="2">Unpaid</option>
-                                            </select>
-                                        </div>
+                                            {{-- Category --}}
+                                            <div class="form-group col-md-6">
+                                                <label for="category">Category</label>
+                                                <select class="form-control" name="category">
+                                                    <option value="">Select Category</option>
+                                                    @foreach ($categories as $cat)
+                                                        <option value="{{ $cat->id }}">{{ $cat->title }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
 
-                                        <div class="form-group">
-                                            <label>Assigned To</label>
-                                            <select name="assigned_to" class="form-control">
-                                                <option value="">-- None --</option>
-                                                @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}">{{ $user->first_name }}
-                                                        {{ $user->last_name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                            {{-- Title --}}
+                                            <div class="form-group col-md-6">
+                                                <label for="title">Title</label>
+                                                <input type="text" class="form-control" name="title"
+                                                    placeholder="Enter Title">
+                                            </div>
 
-                                        <div class="form-group">
-                                            <label>Total ($)</label>
-                                            <input type="number" step="0.01" name="total" class="form-control"
-                                                required>
-                                        </div>
+                                            {{-- Meta Title --}}
+                                            <div class="form-group col-md-6">
+                                                <label for="bmetatitle">Meta Title</label>
+                                                <input type="text" class="form-control" name="bmetatitle"
+                                                    placeholder="Meta Title">
+                                            </div>
 
-                                        <div class="form-group">
-                                            <label>Due Date</label>
-                                            <input type="date" name="expires" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Created By</label>
-                                            <select name="created_by" class="form-control">
-                                                <option value="">-- None --</option>
-                                                @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}">{{ $user->first_name }}
-                                                        {{ $user->last_name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Term</label>
-                                            <input type="text" name="term" class="form-control"
-                                                placeholder="e.g. 1 year (renews Apr 1, 2023)">
+                                            {{-- Meta Description --}}
+                                            <div class="form-group col-md-6">
+                                                <label for="bmetadescription">Meta Description</label>
+                                                <textarea class="form-control" name="bmetadescription" rows="3"></textarea>
+                                            </div>
+
+                                            {{-- Page H1 --}}
+                                            <div class="form-group col-md-6">
+                                                <label for="pageh1">Page H1</label>
+                                                <input type="text" class="form-control" name="pageh1"
+                                                    placeholder="Page H1">
+                                            </div>
+
+                                            <div id="productFields" class="row d-none">
+                                                <div class="form-group col-md-6">
+                                                    <label for="price">Product Price</label>
+                                                    <input type="number" class="form-control" name="price"
+                                                        value="{{ old('price') }}">
+                                                </div>
+
+                                                <div class="form-group col-md-6">
+                                                    <label for="shipping">Product Shipping</label>
+                                                    <input type="number" class="form-control" name="shipping"
+                                                        value="{{ old('shipping') }}">
+                                                </div>
+                                            </div>
+
+
+                                            {{-- Content --}}
+                                            <div class="form-group col-md-12">
+                                                <label for="description">Content</label>
+                                                <textarea name="description" id="content" class="form-control" rows="5"></textarea>
+                                            </div>
+
+                                            {{-- Featured Image --}}
+                                            <div class="form-group col-md-6">
+                                                <label for="featured_img">Featured Image</label>
+                                                <input type="file" class="form-control" name="featured_img">
+                                            </div>
                                         </div>
                                     </div>
 
-                                     <div class="card-footer d-flex justify-content-between">
+                                    <div class="card-footer d-flex justify-content-between">
                                         <button type="submit" class="btn btn-primary">Submit</button>
-                                        <a href="{{ route('invoices.index') }}" class="btn btn-secondary">Cancel</a>
+                                        <a href="{{ route('blog.index') }}" class="btn btn-secondary">Cancel</a>
                                     </div>
                                 </form>
+
 
                             </div>
                         </div>
@@ -180,5 +206,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+    <script>
+        function toggleProductFields() {
+            const type = document.getElementById('type').value;
+            const productFields = document.getElementById('productFields');
 
+            if (type === 'product') {
+                productFields.classList.remove('d-none');
+            } else {
+                productFields.classList.add('d-none');
+            }
+        }
+
+        document.getElementById('type').addEventListener('change', toggleProductFields);
+        window.addEventListener('DOMContentLoaded', toggleProductFields);
+    </script>
 @endsection

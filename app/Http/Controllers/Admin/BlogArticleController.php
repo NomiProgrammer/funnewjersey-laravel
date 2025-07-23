@@ -7,13 +7,15 @@ use Illuminate\Http\Request;
 use App\Models\BlogArticle;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Str;
+use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 class BlogArticleController extends Controller
 {
     // List all blog articles
 public function index(Request $request)
 {
     if ($request->ajax()) {
-        $data = BlogArticle::select(['type', 'title', 'description', 'status']);
+        $data = BlogArticle::select(['id','type', 'title', 'description', 'status']);
 
         return datatables()->of($data)
             ->editColumn('title', function ($row) {
@@ -34,19 +36,24 @@ public function index(Request $request)
                     return '<span class="badge badge-secondary">Unknown</span>';
                 }
             })
-            ->addColumn('actions', function ($row) {
-                return '
-                <div class="dropdown">
-                    <button class="btn btn-sm btn-success dropdown-toggle" type="button" id="actionDropdown' . $row->id . '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-cog"></i> Actions
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="actionDropdown' . $row->id . '">
-                        <a class="dropdown-item" href="#"><i class="fas fa-edit text-dark"></i> &nbsp;Edit</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-trash text-dark"></i> &nbsp;Delete</a>
-                    </div>
-                </div>
-                ';
-            })
+->addColumn('actions', function ($item) {
+  $editUrl = route('blog.edit', ['locale' => app()->getLocale(), 'id' => $item->id]);
+    return '
+        <div class="dropdown">
+            <button class="btn btn-sm btn-success dropdown-toggle" type="button" id="actionDropdown' . $item->id . '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-cog"></i> Actions
+            </button>
+            <div class="dropdown-menu" aria-labelledby="actionDropdown' . $item->id . '">
+                <a class="dropdown-item" href="' . $editUrl . '">
+                    <i class="fas fa-edit"></i> &nbsp;Edit
+                </a>
+                <a class="dropdown-item text-danger delete-blogdelete" href="javascript:void(0);" data-id="' . $item->id . '">
+                    <i class="fas fa-trash"></i> &nbsp;Delete
+                </a>
+            </div>
+        </div>
+    ';
+})
             ->rawColumns(['status', 'actions'])
             ->make(true);
     }
@@ -55,39 +62,88 @@ public function index(Request $request)
 }
 
 
-    // Show a single blog article
-    public function show($id)
-    {
-        $article = BlogArticle::findOrFail($id);
-        return response()->json($article);
+  public function create()
+{
+    $categories = Category::all();
+
+    return view('dashboard.admin.blog.create', compact('categories'));
+}
+
+public function store(Request $request)
+{
+    $request->validate([
+        'type' => 'required|in:blog,article,news,product,deals',
+        'category' => 'nullable|exists:categories,id',
+        'title' => 'required|string|max:255',
+        'bmetatitle' => 'nullable|string|max:255',
+        'bmetadescription' => 'nullable|string|max:500',
+        'pageh1' => 'nullable|string|max:255',
+        'price' => 'nullable|numeric',
+        'shipping' => 'nullable|numeric',
+        'description' => 'nullable|string',
+        'featured_img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+
+    $data = $request->all();
+    // Add authenticated user ID
+    $data['created_by'] = Auth::id();
+    $data['create_time'] = time(); // Add UNIX timestamp
+
+    if ($request->hasFile('featured_img')) {
+        $image = $request->file('featured_img');
+        $imageName = time() . '_' . $image->getClientOriginalName();
+        $image->move(public_path('front_assets/uploads/blog/'), $imageName);
+        $data['featured_img'] = 'front_assets/uploads/blog/' . $imageName;
     }
 
-    // Store a new blog article (demo data)
-    public function store(Request $request)
-    {
-        $article = BlogArticle::create([
-            'title' => 'Demo Blog',
-            'content' => 'This is a demo blog post.',
-        ]);
-        return response()->json($article);
+    BlogArticle::create($data);
+
+    return redirect()->route('blog.index')->with('success', 'Blog article created successfully!');
+}
+
+public function edit($locale, $id)
+{
+    $blog = BlogArticle::findOrFail($id);
+    $categories = Category::all();
+
+    return view('dashboard.admin.blog.edit', compact('blog', 'categories'));
+}
+
+public function update(Request $request, $locale, $id)
+{
+    $request->validate([
+        'type' => 'required|in:blog,article,news,product,deals',
+        'category' => 'nullable|exists:categories,id',
+        'title' => 'required|string|max:255',
+        'bmetatitle' => 'nullable|string|max:255',
+        'bmetadescription' => 'nullable|string|max:500',
+        'pageh1' => 'nullable|string|max:255',
+        'price' => 'nullable|numeric',
+        'shipping' => 'nullable|numeric',
+        'description' => 'nullable|string',
+        'featured_img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+
+    $blog = BlogArticle::findOrFail($id);
+    $data = $request->all();
+
+    if ($request->hasFile('featured_img')) {
+        $image = $request->file('featured_img');
+        $imageName = time() . '_' . $image->getClientOriginalName();
+        $image->move(public_path('front_assets/uploads/blog/'), $imageName);
+        $data['featured_img'] = 'front_assets/uploads/blog/' . $imageName;
     }
 
-    // Update a blog article (demo data)
-    public function update(Request $request, $id)
-    {
-        $article = BlogArticle::findOrFail($id);
-        $article->update([
-            'title' => 'Updated Blog',
-            'content' => 'This is an updated blog post.',
-        ]);
-        return response()->json($article);
-    }
+    $blog->update($data);
 
-    // Delete a blog article
-    public function destroy($id)
-    {
-        $article = BlogArticle::findOrFail($id);
-        $article->delete();
-        return response()->json(['message' => 'Blog article deleted']);
-    }
+    return redirect()->route('blog.index')->with('success', 'Blog article updated successfully!');
+}
+
+public function destroy($locale, $id)
+{
+    $blog = BlogArticle::findOrFail($id);
+    $blog->delete();
+
+    return response()->json(['success' => 'Blog article deleted successfully!']);
+}
 }
