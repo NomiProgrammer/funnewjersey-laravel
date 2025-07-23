@@ -13,60 +13,60 @@ use Yajra\DataTables\DataTables;
 class BannersAdsController extends Controller
 {
     // List all banner ads
-public function index(Request $request)
-{
-    if ($request->ajax()) {
-        $data = BannersAds::with(['categoryid', 'customer','location'])->orderBy('id', 'asc')->select([
-            'id',
-            'featured_img',
-            'title',
-            'description',
-            'slot',
-            'type',
-            'category',
-            'state',
-            'created_by',
-            'expires',
-            'status',
-        ]);
+    public function index(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = BannersAds::with(['categoryid', 'customer', 'location'])->orderBy('id', 'asc')->select([
+                'id',
+                'featured_img',
+                'title',
+                'description',
+                'slot',
+                'type',
+                'category',
+                'state',
+                'created_by',
+                'expires',
+                'status',
+            ]);
 
-        return DataTables::of($data)
-            ->editColumn('featured_img', function ($item) {
-                $url = asset('front_assets/uploads/banner/' . $item->featured_img);
-                return '<img src="' . $url . '" alt="Image" width="90" height="60" loading="lazy">';
-            })
-                        ->editColumn('expires', function ($item) {
-    return \Carbon\Carbon::parse($item->expires)->format('d M Y');
-})
-            ->editColumn('description', function ($item) {
-                return $item->description
-                    ? (strlen($item->description) > 10 ? substr($item->description, 0, 10) . '...' : $item->description)
-                    : '-';
-            })
-            ->editColumn('status', function ($item) {
-                if ($item->status == 1) {
-                    return '<span class="badge badge-success">Published</span>';
-                } elseif ($item->status == 0) {
-                    return '<span class="badge badge-danger">Unpublished</span>';
-                } elseif ($item->status == 2) {
-                    return '<span class="badge badge-warning">Drafted</span>';
-                }
-                return '<span class="badge badge-dark">Unknown</span>';
-            })
-            ->addColumn('category', function ($item) {
-    return $item->categoryid ? $item->categoryid->title : '-';
-})
-            ->addColumn('location', function ($item) {
-    return $item->location ? $item->location->name : '-';
-})
-->addColumn('customer', function ($item) {
-    return $item->customer
-        ? trim($item->customer->first_name . ' ' . $item->customer->last_name)
-        : '-';
-})
-->addColumn('actions', function ($item) {
-  $editUrl = route('banners-ads.edit', ['locale' => app()->getLocale(), 'id' => $item->id]);
-    return '
+            return DataTables::of($data)
+                ->editColumn('featured_img', function ($item) {
+                    $url = asset('front_assets/uploads/banner/' . $item->featured_img);
+                    return '<img src="' . $url . '" alt="Image" width="90" height="60" loading="lazy">';
+                })
+                ->editColumn('expires', function ($item) {
+                    return \Carbon\Carbon::parse($item->expires)->format('d M Y');
+                })
+                ->editColumn('description', function ($item) {
+                    return $item->description
+                        ? (strlen($item->description) > 10 ? substr($item->description, 0, 10) . '...' : $item->description)
+                        : '-';
+                })
+                ->editColumn('status', function ($item) {
+                    if ($item->status == 1) {
+                        return '<span class="badge badge-success">Published</span>';
+                    } elseif ($item->status == 0) {
+                        return '<span class="badge badge-danger">Unpublished</span>';
+                    } elseif ($item->status == 2) {
+                        return '<span class="badge badge-warning">Drafted</span>';
+                    }
+                    return '<span class="badge badge-dark">Unknown</span>';
+                })
+                ->addColumn('category', function ($item) {
+                    return $item->categoryid ? $item->categoryid->title : '-';
+                })
+                ->addColumn('location', function ($item) {
+                    return $item->location ? $item->location->name : '-';
+                })
+                ->addColumn('customer', function ($item) {
+                    return $item->customer
+                        ? trim($item->customer->first_name . ' ' . $item->customer->last_name)
+                        : '-';
+                })
+                ->addColumn('actions', function ($item) {
+                    $editUrl = route('banners-ads.edit', ['locale' => app()->getLocale(), 'id' => $item->id]);
+                    return '
         <div class="dropdown">
             <button class="btn btn-sm btn-success dropdown-toggle" type="button" id="actionDropdown' . $item->id . '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-cog"></i> Actions
@@ -81,13 +81,13 @@ public function index(Request $request)
             </div>
         </div>
     ';
-})
-            ->rawColumns(['featured_img', 'status', 'actions'])
-            ->make(true);
-    }
+                })
+                ->rawColumns(['featured_img', 'status', 'actions'])
+                ->make(true);
+        }
 
-    return view('dashboard.admin.bannersads.index');
-}
+        return view('dashboard.admin.bannersads.index');
+    }
 
 
 
@@ -99,13 +99,13 @@ public function index(Request $request)
         return response()->json($banner);
     }
 
-     public function create()
+    public function create()
     {
-            if (auth()->user()->hasRole('admin')) {
-        dd('User is an admin');
-    } else {
-        dd('User is NOT an admin');
-    }
+        if (auth()->user()->hasRole('admin')) {
+            dd('User is an admin');
+        } else {
+            dd('User is NOT an admin');
+        }
         $categories = Category::all();
         $users = User::all();
         $states = Locations::all();
@@ -132,19 +132,19 @@ public function index(Request $request)
             'region' => 'required|in:1,2,3',
         ]);
 
-            // ✅ 2) Handle the image upload
-    if ($request->hasFile('featured_img')) {
-        $image = $request->file('featured_img');
-        $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
+        // ✅ 2) Handle the image upload
+        if ($request->hasFile('featured_img')) {
+            $image = $request->file('featured_img');
+            $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
 
-        // Store in /public/front_assets/uploads/banner
-        $image->move(public_path('front_assets/uploads/banner'), $imageName);
+            // Store in /public/front_assets/uploads/banner
+            $image->move(public_path('front_assets/uploads/banner'), $imageName);
 
-        // Save relative path for asset()
-        $path = 'front_assets/uploads/banner/' . $imageName;
-    } else {
-        $path = null;
-    }
+            // Save relative path for asset()
+            $path = 'front_assets/uploads/banner/' . $imageName;
+        } else {
+            $path = null;
+        }
 
 
         BannersAds::create([
@@ -178,7 +178,7 @@ public function index(Request $request)
         return view('dashboard.admin.bannersads.edit', compact('banner', 'categories', 'users', 'states'));
     }
 
-    public function update(Request $request, $locale,$id)
+    public function update(Request $request, $locale, $id)
     {
         $request->validate([
             'slide_order' => 'required|integer',
@@ -223,7 +223,7 @@ public function index(Request $request)
         return redirect()->route('bannersads.index')->with('success', 'Banner Ad updated successfully!');
     }
 
-    public function destroy($locale,$id)
+    public function destroy($locale, $id)
     {
         $banner = BannersAds::findOrFail($id);
         $banner->delete();

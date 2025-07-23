@@ -7,30 +7,30 @@ use Illuminate\Http\Request;
 use App\Models\Widgets;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Str;
+
 class WidgetsController extends Controller
 {
     // List all widgets
-public function index(Request $request)
-{
-    if ($request->ajax()) {
-        $data = Widgets::select(['id', 'name', 'status']);
+    public function index(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Widgets::select(['id', 'name', 'status']);
+            return datatables()->of($data)
+                ->editColumn('status', function ($item) {
+                    // 1 means deactivated, 0 means active
+                    if ($item->status == 1) {
+                        return '<span class="badge badge-danger">Deactivated</span>';
+                    } else {
+                        return '<span class="badge badge-success">Active</span>';
+                    }
+                })->addColumn('id', function ($item) {
 
-        return datatables()->of($data)
-            ->editColumn('status', function ($item) {
-                // 1 means deactivated, 0 means active
-                if ($item->status == 1) {
-                    return '<span class="badge badge-danger">Deactivated</span>';
-                } else {
-                    return '<span class="badge badge-success">Active</span>';
-                }
-            })->addColumn('id', function ($item) {
+                    return $item->id;
+                })
 
-    return $item->id;
-})
-
-->addColumn('actions', function ($item) {
-  $editUrl = route('widgets.edit', ['locale' => app()->getLocale(), 'id' => $item->id]);
-    return '
+                ->addColumn('actions', function ($item) {
+                    $editUrl = route('widgets.edit', ['locale' => app()->getLocale(), 'id' => $item->id]);
+                    return '
         <div class="dropdown">
             <button class="btn btn-sm btn-success dropdown-toggle" type="button" id="actionDropdown' . $item->id . '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-cog"></i> Actions
@@ -45,13 +45,13 @@ public function index(Request $request)
             </div>
         </div>
     ';
-})
-            ->rawColumns(['status', 'actions'])
-            ->make(true);
-    }
+                })
+                ->rawColumns(['status', 'actions'])
+                ->make(true);
+        }
 
-    return view('dashboard.admin.widgets.index');
-}
+        return view('dashboard.admin.widgets.index');
+    }
 
 
 
@@ -76,7 +76,7 @@ public function index(Request $request)
 
         Widgets::create([
             'name' => $request->name,
-             'alias' => Str::slug($request->name, '_'),
+            'alias' => Str::slug($request->name, '_'),
             'status' => $request->status,
             'editable' => 1,
         ]);
@@ -84,8 +84,8 @@ public function index(Request $request)
         return redirect()->route('widgets.index')->with('success', 'Widget created successfully!');
     }
 
-public function edit($locale, $id)
-{
+    public function edit($locale, $id)
+    {
         $widget = Widgets::findOrFail($id);
         return view('dashboard.admin.widgets.edit', compact('widget'));
     }
@@ -102,7 +102,7 @@ public function edit($locale, $id)
 
         $widget->update([
             'name' => $request->name,
-           'alias' => Str::slug($request->name, '_'),
+            'alias' => Str::slug($request->name, '_'),
             'status' => $request->status,
             'editable' => 1,
         ]);
@@ -111,7 +111,7 @@ public function edit($locale, $id)
     }
 
 
-    public function destroy($locale,$id)
+    public function destroy($locale, $id)
     {
         $widget = Widgets::findOrFail($id);
         $widget->delete();
