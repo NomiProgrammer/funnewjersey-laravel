@@ -81,82 +81,110 @@
                                         </div>
                                     @endif
                                 </div>
-                                <form action="{{ route('invoices.store') }}" method="POST">
+                                <form action="{{ route('meta_tags.store') }}" method="POST">
                                     @csrf
-
                                     <div class="card-body">
-                                        <div class="form-group">
-                                            <label>Title</label>
-                                            <input type="text" name="title" class="form-control" required>
-                                        </div>
+                                        <div class="row">
 
-                                        <div class="form-group">
-                                            <label>Description</label>
-                                            <textarea name="description" id="content" class="form-control" rows="4"></textarea>
-                                        </div>
+                                            {{-- Category --}}
+                                            <div class="form-group col-md-6">
+                                                <label for="category">Category</label>
+                                                <select class="form-control" name="category">
+                                                    <option value="">Select Category</option>
+                                                    @foreach ($categories as $category)
+                                                        <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
 
-                                        <div class="form-group">
-                                            <label>Assigned By</label>
-                                            <select name="assigned_to" class="form-control">
-                                                <option value="">-- None --</option>
-                                                @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}">{{ $user->first_name }}
-                                                        {{ $user->last_name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                            {{-- County --}}
+                                            <div class="form-group col-md-6">
+                                                <label for="county">County</label>
+                                                <select class="form-control" name="county">
+                                                    <option value="">Select County</option>
+                                                    @foreach ($locations as $loc)
+                                                        <option value="{{ $loc->id }}">{{ $loc->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
 
-                                        <div class="form-group">
-                                            <label>Status</label>
-                                            <select name="status" class="form-control" required>
-                                                <option value="1">Paid</option>
-                                                <option value="2">Unpaid</option>
-                                            </select>
-                                        </div>
+                                            {{-- City --}}
+                                            <div class="form-group col-md-6">
+                                                <label for="city">City</label>
+                                                <select class="form-control" name="city">
+                                                    <option value="">Select City</option>
+                                                    @foreach ($locations as $loc)
+                                                        <option value="{{ $loc->id }}">{{ $loc->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
 
-                                        <div class="form-group">
-                                            <label>Assigned To</label>
-                                            <select name="assigned_to" class="form-control">
-                                                <option value="">-- None --</option>
-                                                @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}">{{ $user->first_name }}
-                                                        {{ $user->last_name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                            {{-- Region --}}
+                                            <div class="form-group col-md-6">
+                                                <label for="region">Region</label>
+                                                <select name="region" id="region" class="form-control">
+                                                    <option value="1" selected>Northern</option>
+                                                    <option value="2">Central</option>
+                                                    <option value="3">Southern</option>
+                                                </select>
+                                            </div>
 
-                                        <div class="form-group">
-                                            <label>Total ($)</label>
-                                            <input type="number" step="0.01" name="total" class="form-control"
-                                                required>
-                                        </div>
 
-                                        <div class="form-group">
-                                            <label>Due Date</label>
-                                            <input type="date" name="expires" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Created By</label>
-                                            <select name="created_by" class="form-control">
-                                                <option value="">-- None --</option>
-                                                @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}">{{ $user->first_name }}
-                                                        {{ $user->last_name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Term</label>
-                                            <input type="text" name="term" class="form-control"
-                                                placeholder="e.g. 1 year (renews Apr 1, 2023)">
+                                            {{-- Disable H1 --}}
+                                            <div class="form-group col-md-6">
+                                                <label for="disableh1">Disable H1?</label>
+                                                <select name="disableh1" id="disableh1" class="form-control">
+                                                    <option value="0" selected>No</option>
+                                                    <option value="1">Yes</option>
+                                                </select>
+                                            </div>
+
+                                            {{-- H1 --}}
+                                            <div class="form-group col-md-6">
+                                                <label for="h1">H1</label>
+                                                <input type="text" name="h1" class="form-control"
+                                                    placeholder="Enter H1">
+                                            </div>
+
+                                            {{-- Meta Title --}}
+                                            <div class="form-group col-md-6">
+                                                <label for="metatitle">Meta Title</label>
+                                                <input type="text" name="metatitle" class="form-control"
+                                                    placeholder="Enter Meta Title">
+                                            </div>
+
+                                            {{-- Meta Description --}}
+                                            <div class="form-group col-md-6">
+                                                <label for="metadesc">Meta Description</label>
+                                                <textarea name="metadesc" class="form-control" rows="3"></textarea>
+                                            </div>
+
+                                            {{-- Meta Keywords --}}
+                                            <div class="form-group col-md-6">
+                                                <label for="metakeywords">Meta Keywords</label>
+                                                <textarea name="metakeywords" class="form-control" rows="3"></textarea>
+                                            </div>
+
+                                            {{-- Page Top Description --}}
+                                            <div class="form-group col-md-12">
+                                                <label for="pagetop">Page Top Description</label>
+                                                <textarea name="pagetop" class="form-control" id="content" rows="4"></textarea>
+                                            </div>
+
+                                            {{-- Page Bottom Description --}}
+                                            <div class="form-group col-md-12">
+                                                <label for="pagebottom">Page Bottom Description</label>
+                                                <textarea name="pagebottom" class="form-control" rows="4"></textarea>
+                                            </div>
                                         </div>
                                     </div>
 
-                                     <div class="card-footer d-flex justify-content-between">
+                                    <div class="card-footer d-flex justify-content-between">
                                         <button type="submit" class="btn btn-primary">Submit</button>
-                                        <a href="{{ route('invoices.index') }}" class="btn btn-secondary">Cancel</a>
+                                        <a href="{{ route('meta_tags.index') }}" class="btn btn-secondary">Cancel</a>
                                     </div>
                                 </form>
+
 
                             </div>
                         </div>

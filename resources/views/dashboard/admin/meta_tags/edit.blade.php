@@ -82,82 +82,114 @@
                                     @endif
                                 </div>
 
-                                <form action="{{ route('invoices.update', $invoice->id) }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
+                               <form action="{{ route('meta_tags.update', $meta->id) }}" method="POST">
+    @csrf
+    @method('PUT')
+    <div class="card-body">
+        <div class="row">
 
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <label>Title</label>
-                                            <input type="text" name="title" class="form-control"
-                                                value="{{ old('title', $invoice->title) }}" required>
-                                        </div>
+            {{-- Category --}}
+            <div class="form-group col-md-6">
+                <label for="category">Category</label>
+                <select class="form-control" name="category">
+                    <option value="">Select Category</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}" {{ $meta->category == $category->id ? 'selected' : '' }}>
+                            {{ $category->title }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
 
-                                        <div class="form-group">
-                                            <label>Description</label>
-                                            <textarea name="description" id="content" class="form-control" rows="4">{{ old('description', $invoice->description) }}</textarea>
-                                        </div>
+            {{-- County --}}
+            <div class="form-group col-md-6">
+                <label for="county">County</label>
+                <select class="form-control" name="county">
+                    <option value="">Select County</option>
+                    @foreach ($locations as $loc)
+                        <option value="{{ $loc->id }}" {{ $meta->county == $loc->id ? 'selected' : '' }}>
+                            {{ $loc->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
 
-                                        <div class="form-group">
-                                            <label>Created By</label>
-                                            <select name="created_by" class="form-control">
-                                                <option value="">-- None --</option>
-                                                @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}"
-                                                        {{ $invoice->created_by == $user->id ? 'selected' : '' }}>
-                                                        {{ $user->first_name }} {{ $user->last_name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+            {{-- City --}}
+            <div class="form-group col-md-6">
+                <label for="city">City</label>
+                <select class="form-control" name="city">
+                    <option value="">Select City</option>
+                    @foreach ($locations as $loc)
+                        <option value="{{ $loc->id }}" {{ $meta->city == $loc->id ? 'selected' : '' }}>
+                            {{ $loc->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
 
-                                        <div class="form-group">
-                                            <label>Status</label>
-                                            <select name="status" class="form-control" required>
-                                                <option value="1" {{ $invoice->status == 1 ? 'selected' : '' }}>Paid
-                                                </option>
-                                                <option value="2" {{ $invoice->status == 2 ? 'selected' : '' }}>Unpaid
-                                                </option>
-                                            </select>
-                                        </div>
+            {{-- Region --}}
+            <div class="form-group col-md-6">
+                <label for="region">Region</label>
+                <select name="region" class="form-control">
+                    <option value="1" {{ $meta->region == 1 ? 'selected' : '' }}>Northern</option>
+                    <option value="2" {{ $meta->region == 2 ? 'selected' : '' }}>Central</option>
+                    <option value="3" {{ $meta->region == 3 ? 'selected' : '' }}>Southern</option>
+                </select>
+            </div>
 
-                                        <div class="form-group">
-                                            <label>Assigned To</label>
-                                            <select name="assigned_to" class="form-control">
-                                                <option value="">-- None --</option>
-                                                @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}"
-                                                        {{ $invoice->assigned_to == $user->id ? 'selected' : '' }}>
-                                                        {{ $user->first_name }} {{ $user->last_name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+            {{-- Disable H1 --}}
+            <div class="form-group col-md-6">
+                <label for="disableh1">Disable H1?</label>
+                <select name="disableh1" class="form-control">
+                    <option value="0" {{ $meta->disableh1 == 0 ? 'selected' : '' }}>No</option>
+                    <option value="1" {{ $meta->disableh1 == 1 ? 'selected' : '' }}>Yes</option>
+                </select>
+            </div>
 
-                                        <div class="form-group">
-                                            <label>Total ($)</label>
-                                            <input type="number" step="0.01" name="total" class="form-control"
-                                                value="{{ old('total', $invoice->total) }}" required>
-                                        </div>
+            {{-- H1 --}}
+            <div class="form-group col-md-6">
+                <label for="h1">H1</label>
+                <input type="text" name="h1" class="form-control" value="{{ $meta->h1 }}" placeholder="Enter H1">
+            </div>
 
-                                        <div class="form-group">
-                                            <label>Due Date</label>
-                                            <input type="date" name="expires" class="form-control"
-                                                value="{{ old('expires', $invoice->expires) }}">
-                                        </div>
+            {{-- Meta Title --}}
+            <div class="form-group col-md-6">
+                <label for="metatitle">Meta Title</label>
+                <input type="text" name="metatitle" class="form-control" value="{{ $meta->metatitle }}" placeholder="Enter Meta Title">
+            </div>
 
-                                        <div class="form-group">
-                                            <label>Term</label>
-                                            <input type="text" name="term" class="form-control"
-                                                value="{{ old('term', $invoice->term) }}">
-                                        </div>
-                                    </div>
+            {{-- Meta Description --}}
+            <div class="form-group col-md-6">
+                <label for="metadesc">Meta Description</label>
+                <textarea name="metadesc" class="form-control" rows="3">{{ $meta->metadesc }}</textarea>
+            </div>
 
-                                    <div class="card-footer d-flex justify-content-between">
-                                        <button type="submit" class="btn btn-primary">Update</button>
-                                        <a href="{{ route('invoices.index') }}" class="btn btn-secondary">Cancel</a>
-                                    </div>
-                                </form>
+            {{-- Meta Keywords --}}
+            <div class="form-group col-md-6">
+                <label for="metakeywords">Meta Keywords</label>
+                <textarea name="metakeywords" class="form-control" rows="3">{{ $meta->metakeywords }}</textarea>
+            </div>
+
+            {{-- Page Top Description --}}
+            <div class="form-group col-md-12">
+                <label for="pagetop">Page Top Description</label>
+                <textarea name="pagetop" class="form-control" id="content" rows="4">{{ $meta->pagetop }}</textarea>
+            </div>
+
+            {{-- Page Bottom Description --}}
+            <div class="form-group col-md-12">
+                <label for="pagebottom">Page Bottom Description</label>
+                <textarea name="pagebottom" class="form-control" rows="4">{{ $meta->pagebottom }}</textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-footer d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="{{ route('meta_tags.index') }}" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+
 
 
 

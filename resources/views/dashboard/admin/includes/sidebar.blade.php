@@ -173,8 +173,8 @@
                                 class="nav-link {{ request()->routeIs('meta_tags.index') ? 'active' : '' }}"><i class="fas fa-tags nav-icon"></i>
                                 <p>Custom Meta Tags</p>
                             </a></li>
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/metas/add"
-                                class="nav-link"><i class="fas fa-plus nav-icon"></i>
+                        <li class="nav-item"><a href="{{route('meta_tags.create')}}"
+                                class="nav-link {{ request()->routeIs('meta_tags.create') ? 'active' : '' }}"><i class="fas fa-plus nav-icon"></i>
                                 <p>Add New Metas</p>
                             </a></li>
                     </ul>
