@@ -1,5 +1,5 @@
 @extends('dashboard.admin.layouts.app')
-@section('page_title', 'Edit Banner')
+@section('page_title', 'Edit Parallax Slider')
 
 @section('css')
     <!-- DataTables CSS -->
@@ -17,8 +17,8 @@
 
 @section('admin-content')
     @php
-        $pageName = 'Edit Banner';
-        $pageName2 = 'Edit New Banner Records';
+        $pageName = 'Edit Parallax Slider';
+        $pageName2 = 'Edit New Parallax Slider Records';
     @endphp
 
     <div class="content-wrapper">
@@ -82,131 +82,99 @@
                                     @endif
                                 </div>
 
-                          <form action="{{ route('banners-ads.update', $banner->id) }}" method="POST" enctype="multipart/form-data">
+                             <form action="{{ route('parallax.update', $parallax->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
 
-    <div class="row">
-        <div class="col-md-6 mb-3">
-            <label>Slide Order</label>
-            <input type="number" name="slide_order" class="form-control" value="{{ old('slide_order', $banner->slide_order) }}" required>
-        </div>
+    <div class="card-body">
+        <div class="row">
+            @foreach([
+                'title' => 'Title',
+                'link' => 'Link',
+                'alttag' => 'Alt Tag',
+                'button' => 'Button Text',
+                'starts' => 'Date Starts',
+                'expires' => 'Date Expires',
+                'slide_order' => 'Slide Order'
+            ] as $field => $label)
+                <div class="form-group col-md-6">
+                    <label for="{{ $field }}">{{ $label }}</label>
+                    <input type="{{ in_array($field, ['starts', 'expires']) ? 'date' : 'text' }}"
+                           class="form-control"
+                           name="{{ $field }}"
+                           value="{{ old($field, $parallax->$field) }}"
+                           placeholder="Enter {{ $label }}">
+                </div>
+            @endforeach
 
-        <div class="col-md-6 mb-3">
-            <label>Current Image</label><br>
-            @if ($banner->featured_img)
-                <img src="{{ asset('storage/' . $banner->featured_img) }}" alt="Featured Image" style="max-height: 150px;">
-            @endif
-        </div>
+            <div class="form-group col-md-6">
+                <label for="category">Category</label>
+                <select class="form-control" name="category">
+                    <option value="">Select Category</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}" {{ $parallax->category == $category->id ? 'selected' : '' }}>
+                            {{ $category->title }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
 
-        <div class="col-md-6 mb-3">
-            <label>Change Featured Image</label>
-            <input type="file" name="featured_img" class="form-control">
-        </div>
+            <div class="form-group col-md-6">
+                <label for="county">County</label>
+                <select class="form-control" name="county">
+                    <option value="">Select County</option>
+                    @foreach ($locations as $location)
+                        <option value="{{ $location->id }}" {{ $parallax->county == $location->id ? 'selected' : '' }}>
+                            {{ $location->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
 
-        <div class="col-md-6 mb-3">
-            <label>Title</label>
-            <input type="text" name="title" class="form-control" value="{{ old('title', $banner->title) }}" required>
-        </div>
+            <div class="form-group col-md-6">
+                <label for="city">City</label>
+                <select class="form-control" name="city">
+                    <option value="">Select City</option>
+                    @foreach ($locations as $location)
+                        <option value="{{ $location->id }}" {{ $parallax->city == $location->id ? 'selected' : '' }}>
+                            {{ $location->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
 
-        <div class="col-md-12 mb-3">
-            <label>Description</label>
-            <textarea name="description" id="content" class="form-control" rows="4">{{ old('description', $banner->description) }}</textarea>
-        </div>
+            <div class="form-group col-md-12">
+                <label for="description">Content</label>
+                <textarea class="form-control" id="content" name="description" rows="4">{{ old('description', $parallax->description) }}</textarea>
+            </div>
 
-        <div class="col-md-6 mb-3">
-            <label>Assigned To</label>
-            <select name="assigned_to" class="form-control">
-                <option value="">-- None --</option>
-                @foreach ($users as $user)
-                    <option value="{{ $user->id }}" {{ $banner->assigned_to == $user->id ? 'selected' : '' }}>
-                        {{ $user->first_name }} {{ $user->last_name }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
+            <div class="form-group col-md-6">
+                <label for="created_by">Assigned To</label>
+                <select class="form-control" name="created_by">
+                    @foreach ($users as $user)
+                        <option value="{{ $user->id }}" {{ $parallax->created_by == $user->id ? 'selected' : '' }}>
+                            {{ $user->first_name }} {{ $user->last_name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
 
-        <div class="col-md-6 mb-3">
-            <label>Created By</label>
-            <select name="created_by" class="form-control">
-                <option value="">-- None --</option>
-                @foreach ($users as $user)
-                    <option value="{{ $user->id }}" {{ $banner->created_by == $user->id ? 'selected' : '' }}>
-                        {{ $user->first_name }} {{ $user->last_name }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label>Status</label>
-            <select name="status" class="form-control" required>
-                <option value="1" {{ $banner->status == 1 ? 'selected' : '' }}>Published</option>
-                <option value="2" {{ $banner->status == 2 ? 'selected' : '' }}>Drafted</option>
-                <option value="0" {{ $banner->status == 0 ? 'selected' : '' }}>Unpublished</option>
-            </select>
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label>State (County)</label>
-            <select name="state" class="form-control" required>
-                @foreach ($states as $state)
-                    <option value="{{ $state->id }}" {{ $banner->state == $state->id ? 'selected' : '' }}>
-                        {{ $state->name }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label>Link</label>
-            <input type="url" name="link" class="form-control" value="{{ old('link', $banner->link) }}">
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label>Slot</label>
-            <input type="text" name="slot" class="form-control" value="{{ old('slot', $banner->slot) }}">
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label>Category</label>
-            <select name="category" class="form-control" required>
-                @foreach ($categories as $cat)
-                    <option value="{{ $cat->id }}" {{ $banner->category == $cat->id ? 'selected' : '' }}>
-                        {{ $cat->title }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label>Date Expires</label>
-            <input type="date" name="expires" class="form-control" value="{{ old('expires', $banner->expires) }}">
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label>Banner Type</label>
-            <select name="type" class="form-control" required>
-                <option value="1" {{ $banner->type == '1' ? 'selected' : '' }}>Top Horizontal</option>
-                <option value="2" {{ $banner->type == '2' ? 'selected' : '' }}>Sidebar Square</option>
-            </select>
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label>Region</label>
-            <select name="region" class="form-control" required>
-                <option value="1" {{ $banner->region == '1' ? 'selected' : '' }}>North NJ</option>
-                <option value="2" {{ $banner->region == '2' ? 'selected' : '' }}>South NJ</option>
-                <option value="3" {{ $banner->region == '3' ? 'selected' : '' }}>Southern NJ</option>
-            </select>
+            <div class="form-group col-md-6">
+                <label for="featured_img">Featured Image</label>
+                <input type="file" class="form-control" name="featured_img">
+                @if ($parallax->featured_img)
+                    <img src="{{ asset('path/to/uploads/' . $parallax->featured_img) }}" alt="" style="margin-top:10px; max-height: 100px;">
+                @endif
+            </div>
         </div>
     </div>
 
     <div class="card-footer d-flex justify-content-between">
         <button type="submit" class="btn btn-primary">Update</button>
-        <a href="{{ route('bannersads.index') }}" class="btn btn-secondary">Cancel</a>
+        <a href="{{ route('parallax.index') }}" class="btn btn-secondary">Cancel</a>
     </div>
 </form>
+
 
 
 

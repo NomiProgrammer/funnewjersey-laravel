@@ -4,7 +4,7 @@
           <li class="nav-item d-flex align-items-center">
               <span style="color: #c00; font-weight: bold;">
                   <i class="fas fa-user-circle"></i>
-                  Logged in as : {{Auth::user()->first_name;}}
+                  Logged in as : {{ Auth::user()->first_name }}
               </span>
               <span style="color: #c00; margin-left: 4px; font-weight: bold;"></span>
           </li>
@@ -35,9 +35,9 @@
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                   <form method="POST" action="{{ route('logout', app()->getLocale()) }}">
-    @csrf
-    <button type="submit" class="dropdown-item">Logout</button>
-</form>
+                      @csrf
+                      <button type="submit" class="dropdown-item">Logout</button>
+                  </form>
                   <!-- Add more user actions as needed -->
               </div>
           </li>

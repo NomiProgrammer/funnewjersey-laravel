@@ -1,5 +1,5 @@
 @extends('dashboard.admin.layouts.app')
-@section('page_title', 'Edit Banner')
+@section('page_title', 'Add Tags')
 
 @section('css')
     <!-- DataTables CSS -->
@@ -17,8 +17,8 @@
 
 @section('admin-content')
     @php
-        $pageName = 'Edit Banner';
-        $pageName2 = 'Edit New Banner Records';
+        $pageName = 'Add Tags';
+        $pageName2 = 'Add New Tags Records';
     @endphp
 
     <div class="content-wrapper">
@@ -81,136 +81,50 @@
                                         </div>
                                     @endif
                                 </div>
-
-                          <form action="{{ route('banners-ads.update', $banner->id) }}" method="POST" enctype="multipart/form-data">
-    @csrf
-    @method('PUT')
-
-    <div class="row">
-        <div class="col-md-6 mb-3">
-            <label>Slide Order</label>
-            <input type="number" name="slide_order" class="form-control" value="{{ old('slide_order', $banner->slide_order) }}" required>
+                               <form action="{{ route('tags.store') }}" method="POST">
+        @csrf
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label>Name</label>
+                <input type="text" name="title" class="form-control" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label>Parent</label>
+                <select name="parent" class="form-control">
+                    <option value="0">No Parent</option>
+                    <option value="1">Dog Friendly</option>
+                    <option value="2">Fun Outdoor Activities</option>
+                    <option value="3">Historical Places</option>
+                    <option value="4">Kid Friendly Attraction</option>
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label>Meta Title</label>
+                <input type="text" name="metatitle2" class="form-control">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label>Meta Keywords</label>
+                <input type="text" name="metakeywords2" class="form-control">
+            </div>
+            <div class="col-md-12 mb-3">
+                <label>Meta Description</label>
+                <textarea name="metadescription2" class="form-control" rows="3"></textarea>
+            </div>
+            <div class="col-md-12 mb-3">
+                <label>Tag Description Top</label>
+                <textarea name="catdesc" id="content" class="form-control" rows="5"></textarea>
+            </div>
+            <div class="col-md-12 mb-3">
+                <label>Tag Description Bottom</label>
+                <textarea name="catdesc2" id="content" class="form-control" rows="5"></textarea>
+            </div>
         </div>
 
-        <div class="col-md-6 mb-3">
-            <label>Current Image</label><br>
-            @if ($banner->featured_img)
-                <img src="{{ asset('storage/' . $banner->featured_img) }}" alt="Featured Image" style="max-height: 150px;">
-            @endif
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label>Change Featured Image</label>
-            <input type="file" name="featured_img" class="form-control">
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label>Title</label>
-            <input type="text" name="title" class="form-control" value="{{ old('title', $banner->title) }}" required>
-        </div>
-
-        <div class="col-md-12 mb-3">
-            <label>Description</label>
-            <textarea name="description" id="content" class="form-control" rows="4">{{ old('description', $banner->description) }}</textarea>
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label>Assigned To</label>
-            <select name="assigned_to" class="form-control">
-                <option value="">-- None --</option>
-                @foreach ($users as $user)
-                    <option value="{{ $user->id }}" {{ $banner->assigned_to == $user->id ? 'selected' : '' }}>
-                        {{ $user->first_name }} {{ $user->last_name }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label>Created By</label>
-            <select name="created_by" class="form-control">
-                <option value="">-- None --</option>
-                @foreach ($users as $user)
-                    <option value="{{ $user->id }}" {{ $banner->created_by == $user->id ? 'selected' : '' }}>
-                        {{ $user->first_name }} {{ $user->last_name }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label>Status</label>
-            <select name="status" class="form-control" required>
-                <option value="1" {{ $banner->status == 1 ? 'selected' : '' }}>Published</option>
-                <option value="2" {{ $banner->status == 2 ? 'selected' : '' }}>Drafted</option>
-                <option value="0" {{ $banner->status == 0 ? 'selected' : '' }}>Unpublished</option>
-            </select>
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label>State (County)</label>
-            <select name="state" class="form-control" required>
-                @foreach ($states as $state)
-                    <option value="{{ $state->id }}" {{ $banner->state == $state->id ? 'selected' : '' }}>
-                        {{ $state->name }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label>Link</label>
-            <input type="url" name="link" class="form-control" value="{{ old('link', $banner->link) }}">
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label>Slot</label>
-            <input type="text" name="slot" class="form-control" value="{{ old('slot', $banner->slot) }}">
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label>Category</label>
-            <select name="category" class="form-control" required>
-                @foreach ($categories as $cat)
-                    <option value="{{ $cat->id }}" {{ $banner->category == $cat->id ? 'selected' : '' }}>
-                        {{ $cat->title }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label>Date Expires</label>
-            <input type="date" name="expires" class="form-control" value="{{ old('expires', $banner->expires) }}">
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label>Banner Type</label>
-            <select name="type" class="form-control" required>
-                <option value="1" {{ $banner->type == '1' ? 'selected' : '' }}>Top Horizontal</option>
-                <option value="2" {{ $banner->type == '2' ? 'selected' : '' }}>Sidebar Square</option>
-            </select>
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label>Region</label>
-            <select name="region" class="form-control" required>
-                <option value="1" {{ $banner->region == '1' ? 'selected' : '' }}>North NJ</option>
-                <option value="2" {{ $banner->region == '2' ? 'selected' : '' }}>South NJ</option>
-                <option value="3" {{ $banner->region == '3' ? 'selected' : '' }}>Southern NJ</option>
-            </select>
-        </div>
+     <div class="card-footer d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{{ route('tags.index') }}" class="btn btn-secondary">Cancel</a>
     </div>
-
-    <div class="card-footer d-flex justify-content-between">
-        <button type="submit" class="btn btn-primary">Update</button>
-        <a href="{{ route('bannersads.index') }}" class="btn btn-secondary">Cancel</a>
-    </div>
-</form>
-
-
-
-
+    </form>
 
                             </div>
                         </div>

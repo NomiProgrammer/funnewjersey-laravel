@@ -63,8 +63,8 @@
                                 class="nav-link {{ request()->routeIs('parallax.index') ? 'active' : '' }}"><i class="fas fa-images nav-icon"></i>
                                 <p>All</p>
                             </a></li>
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/slider/manage"
-                                class="nav-link"><i class="fas fa-plus nav-icon"></i>
+                        <li class="nav-item"><a href="{{ route('parallax.create') }}"
+                                class="nav-link {{ request()->routeIs('parallax.create') ? 'active' : '' }}"><i class="fas fa-plus nav-icon"></i>
                                 <p>Add new</p>
                             </a></li>
                     </ul>
@@ -173,8 +173,8 @@
                                 class="nav-link {{ request()->routeIs('meta_tags.index') ? 'active' : '' }}"><i class="fas fa-tags nav-icon"></i>
                                 <p>Custom Meta Tags</p>
                             </a></li>
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/metas/add"
-                                class="nav-link"><i class="fas fa-plus nav-icon"></i>
+                        <li class="nav-item"><a href="{{route('meta_tags.create')}}"
+                                class="nav-link {{ request()->routeIs('meta_tags.create') ? 'active' : '' }}"><i class="fas fa-plus nav-icon"></i>
                                 <p>Add New Metas</p>
                             </a></li>
                     </ul>
@@ -205,8 +205,8 @@
                                 class="nav-link {{ request()->routeIs('category.index') ? 'active' : '' }}"><i class="fas fa-list nav-icon"></i>
                                 <p>All categories</p>
                             </a></li>
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/category/newcategory"
-                                class="nav-link"><i class="fas fa-plus nav-icon"></i>
+                        <li class="nav-item"><a href="{{route('category.create')}}"
+                                class="nav-link {{ request()->routeIs('category.create') ? 'active' : '' }}"><i class="fas fa-plus nav-icon"></i>
                                 <p>New category</p>
                             </a></li>
                     </ul>
@@ -221,8 +221,8 @@
                                 class="nav-link {{ request()->routeIs('tags.index') ? 'active' : '' }}"><i class="fas fa-tags nav-icon"></i>
                                 <p>All Tags</p>
                             </a></li>
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/tag/newtag"
-                                class="nav-link"><i class="fas fa-plus nav-icon"></i>
+                        <li class="nav-item"><a href="{{route('tags.create')}}"
+                                class="nav-link {{ request()->routeIs('tags.create') ? 'active' : '' }}"><i class="fas fa-plus nav-icon"></i>
                                 <p>New Tag</p>
                             </a></li>
                     </ul>

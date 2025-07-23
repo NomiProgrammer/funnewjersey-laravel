@@ -1,5 +1,5 @@
 @extends('dashboard.admin.layouts.app')
-@section('page_title', 'Edit Banner')
+@section('page_title', 'Add Category')
 
 @section('css')
     <!-- DataTables CSS -->
@@ -17,8 +17,8 @@
 
 @section('admin-content')
     @php
-        $pageName = 'Edit Banner';
-        $pageName2 = 'Edit New Banner Records';
+        $pageName = 'Add Category';
+        $pageName2 = 'Add New Category Records';
     @endphp
 
     <div class="content-wrapper">
@@ -81,134 +81,138 @@
                                         </div>
                                     @endif
                                 </div>
-
-                          <form action="{{ route('banners-ads.update', $banner->id) }}" method="POST" enctype="multipart/form-data">
+                               <form action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
-    @method('PUT')
-
     <div class="row">
         <div class="col-md-6 mb-3">
-            <label>Slide Order</label>
-            <input type="number" name="slide_order" class="form-control" value="{{ old('slide_order', $banner->slide_order) }}" required>
+            <label>Name</label>
+            <input type="text" name="title" class="form-control" required>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label>Mini Title</label>
+            <input type="text" name="minititle" class="form-control">
         </div>
 
         <div class="col-md-6 mb-3">
-            <label>Current Image</label><br>
-            @if ($banner->featured_img)
-                <img src="{{ asset('storage/' . $banner->featured_img) }}" alt="Featured Image" style="max-height: 150px;">
-            @endif
+            <label>Category URL</label>
+            <input type="text" name="url" class="form-control">
+        </div>
+        <div class="col-md-6 mb-3">
+            <label>Make Category Private</label>
+            <select name="not_public" class="form-control">
+                <option value="0">Public</option>
+                <option value="1">Private</option>
+            </select>
         </div>
 
         <div class="col-md-6 mb-3">
-            <label>Change Featured Image</label>
+            <label>Disable H1</label>
+            <select name="noh1" class="form-control">
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label>Hardlink Category to URL</label>
+            <select name="islink" class="form-control">
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label>Listing Count Override</label>
+            <input type="number" name="countoverride" class="form-control">
+        </div>
+        <div class="col-md-6 mb-3">
+            <label>Parent</label>
+            <select name="parent" class="form-control">
+                <option value="">No Parent</option>
+                @foreach ($parent as $bc)
+                    <option value="{{ $bc->id }}" {{ old('parent') == $bc->id ? 'selected' : '' }}>{{ $bc->title }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label>FA Icon</label>
+            <input type="text" name="fa_icon" class="form-control">
+        </div>
+        <div class="col-md-6 mb-3">
+            <label>Category Thumbnail</label>
             <input type="file" name="featured_img" class="form-control">
         </div>
+        <div class="col-md-6 mb-3">
+            <label>Thumbnail Alt Tag</label>
+            <input type="text" name="img_alt" class="form-control">
+        </div>
+        <div class="col-md-6 mb-3">
+            <label>Default Details Image</label>
+            <input type="file" name="featured_img2" class="form-control">
+        </div>
+        <div class="col-md-6 mb-3">
+            <label>Default Image Alt Tag</label>
+            <input type="text" name="img_alt2" class="form-control">
+        </div>
+        <div class="col-md-6 mb-3">
+            <label>Featured Listing Image</label>
+            <input type="file" name="featured_img3" class="form-control">
+        </div>
+        <div class="col-md-6 mb-3">
+            <label>Featured Listing Alt Tag</label>
+            <input type="text" name="img_alt3" class="form-control">
+        </div>
 
         <div class="col-md-6 mb-3">
-            <label>Title</label>
-            <input type="text" name="title" class="form-control" value="{{ old('title', $banner->title) }}" required>
+            <label>Meta Title</label>
+            <input type="text" name="metatitle2" class="form-control">
+        </div>
+        <div class="col-md-6 mb-3">
+            <label>Meta Keywords</label>
+            <input type="text" name="metakeywords2" class="form-control">
+        </div>
+        <div class="col-md-12 mb-3">
+            <label>Meta Description</label>
+            <textarea name="metadescription2" id="content" class="form-control" rows="2"></textarea>
         </div>
 
         <div class="col-md-12 mb-3">
-            <label>Description</label>
-            <textarea name="description" id="content" class="form-control" rows="4">{{ old('description', $banner->description) }}</textarea>
+            <label>Category Description Top</label>
+            <textarea name="catdesc" id="content" class="form-control" rows="3"></textarea>
+        </div>
+        <div class="col-md-12 mb-3">
+            <label>Category Description Bottom</label>
+            <textarea name="catdesc2" id="content" class="form-control" rows="3"></textarea>
         </div>
 
         <div class="col-md-6 mb-3">
-            <label>Assigned To</label>
-            <select name="assigned_to" class="form-control">
-                <option value="">-- None --</option>
-                @foreach ($users as $user)
-                    <option value="{{ $user->id }}" {{ $banner->assigned_to == $user->id ? 'selected' : '' }}>
-                        {{ $user->first_name }} {{ $user->last_name }}
-                    </option>
-                @endforeach
-            </select>
+            <label>Meta Title (Location)</label>
+            <input type="text" name="metatitle" class="form-control">
+        </div>
+        <div class="col-md-6 mb-3">
+            <label>Meta Keywords (Location)</label>
+            <input type="text" name="metakeywords" class="form-control">
+        </div>
+        <div class="col-md-12 mb-3">
+            <label>Meta Description (Location)</label>
+            <textarea name="metadescription" class="form-control" rows="2"></textarea>
         </div>
 
-        <div class="col-md-6 mb-3">
-            <label>Created By</label>
-            <select name="created_by" class="form-control">
-                <option value="">-- None --</option>
-                @foreach ($users as $user)
-                    <option value="{{ $user->id }}" {{ $banner->created_by == $user->id ? 'selected' : '' }}>
-                        {{ $user->first_name }} {{ $user->last_name }}
-                    </option>
-                @endforeach
-            </select>
+        <div class="col-md-12 mb-3">
+            <label>Category Description Top (variables)</label>
+            <textarea name="catdescvar" class="form-control" rows="3"></textarea>
         </div>
-
-        <div class="col-md-6 mb-3">
-            <label>Status</label>
-            <select name="status" class="form-control" required>
-                <option value="1" {{ $banner->status == 1 ? 'selected' : '' }}>Published</option>
-                <option value="2" {{ $banner->status == 2 ? 'selected' : '' }}>Drafted</option>
-                <option value="0" {{ $banner->status == 0 ? 'selected' : '' }}>Unpublished</option>
-            </select>
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label>State (County)</label>
-            <select name="state" class="form-control" required>
-                @foreach ($states as $state)
-                    <option value="{{ $state->id }}" {{ $banner->state == $state->id ? 'selected' : '' }}>
-                        {{ $state->name }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label>Link</label>
-            <input type="url" name="link" class="form-control" value="{{ old('link', $banner->link) }}">
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label>Slot</label>
-            <input type="text" name="slot" class="form-control" value="{{ old('slot', $banner->slot) }}">
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label>Category</label>
-            <select name="category" class="form-control" required>
-                @foreach ($categories as $cat)
-                    <option value="{{ $cat->id }}" {{ $banner->category == $cat->id ? 'selected' : '' }}>
-                        {{ $cat->title }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label>Date Expires</label>
-            <input type="date" name="expires" class="form-control" value="{{ old('expires', $banner->expires) }}">
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label>Banner Type</label>
-            <select name="type" class="form-control" required>
-                <option value="1" {{ $banner->type == '1' ? 'selected' : '' }}>Top Horizontal</option>
-                <option value="2" {{ $banner->type == '2' ? 'selected' : '' }}>Sidebar Square</option>
-            </select>
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label>Region</label>
-            <select name="region" class="form-control" required>
-                <option value="1" {{ $banner->region == '1' ? 'selected' : '' }}>North NJ</option>
-                <option value="2" {{ $banner->region == '2' ? 'selected' : '' }}>South NJ</option>
-                <option value="3" {{ $banner->region == '3' ? 'selected' : '' }}>Southern NJ</option>
-            </select>
+        <div class="col-md-12 mb-3">
+            <label>Category Description Bottom (variables)</label>
+            <textarea name="catdesc2var" class="form-control" rows="3"></textarea>
         </div>
     </div>
 
     <div class="card-footer d-flex justify-content-between">
-        <button type="submit" class="btn btn-primary">Update</button>
-        <a href="{{ route('bannersads.index') }}" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{{ route('category.index') }}" class="btn btn-secondary">Cancel</a>
     </div>
 </form>
-
-
 
 
 

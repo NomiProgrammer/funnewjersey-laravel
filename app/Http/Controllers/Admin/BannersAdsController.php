@@ -101,11 +101,6 @@ class BannersAdsController extends Controller
 
     public function create()
     {
-        if (auth()->user()->hasRole('admin')) {
-            dd('User is an admin');
-        } else {
-            dd('User is NOT an admin');
-        }
         $categories = Category::all();
         $users = User::all();
         $states = Locations::all();

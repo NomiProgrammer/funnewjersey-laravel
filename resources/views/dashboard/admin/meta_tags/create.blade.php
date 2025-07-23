@@ -1,5 +1,5 @@
 @extends('dashboard.admin.layouts.app')
-@section('page_title', 'Edit Package')
+@section('page_title', 'Add Meta Tags')
 
 @section('css')
     <!-- DataTables CSS -->
@@ -17,8 +17,8 @@
 
 @section('admin-content')
     @php
-        $pageName = 'Edit Package';
-        $pageName2 = 'Edit New Package Records';
+        $pageName = 'Add Meta Tags';
+        $pageName2 = 'Add New Meta Tags Records';
     @endphp
 
     <div class="content-wrapper">
@@ -81,75 +81,109 @@
                                         </div>
                                     @endif
                                 </div>
-                                <form action="{{ route('package.update', $package->id) }}" method="POST">
+                                <form action="{{ route('meta_tags.store') }}" method="POST">
                                     @csrf
-                                    @method('PUT')
-
                                     <div class="card-body">
                                         <div class="row">
 
+                                            {{-- Category --}}
                                             <div class="form-group col-md-6">
-                                                <label for="type">Type</label>
-                                                <select class="form-control" name="type" required>
-                                                    <option value="">-- Select Type --</option>
-                                                    <option value="post_package"
-                                                        {{ $package->type == 'post_package' ? 'selected' : '' }}>Post
-                                                        Package</option>
-                                                    <option value="featured_package"
-                                                        {{ $package->type == 'featured_package' ? 'selected' : '' }}>
-                                                        Featured Package</option>
-                                                    <option value="banner_package"
-                                                        {{ $package->type == 'banner_package' ? 'selected' : '' }}>Banner
-                                                        Package</option>
-                                                    <option value="deal_package"
-                                                        {{ $package->type == 'deal_package' ? 'selected' : '' }}>Deal
-                                                        Package</option>
+                                                <label for="category">Category</label>
+                                                <select class="form-control" name="category">
+                                                    <option value="">Select Category</option>
+                                                    @foreach ($categories as $category)
+                                                        <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
 
+                                            {{-- County --}}
                                             <div class="form-group col-md-6">
-                                                <label for="title">Title</label>
-                                                <input type="text" class="form-control" name="title"
-                                                    value="{{ old('title', $package->title) }}" required>
+                                                <label for="county">County</label>
+                                                <select class="form-control" name="county">
+                                                    <option value="">Select County</option>
+                                                    @foreach ($locations as $loc)
+                                                        <option value="{{ $loc->id }}">{{ $loc->name }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
 
+                                            {{-- City --}}
+                                            <div class="form-group col-md-6">
+                                                <label for="city">City</label>
+                                                <select class="form-control" name="city">
+                                                    <option value="">Select City</option>
+                                                    @foreach ($locations as $loc)
+                                                        <option value="{{ $loc->id }}">{{ $loc->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                            {{-- Region --}}
+                                            <div class="form-group col-md-6">
+                                                <label for="region">Region</label>
+                                                <select name="region" id="region" class="form-control">
+                                                    <option value="1" selected>Northern</option>
+                                                    <option value="2">Central</option>
+                                                    <option value="3">Southern</option>
+                                                </select>
+                                            </div>
+
+
+                                            {{-- Disable H1 --}}
+                                            <div class="form-group col-md-6">
+                                                <label for="disableh1">Disable H1?</label>
+                                                <select name="disableh1" id="disableh1" class="form-control">
+                                                    <option value="0" selected>No</option>
+                                                    <option value="1">Yes</option>
+                                                </select>
+                                            </div>
+
+                                            {{-- H1 --}}
+                                            <div class="form-group col-md-6">
+                                                <label for="h1">H1</label>
+                                                <input type="text" name="h1" class="form-control"
+                                                    placeholder="Enter H1">
+                                            </div>
+
+                                            {{-- Meta Title --}}
+                                            <div class="form-group col-md-6">
+                                                <label for="metatitle">Meta Title</label>
+                                                <input type="text" name="metatitle" class="form-control"
+                                                    placeholder="Enter Meta Title">
+                                            </div>
+
+                                            {{-- Meta Description --}}
+                                            <div class="form-group col-md-6">
+                                                <label for="metadesc">Meta Description</label>
+                                                <textarea name="metadesc" class="form-control" rows="3"></textarea>
+                                            </div>
+
+                                            {{-- Meta Keywords --}}
+                                            <div class="form-group col-md-6">
+                                                <label for="metakeywords">Meta Keywords</label>
+                                                <textarea name="metakeywords" class="form-control" rows="3"></textarea>
+                                            </div>
+
+                                            {{-- Page Top Description --}}
                                             <div class="form-group col-md-12">
-                                                <label for="description">Description</label>
-                                                <textarea class="form-control"id="content" name="description" rows="3">{{ old('description', $package->description) }}</textarea>
+                                                <label for="pagetop">Page Top Description</label>
+                                                <textarea name="pagetop" class="form-control" id="content" rows="4"></textarea>
                                             </div>
 
-                                            <div class="form-group col-md-4">
-                                                <label for="price">Price</label>
-                                                <input type="number" class="form-control" name="price"
-                                                    value="{{ old('price', $package->price) }}" step="0.01" required>
+                                            {{-- Page Bottom Description --}}
+                                            <div class="form-group col-md-12">
+                                                <label for="pagebottom">Page Bottom Description</label>
+                                                <textarea name="pagebottom" class="form-control" rows="4"></textarea>
                                             </div>
-
-                                            <div class="form-group col-md-4">
-                                                <label for="expiration_time">Expiration Time (Days)</label>
-                                                <input type="number" class="form-control" name="expiration_time"
-                                                    value="{{ old('expiration_time', $package->expiration_time) }}"
-                                                    required>
-                                            </div>
-
-                                            <div class="form-group col-md-4">
-                                                <label for="status">Status</label>
-                                                <select class="form-control" name="status" required>
-                                                    <option value="1" {{ $package->status == 1 ? 'selected' : '' }}>
-                                                        Public</option>
-                                                    <option value="0" {{ $package->status == 0 ? 'selected' : '' }}>
-                                                        Admin Only</option>
-                                                </select>
-                                            </div>
-
                                         </div>
                                     </div>
 
                                     <div class="card-footer d-flex justify-content-between">
-                                        <button type="submit" class="btn btn-primary">Update</button>
-                                        <a href="{{ route('package.index') }}" class="btn btn-secondary">Cancel</a>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <a href="{{ route('meta_tags.index') }}" class="btn btn-secondary">Cancel</a>
                                     </div>
                                 </form>
-
 
 
                             </div>
@@ -174,4 +208,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+
 @endsection

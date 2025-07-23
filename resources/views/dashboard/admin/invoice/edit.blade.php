@@ -82,82 +82,81 @@
                                     @endif
                                 </div>
 
-                                <form action="{{ route('invoices.update', $invoice->id) }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
+                              <form action="{{ route('invoices.update', $invoice->id) }}" method="POST">
+    @csrf
+    @method('PUT')
 
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <label>Title</label>
-                                            <input type="text" name="title" class="form-control"
-                                                value="{{ old('title', $invoice->title) }}" required>
-                                        </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label>Title</label>
+                <input type="text" name="title" class="form-control" value="{{ old('title', $invoice->title) }}" required>
+            </div>
 
-                                        <div class="form-group">
-                                            <label>Description</label>
-                                            <textarea name="description" id="content" class="form-control" rows="4">{{ old('description', $invoice->description) }}</textarea>
-                                        </div>
+            <div class="form-group col-md-6">
+                <label>Total ($)</label>
+                <input type="number" step="0.01" name="total" class="form-control" value="{{ old('total', $invoice->total) }}" required>
+            </div>
+        </div>
 
-                                        <div class="form-group">
-                                            <label>Created By</label>
-                                            <select name="created_by" class="form-control">
-                                                <option value="">-- None --</option>
-                                                @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}"
-                                                        {{ $invoice->created_by == $user->id ? 'selected' : '' }}>
-                                                        {{ $user->first_name }} {{ $user->last_name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <textarea name="description" id="content" class="form-control" rows="4">{{ old('description', $invoice->description) }}</textarea>
+        </div>
 
-                                        <div class="form-group">
-                                            <label>Status</label>
-                                            <select name="status" class="form-control" required>
-                                                <option value="1" {{ $invoice->status == 1 ? 'selected' : '' }}>Paid
-                                                </option>
-                                                <option value="2" {{ $invoice->status == 2 ? 'selected' : '' }}>Unpaid
-                                                </option>
-                                            </select>
-                                        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label>Created By</label>
+                <select name="created_by" class="form-control">
+                    <option value="">-- None --</option>
+                    @foreach ($users as $user)
+                        <option value="{{ $user->id }}" {{ $invoice->created_by == $user->id ? 'selected' : '' }}>
+                            {{ $user->first_name }} {{ $user->last_name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
 
-                                        <div class="form-group">
-                                            <label>Assigned To</label>
-                                            <select name="assigned_to" class="form-control">
-                                                <option value="">-- None --</option>
-                                                @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}"
-                                                        {{ $invoice->assigned_to == $user->id ? 'selected' : '' }}>
-                                                        {{ $user->first_name }} {{ $user->last_name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+            <div class="form-group col-md-6">
+                <label>Assigned To</label>
+                <select name="assigned_to" class="form-control">
+                    <option value="">-- None --</option>
+                    @foreach ($users as $user)
+                        <option value="{{ $user->id }}" {{ $invoice->assigned_to == $user->id ? 'selected' : '' }}>
+                            {{ $user->first_name }} {{ $user->last_name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
 
-                                        <div class="form-group">
-                                            <label>Total ($)</label>
-                                            <input type="number" step="0.01" name="total" class="form-control"
-                                                value="{{ old('total', $invoice->total) }}" required>
-                                        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label>Status</label>
+                <select name="status" class="form-control" required>
+                    <option value="1" {{ $invoice->status == 1 ? 'selected' : '' }}>Paid</option>
+                    <option value="2" {{ $invoice->status == 2 ? 'selected' : '' }}>Unpaid</option>
+                </select>
+            </div>
 
-                                        <div class="form-group">
-                                            <label>Due Date</label>
-                                            <input type="date" name="expires" class="form-control"
-                                                value="{{ old('expires', $invoice->expires) }}">
-                                        </div>
+            <div class="form-group col-md-6">
+                <label>Due Date</label>
+                <input type="date" name="expires" class="form-control" value="{{ old('expires', $invoice->expires) }}">
+            </div>
+        </div>
 
-                                        <div class="form-group">
-                                            <label>Term</label>
-                                            <input type="text" name="term" class="form-control"
-                                                value="{{ old('term', $invoice->term) }}">
-                                        </div>
-                                    </div>
+        <div class="form-group">
+            <label>Term</label>
+            <input type="text" name="term" class="form-control" value="{{ old('term', $invoice->term) }}">
+        </div>
+    </div>
 
-                                    <div class="card-footer d-flex justify-content-between">
-                                        <button type="submit" class="btn btn-primary">Update</button>
-                                        <a href="{{ route('invoices.index') }}" class="btn btn-secondary">Cancel</a>
-                                    </div>
-                                </form>
+    <div class="card-footer d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="{{ route('invoices.index') }}" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+
 
 
 

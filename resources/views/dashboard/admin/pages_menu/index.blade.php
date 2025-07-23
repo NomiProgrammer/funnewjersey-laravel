@@ -207,7 +207,7 @@ $('#example2').DataTable({
             e.preventDefault();
 
             let id = $(this).data('id');
-            if (confirm('Are you sure you want to delete this widget?')) {
+            if (confirm('Are you sure you want to delete this Page?')) {
                 $.ajax({
                     url: "{{ url(app()->getLocale() . '/admin/page/destroy') }}/" + id,
                     type: 'DELETE',
