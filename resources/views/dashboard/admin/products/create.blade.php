@@ -1,5 +1,5 @@
 @extends('dashboard.admin.layouts.app')
-@section('page_title', 'Edit Blogs')
+@section('page_title', 'Add Products ')
 
 @section('css')
     <!-- DataTables CSS -->
@@ -17,8 +17,8 @@
 
 @section('admin-content')
     @php
-        $pageName = 'Edit Blogs';
-        $pageName2 = 'Edit New Blogs Records';
+        $pageName = 'Add Products ';
+        $pageName2 = 'Add New Products  Records';
     @endphp
 
     <div class="content-wrapper">
@@ -81,114 +81,61 @@
                                         </div>
                                     @endif
                                 </div>
+                                   <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="card-body">
+            <div class="row">
 
-                            <form action="{{ route('blog.update', $blog->id) }}" method="POST" enctype="multipart/form-data">
-    @csrf
-    @method('PUT')
+                {{-- Type --}}
+                <div class="form-group col-md-6">
+                    <label for="type">Type</label>
+                    <select class="form-control" name="type" id="type">
+                        <option value="product" selected>Product</option>
+                    </select>
+                </div>
 
-    <div class="card-body">
-        <div class="row">
+                {{-- Title --}}
+                <div class="form-group col-md-6">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" name="title"
+                        placeholder="Enter Title" value="{{ old('title') }}">
+                </div>
 
-            {{-- Type --}}
-            <div class="form-group col-md-6">
-                <label for="type">Type</label>
-                @php
-                    $types = [
-                        'blog' => 'Blog Post',
-                        'product' => 'Product',
-                        'article' => 'Article',
-                        'news' => 'Homepage News',
-                        'deal' => 'Fun Deals',
-                    ];
-                @endphp
-                <select class="form-control" name="type" id="type">
-                    <option value="">Select Type</option>
-                    @foreach ($types as $key => $label)
-                        <option value="{{ $key }}" {{ $blog->type == $key ? 'selected' : '' }}>
-                            {{ $label }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-
-            {{-- Category --}}
-            <div class="form-group col-md-6">
-                <label for="category">Category</label>
-                <select class="form-control" name="category">
-                    <option value="">Select Category</option>
-                    @foreach ($categories as $cat)
-                        <option value="{{ $cat->id }}" {{ $blog->category == $cat->id ? 'selected' : '' }}>
-                            {{ $cat->title }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-
-            {{-- Title --}}
-            <div class="form-group col-md-6">
-                <label for="title">Title</label>
-                <input type="text" class="form-control" name="title" value="{{ old('title', $blog->title) }}" placeholder="Enter Title">
-            </div>
-
-            {{-- Meta Title --}}
-            <div class="form-group col-md-6">
-                <label for="bmetatitle">Meta Title</label>
-                <input type="text" class="form-control" name="bmetatitle" value="{{ old('bmetatitle', $blog->bmetatitle) }}" placeholder="Meta Title">
-            </div>
-
-            {{-- Meta Description --}}
-            <div class="form-group col-md-6">
-                <label for="bmetadescription">Meta Description</label>
-                <textarea class="form-control" name="bmetadescription" rows="3">{{ old('bmetadescription', $blog->bmetadescription) }}</textarea>
-            </div>
-
-            {{-- Page H1 --}}
-            <div class="form-group col-md-6">
-                <label for="pageh1">Page H1</label>
-                <input type="text" class="form-control" name="pageh1" value="{{ old('pageh1', $blog->pageh1) }}" placeholder="Page H1">
-            </div>
-
-            {{-- Product Fields --}}
-            <div id="productFields" class="row {{ $blog->type == 'product' ? '' : 'd-none' }}">
+                {{-- Product Price --}}
                 <div class="form-group col-md-6">
                     <label for="price">Product Price</label>
-                    <input type="number" class="form-control" name="price" value="{{ old('price', $blog->price) }}">
+                    <input type="number" class="form-control" name="price"
+                        placeholder="Enter Price" value="{{ old('price') }}">
                 </div>
 
+                {{-- Product Shipping --}}
                 <div class="form-group col-md-6">
                     <label for="shipping">Product Shipping</label>
-                    <input type="number" class="form-control" name="shipping" value="{{ old('shipping', $blog->shipping) }}">
+                    <input type="number" class="form-control" name="shipping"
+                        placeholder="Enter Shipping Cost" value="{{ old('shipping') }}">
                 </div>
-            </div>
 
-            {{-- Content --}}
-            <div class="form-group col-md-12">
-                <label for="description">Content</label>
-                <textarea name="description" id="content" class="form-control" rows="5">{{ old('description', $blog->description) }}</textarea>
-            </div>
+                {{-- Content --}}
+                <div class="form-group col-md-12">
+                    <label for="description">Content</label>
+                    <textarea name="description" id="content" class="form-control" rows="5">{{ old('description') }}</textarea>
+                </div>
 
-            {{-- Featured Image --}}
-            <div class="form-group col-md-6">
-                <label for="featured_img">Featured Image</label>
-                <input type="file" class="form-control" name="featured_img">
-                @if ($blog->featured_img)
-                    <div class="mt-2">
-                        <img src="{{ asset('front_assets/uploads/slider/' . $blog->featured_img) }}" width="150" alt="Current Image">
-                    </div>
-                @endif
+                {{-- Featured Image --}}
+                <div class="form-group col-md-6">
+                    <label for="featured_img">Featured Image</label>
+                    <input type="file" class="form-control" name="featured_img">
+                    <small class="text-muted">Image will be uploaded to: <code>front_assets/uploads/products/</code></small>
+                </div>
+
             </div>
         </div>
-    </div>
 
-    <div class="card-footer d-flex justify-content-between">
-        <button type="submit" class="btn btn-primary">Update</button>
-        <a href="{{ route('blog.index') }}" class="btn btn-secondary">Cancel</a>
-    </div>
-</form>
-
-
-
-
+        <div class="card-footer d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a href="{{ route('products.index') }}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
 
 
                             </div>
@@ -213,25 +160,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const typeSelect = document.getElementById('type');
-        const productFields = document.getElementById('productFields');
-
+    <script>
         function toggleProductFields() {
-            if (typeSelect.value === 'product') {
+            const type = document.getElementById('type').value;
+            const productFields = document.getElementById('productFields');
+
+            if (type === 'product') {
                 productFields.classList.remove('d-none');
             } else {
                 productFields.classList.add('d-none');
             }
         }
 
-        // Run on page load
-        toggleProductFields();
-
-        // Run on change
-        typeSelect.addEventListener('change', toggleProductFields);
-    });
-</script>
-
+        document.getElementById('type').addEventListener('change', toggleProductFields);
+        window.addEventListener('DOMContentLoaded', toggleProductFields);
+    </script>
 @endsection
