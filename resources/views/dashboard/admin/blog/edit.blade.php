@@ -82,82 +82,110 @@
                                     @endif
                                 </div>
 
-                                <form action="{{ route('invoices.update', $invoice->id) }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
+                            <form action="{{ route('blog.update', $blog->id) }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    @method('PUT')
 
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <label>Title</label>
-                                            <input type="text" name="title" class="form-control"
-                                                value="{{ old('title', $invoice->title) }}" required>
-                                        </div>
+    <div class="card-body">
+        <div class="row">
 
-                                        <div class="form-group">
-                                            <label>Description</label>
-                                            <textarea name="description" id="content" class="form-control" rows="4">{{ old('description', $invoice->description) }}</textarea>
-                                        </div>
+            {{-- Type --}}
+            <div class="form-group col-md-6">
+                <label for="type">Type</label>
+                @php
+                    $types = [
+                        'blog' => 'Blog Post',
+                        'product' => 'Product',
+                        'article' => 'Article',
+                        'news' => 'Homepage News',
+                        'deal' => 'Fun Deals',
+                    ];
+                @endphp
+                <select class="form-control" name="type" id="type">
+                    <option value="">Select Type</option>
+                    @foreach ($types as $key => $label)
+                        <option value="{{ $key }}" {{ $blog->type == $key ? 'selected' : '' }}>
+                            {{ $label }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
 
-                                        <div class="form-group">
-                                            <label>Created By</label>
-                                            <select name="created_by" class="form-control">
-                                                <option value="">-- None --</option>
-                                                @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}"
-                                                        {{ $invoice->created_by == $user->id ? 'selected' : '' }}>
-                                                        {{ $user->first_name }} {{ $user->last_name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+            {{-- Category --}}
+            <div class="form-group col-md-6">
+                <label for="category">Category</label>
+                <select class="form-control" name="category">
+                    <option value="">Select Category</option>
+                    @foreach ($categories as $cat)
+                        <option value="{{ $cat->id }}" {{ $blog->category == $cat->id ? 'selected' : '' }}>
+                            {{ $cat->title }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
 
-                                        <div class="form-group">
-                                            <label>Status</label>
-                                            <select name="status" class="form-control" required>
-                                                <option value="1" {{ $invoice->status == 1 ? 'selected' : '' }}>Paid
-                                                </option>
-                                                <option value="2" {{ $invoice->status == 2 ? 'selected' : '' }}>Unpaid
-                                                </option>
-                                            </select>
-                                        </div>
+            {{-- Title --}}
+            <div class="form-group col-md-6">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" name="title" value="{{ old('title', $blog->title) }}" placeholder="Enter Title">
+            </div>
 
-                                        <div class="form-group">
-                                            <label>Assigned To</label>
-                                            <select name="assigned_to" class="form-control">
-                                                <option value="">-- None --</option>
-                                                @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}"
-                                                        {{ $invoice->assigned_to == $user->id ? 'selected' : '' }}>
-                                                        {{ $user->first_name }} {{ $user->last_name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+            {{-- Meta Title --}}
+            <div class="form-group col-md-6">
+                <label for="bmetatitle">Meta Title</label>
+                <input type="text" class="form-control" name="bmetatitle" value="{{ old('bmetatitle', $blog->bmetatitle) }}" placeholder="Meta Title">
+            </div>
 
-                                        <div class="form-group">
-                                            <label>Total ($)</label>
-                                            <input type="number" step="0.01" name="total" class="form-control"
-                                                value="{{ old('total', $invoice->total) }}" required>
-                                        </div>
+            {{-- Meta Description --}}
+            <div class="form-group col-md-6">
+                <label for="bmetadescription">Meta Description</label>
+                <textarea class="form-control" name="bmetadescription" rows="3">{{ old('bmetadescription', $blog->bmetadescription) }}</textarea>
+            </div>
 
-                                        <div class="form-group">
-                                            <label>Due Date</label>
-                                            <input type="date" name="expires" class="form-control"
-                                                value="{{ old('expires', $invoice->expires) }}">
-                                        </div>
+            {{-- Page H1 --}}
+            <div class="form-group col-md-6">
+                <label for="pageh1">Page H1</label>
+                <input type="text" class="form-control" name="pageh1" value="{{ old('pageh1', $blog->pageh1) }}" placeholder="Page H1">
+            </div>
 
-                                        <div class="form-group">
-                                            <label>Term</label>
-                                            <input type="text" name="term" class="form-control"
-                                                value="{{ old('term', $invoice->term) }}">
-                                        </div>
-                                    </div>
+            {{-- Product Fields --}}
+            <div id="productFields" class="row {{ $blog->type == 'product' ? '' : 'd-none' }}">
+                <div class="form-group col-md-6">
+                    <label for="price">Product Price</label>
+                    <input type="number" class="form-control" name="price" value="{{ old('price', $blog->price) }}">
+                </div>
 
-                                    <div class="card-footer d-flex justify-content-between">
-                                        <button type="submit" class="btn btn-primary">Update</button>
-                                        <a href="{{ route('invoices.index') }}" class="btn btn-secondary">Cancel</a>
-                                    </div>
-                                </form>
+                <div class="form-group col-md-6">
+                    <label for="shipping">Product Shipping</label>
+                    <input type="number" class="form-control" name="shipping" value="{{ old('shipping', $blog->shipping) }}">
+                </div>
+            </div>
+
+            {{-- Content --}}
+            <div class="form-group col-md-12">
+                <label for="description">Content</label>
+                <textarea name="description" id="content" class="form-control" rows="5">{{ old('description', $blog->description) }}</textarea>
+            </div>
+
+            {{-- Featured Image --}}
+            <div class="form-group col-md-6">
+                <label for="featured_img">Featured Image</label>
+                <input type="file" class="form-control" name="featured_img">
+                @if ($blog->featured_img)
+                    <div class="mt-2">
+                        <img src="{{ asset('front_assets/uploads/slider/' . $blog->featured_img) }}" width="150" alt="Current Image">
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+
+    <div class="card-footer d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="{{ route('blog.index') }}" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+
 
 
 
@@ -185,5 +213,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const typeSelect = document.getElementById('type');
+        const productFields = document.getElementById('productFields');
+
+        function toggleProductFields() {
+            if (typeSelect.value === 'product') {
+                productFields.classList.remove('d-none');
+            } else {
+                productFields.classList.add('d-none');
+            }
+        }
+
+        // Run on page load
+        toggleProductFields();
+
+        // Run on change
+        typeSelect.addEventListener('change', toggleProductFields);
+    });
+</script>
 
 @endsection
