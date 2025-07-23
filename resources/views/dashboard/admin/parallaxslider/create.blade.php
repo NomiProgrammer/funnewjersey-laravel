@@ -81,82 +81,82 @@
                                         </div>
                                     @endif
                                 </div>
-                                <form action="{{ route('invoices.store') }}" method="POST">
-                                    @csrf
+                                <form action="{{ route('parallax.store') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <div class="card-body">
+        <div class="row">
+            @foreach([
+                'title' => 'Title',
+                'link' => 'Link',
+                'alttag' => 'Alt Tag',
+                'button' => 'Button Text',
+                'starts' => 'Date Starts',
+                'expires' => 'Date Expires',
+                'slide_order' => 'Slide Order'
+            ] as $field => $label)
+                <div class="form-group col-md-6">
+                    <label for="{{ $field }}">{{ $label }}</label>
+                    <input type="{{ in_array($field, ['starts', 'expires']) ? 'date' : 'text' }}" class="form-control" name="{{ $field }}" placeholder="Enter {{ $label }}">
+                </div>
+            @endforeach
 
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <label>Title</label>
-                                            <input type="text" name="title" class="form-control" required>
-                                        </div>
+            <div class="form-group col-md-6">
+                <label for="category">Category</label>
+                <select class="form-control" name="category">
+                    <option value="">Select Category</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->title }}</option>
+                    @endforeach
+                </select>
+            </div>
 
-                                        <div class="form-group">
-                                            <label>Description</label>
-                                            <textarea name="description" id="content" class="form-control" rows="4"></textarea>
-                                        </div>
+            <div class="form-group col-md-6">
+                <label for="county">County</label>
+                <select class="form-control" name="county">
+                    <option value="">Select County</option>
+                    @foreach ($locations as $location)
+                        <option value="{{ $location->id }}">{{ $location->name }}</option>
+                    @endforeach
+                </select>
+            </div>
 
-                                        <div class="form-group">
-                                            <label>Assigned By</label>
-                                            <select name="assigned_to" class="form-control">
-                                                <option value="">-- None --</option>
-                                                @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}">{{ $user->first_name }}
-                                                        {{ $user->last_name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+            <div class="form-group col-md-6">
+                <label for="city">City</label>
+                <select class="form-control" name="city">
+                    <option value="">Select City</option>
+                    @foreach ($locations as $location)
+                        <option value="{{ $location->id }}">{{ $location->name }}</option>
+                    @endforeach
+                </select>
+            </div>
 
-                                        <div class="form-group">
-                                            <label>Status</label>
-                                            <select name="status" class="form-control" required>
-                                                <option value="1">Paid</option>
-                                                <option value="2">Unpaid</option>
-                                            </select>
-                                        </div>
+            <div class="form-group col-md-12">
+                <label for="description">Content</label>
+                <textarea class="form-control" id="content" name="description" rows="4"></textarea>
+            </div>
 
-                                        <div class="form-group">
-                                            <label>Assigned To</label>
-                                            <select name="assigned_to" class="form-control">
-                                                <option value="">-- None --</option>
-                                                @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}">{{ $user->first_name }}
-                                                        {{ $user->last_name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+            <div class="form-group col-md-6">
+                <label for="created_by">Assigned To</label>
+                <select class="form-control" name="created_by">
+                    @foreach ($users as $user)
+                        <option value="{{ $user->id }}">{{ $user->first_name }}{{ $user->last_name}}</option>
+                    @endforeach
+                </select>
+            </div>
 
-                                        <div class="form-group">
-                                            <label>Total ($)</label>
-                                            <input type="number" step="0.01" name="total" class="form-control"
-                                                required>
-                                        </div>
+            <div class="form-group col-md-6">
+                <label for="featured_img">Featured Image</label>
+                <input type="file" class="form-control" name="featured_img">
+            </div>
+        </div>
+    </div>
 
-                                        <div class="form-group">
-                                            <label>Due Date</label>
-                                            <input type="date" name="expires" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Created By</label>
-                                            <select name="created_by" class="form-control">
-                                                <option value="">-- None --</option>
-                                                @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}">{{ $user->first_name }}
-                                                        {{ $user->last_name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Term</label>
-                                            <input type="text" name="term" class="form-control"
-                                                placeholder="e.g. 1 year (renews Apr 1, 2023)">
-                                        </div>
-                                    </div>
+    <div class="card-footer d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{{ route('parallax.index') }}" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
 
-                                     <div class="card-footer d-flex justify-content-between">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                        <a href="{{ route('invoices.index') }}" class="btn btn-secondary">Cancel</a>
-                                    </div>
-                                </form>
 
                             </div>
                         </div>

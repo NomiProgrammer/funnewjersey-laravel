@@ -63,8 +63,8 @@
                                 class="nav-link {{ request()->routeIs('parallax.index') ? 'active' : '' }}"><i class="fas fa-images nav-icon"></i>
                                 <p>All</p>
                             </a></li>
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/slider/manage"
-                                class="nav-link"><i class="fas fa-plus nav-icon"></i>
+                        <li class="nav-item"><a href="{{ route('parallax.create') }}"
+                                class="nav-link {{ request()->routeIs('parallax.create') ? 'active' : '' }}"><i class="fas fa-plus nav-icon"></i>
                                 <p>Add new</p>
                             </a></li>
                     </ul>
