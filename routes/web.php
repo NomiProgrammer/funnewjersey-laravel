@@ -138,12 +138,12 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'en|es|fr|ur']], f
         });
         // ProductsController Controller
         Route::controller(ProductsController::class)->group(function () {
-        Route::get('/products/manage', 'index')->name('products.index');
-        Route::get('/products/add', 'create')->name('products.create');
-        Route::post('/products/store', 'store')->name('products.store');
-        Route::get('/products/edit/{id}', 'edit')->name('products.edit');
-        Route::put('/products/update/{id}', 'update')->name('products.update');
-        Route::delete('/products/destroy/{id}', 'destroy')->name('products.destroy');
+            Route::get('/products/manage', 'index')->name('products.index');
+            Route::get('/products/add', 'create')->name('products.create');
+            Route::post('/products/store', 'store')->name('products.store');
+            Route::get('/products/edit/{id}', 'edit')->name('products.edit');
+            Route::put('/products/update/{id}', 'update')->name('products.update');
+            Route::delete('/products/destroy/{id}', 'destroy')->name('products.destroy');
         });
         // PageController Controller
         Route::controller(PagesController::class)->group(function () {
@@ -166,10 +166,20 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'en|es|fr|ur']], f
         // MegaMenusTag Controller
         Route::controller(MegaMenusTagsController::class)->group(function () {
             Route::get('/meta_tags/manage', 'index')->name('meta_tags.index');
+            Route::get('/meta_tags/add', 'create')->name('meta_tags.create');
+            Route::post('/meta_tags/store', 'store')->name('meta_tags.store');
+            Route::get('/meta_tags/edit/{id}', 'edit')->name('meta_tags.edit');
+            Route::put('/meta_tags/update/{id}', 'update')->name('meta_tags.update');
+            Route::delete('/meta_tags/destroy/{id}', 'destroy')->name('meta_tags.destroy');
         });
         // Listing Controller
         Route::controller(ListingController::class)->group(function () {
             Route::get('/listings/manage', 'index')->name('listings.index');
+            Route::get('/listings/add', 'create')->name('listings.create');
+            Route::post('/listings/store', 'store')->name('listings.store');
+            Route::get('/listings/edit/{id}', 'edit')->name('listings.edit');
+            Route::put('/listings/update/{id}', 'update')->name('listings.update');
+            Route::delete('/listings/destroy/{id}', 'destroy')->name('listings.destroy');
         });
     });
 
