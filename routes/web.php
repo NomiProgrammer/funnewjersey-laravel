@@ -136,6 +136,15 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'en|es|fr|ur']], f
         Route::controller(BlogArticleController::class)->group(function () {
             Route::get('/blog/manage', 'index')->name('blog.index');
         });
+        // ProductsController Controller
+        Route::controller(ProductsController::class)->group(function () {
+        Route::get('/products/manage', 'index')->name('products.index');
+        Route::get('/products/add', 'create')->name('products.create');
+        Route::post('/products/store', 'store')->name('products.store');
+        Route::get('/products/edit/{id}', 'edit')->name('products.edit');
+        Route::put('/products/update/{id}', 'update')->name('products.update');
+        Route::delete('/products/destroy/{id}', 'destroy')->name('products.destroy');
+        });
         // PageController Controller
         Route::controller(PagesController::class)->group(function () {
             Route::get('/pages/manage', 'index')->name('pages.index');

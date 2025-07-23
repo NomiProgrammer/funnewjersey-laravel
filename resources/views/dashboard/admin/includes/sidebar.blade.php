@@ -318,18 +318,18 @@
                             </a></li>
                     </ul>
                 </li>
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                <li class="nav-item has-treeview {{ request()->routeIs('products.*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('products.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-shopping-cart"></i>
                         <p>Products/E-Commerce<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="#"
-                                class="nav-link"><i class="fas fa-box-open nav-icon"></i>
+                        <li class="nav-item"><a href="{{route('products.index')}}"
+                                class="nav-link {{ request()->routeIs('products.index') ? 'active' : '' }}"><i class="fas fa-box-open nav-icon"></i>
                                 <p>All posts</p>
                             </a></li>
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/product/manage"
-                                class="nav-link"><i class="fas fa-plus nav-icon"></i>
+                        <li class="nav-item"><a href="{{route('products.create')}}"
+                                class="nav-link {{ request()->routeIs('products.create') ? 'active' : '' }}"><i class="fas fa-plus nav-icon"></i>
                                 <p>New Post</p>
                             </a></li>
                     </ul>
