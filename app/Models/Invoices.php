@@ -25,4 +25,8 @@ class Invoices extends Model
     {
         return $this->belongsTo(User::class, 'assigned_to');
     }
+    public function postPackages()
+{
+    return $this->hasMany(PostPackage::class);
+}
 }

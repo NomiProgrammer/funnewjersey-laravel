@@ -32,17 +32,14 @@ class BannersAdsController extends Controller
 
             return DataTables::of($data)
                 ->editColumn('featured_img', function ($item) {
-                    $url = asset('front_assets/uploads/banner/' . $item->featured_img);
+                    $url = asset($item->featured_img);
                     return '<img src="' . $url . '" alt="Image" width="90" height="60" loading="lazy">';
                 })
-                ->editColumn('expires', function ($item) {
-                    return \Carbon\Carbon::parse($item->expires)->format('d M Y');
-                })
-                ->editColumn('description', function ($item) {
-                    return $item->description
-                        ? (strlen($item->description) > 10 ? substr($item->description, 0, 10) . '...' : $item->description)
-                        : '-';
-                })
+
+->editColumn('description', function ($item) {
+    $cleanText = strip_tags($item->description); // remove HTML
+    return strlen($cleanText) > 10 ? substr($cleanText, 0, 10) . '...' : $cleanText;
+})
                 ->editColumn('status', function ($item) {
                     if ($item->status == 1) {
                         return '<span class="badge badge-success">Published</span>';
@@ -50,6 +47,14 @@ class BannersAdsController extends Controller
                         return '<span class="badge badge-danger">Unpublished</span>';
                     } elseif ($item->status == 2) {
                         return '<span class="badge badge-warning">Drafted</span>';
+                    }
+                    return '<span class="badge badge-dark">Unknown</span>';
+                })
+                ->editColumn('type', function ($item) {
+                    if ($item->type == 1) {
+                        return '<span class="badge badge-success">Top Horizontal</span>';
+                    } elseif ($item->type == 2) {
+                        return '<span class="badge badge-danger">Sidebar Square</span>';
                     }
                     return '<span class="badge badge-dark">Unknown</span>';
                 })
@@ -82,7 +87,7 @@ class BannersAdsController extends Controller
         </div>
     ';
                 })
-                ->rawColumns(['featured_img', 'status', 'actions'])
+                ->rawColumns(['featured_img', 'status', 'actions','type'])
                 ->make(true);
         }
 

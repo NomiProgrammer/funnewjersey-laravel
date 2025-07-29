@@ -179,18 +179,18 @@
                             </a></li>
                     </ul>
                 </li>
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                <li class="nav-item has-treeview {{ request()->routeIs('mega_menus.*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('mega_menus.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-bars"></i>
                         <p>Custom Mega Menus<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/menus"
-                                class="nav-link"><i class="fas fa-th-large nav-icon"></i>
+                        <li class="nav-item"><a href="{{route('mega_menus.index')}}"
+                                class="nav-link {{ request()->routeIs('mega_menus.index') ? 'active' : '' }}"><i class="fas fa-th-large nav-icon"></i>
                                 <p>Custom Mega Menus</p>
                             </a></li>
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/menus/add"
-                                class="nav-link"><i class="fas fa-plus nav-icon"></i>
+                        <li class="nav-item"><a href="{{route('mega_menus.create')}}"
+                                class="nav-link {{ request()->routeIs('mega_menus.create') ? 'active' : '' }}"><i class="fas fa-plus nav-icon"></i>
                                 <p>Add New Menu</p>
                             </a></li>
                     </ul>
@@ -227,18 +227,18 @@
                             </a></li>
                     </ul>
                 </li>
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                <li class="nav-item has-treeview {{ request()->routeIs('deals.*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('deals.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-bookmark"></i>
                         <p>Fun Deals<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/deal/all"
-                                class="nav-link"><i class="fas fa-gift nav-icon"></i>
+                        <li class="nav-item"><a href="{{route('deals.index')}}"
+                                class="nav-link {{ request()->routeIs('deals.index') ? 'active' : '' }}"><i class="fas fa-gift nav-icon"></i>
                                 <p>All Fun Deals</p>
                             </a></li>
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/deal/manage"
-                                class="nav-link"><i class="fas fa-plus nav-icon"></i>
+                        <li class="nav-item"><a href="{{route('deals.create')}}"
+                                class="nav-link {{ request()->routeIs('deals.create') ? 'active' : '' }}"><i class="fas fa-plus nav-icon"></i>
                                 <p>Add New Fun Deal</p>
                             </a></li>
                     </ul>
@@ -312,8 +312,8 @@
                                 class="nav-link {{ request()->routeIs('blog.create') ? 'active' : '' }}"><i class="fas fa-plus nav-icon"></i>
                                 <p>New Post</p>
                             </a></li>
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/blog/all2"
-                                class="nav-link"><i class="fas fa-trash nav-icon"></i>
+                        <li class="nav-item"><a href="{{route('blog.trash')}}"
+                                class="nav-link {{ request()->routeIs('blog.trash') ? 'active' : '' }}"><i class="fas fa-trash nav-icon"></i>
                                 <p>Trash Post</p>
                             </a></li>
                     </ul>

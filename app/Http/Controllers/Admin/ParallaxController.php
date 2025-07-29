@@ -16,7 +16,7 @@ class ParallaxController extends Controller
 public function index(Request $request)
 {
     if ($request->ajax()) {
-        $data = Parallax::with(['categoryid', 'customer'])->orderBy('id', 'desc')
+        $data = Parallax::with(['categoryid', 'customer','company'])->orderBy('id', 'desc')
             ->select([
                 'id',
                 'featured_img',
@@ -33,7 +33,7 @@ public function index(Request $request)
 
      return DataTables::of($data)
     ->editColumn('featured_img', function ($item) {
-        $url = asset('front_assets/uploads/slider/' . $item->featured_img);
+        $url = asset($item->featured_img);
         return '<img src="' . $url . '" alt="Image" width="90" height="60" loading="lazy">';
     })
 ->addColumn('customer', function ($item) {
@@ -44,9 +44,16 @@ public function index(Request $request)
 ->addColumn('category', function ($item) {
     return $item->categoryid ? $item->categoryid->title : '-';
 })
-    ->editColumn('description', function ($item) {
-        return strlen($item->description) > 10 ? substr($item->description, 0, 10) . '...' : $item->description;
-    })
+->addColumn('company', function ($item) {
+    return $item->company ? $item->company->value : '-';
+})
+->editColumn('description', function ($item) {
+    $cleanText = strip_tags($item->description); // remove HTML
+    return strlen($cleanText) > 10 ? substr($cleanText, 0, 10) . '...' : $cleanText;
+})
+    ->editColumn('title', function ($item) {
+    return $item->title;
+})
                 ->editColumn('expires', function ($item) {
     return \Carbon\Carbon::parse($item->expires)->format('d M Y');
 })
@@ -84,7 +91,7 @@ public function index(Request $request)
 })
 
 
-    ->rawColumns(['featured_img', 'status', 'actions'])
+    ->rawColumns(['featured_img', 'status', 'actions','company','title'])
     ->make(true);
 
     }

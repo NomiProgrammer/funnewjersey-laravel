@@ -88,11 +88,11 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label>Name</label>
-                <input type="text" name="title" class="form-control" value="{{ $tag->title }}" required>
+                <input type="text" required name="title" class="form-control" value="{{ $tag->title }}" required>
             </div>
             <div class="col-md-6 mb-3">
                 <label>Parent</label>
-                <select name="parent" class="form-control">
+                <select  name="parent" class="form-control">
                     <option value="0" {{ $tag->parent == 0 ? 'selected' : '' }}>No Parent</option>
                     <option value="1" {{ $tag->parent == 1 ? 'selected' : '' }}>Dog Friendly</option>
                     <option value="2" {{ $tag->parent == 2 ? 'selected' : '' }}>Fun Outdoor Activities</option>
@@ -102,23 +102,23 @@
             </div>
             <div class="col-md-6 mb-3">
                 <label>Meta Title</label>
-                <input type="text" name="metatitle2" class="form-control" value="{{ $tag->metatitle2 }}">
+                <input type="text" required name="metatitle2" class="form-control" value="{{ $tag->metatitle2 }}">
             </div>
             <div class="col-md-6 mb-3">
                 <label>Meta Keywords</label>
-                <input type="text" name="metakeywords2" class="form-control" value="{{ $tag->metakeywords2 }}">
+                <input type="text" required name="metakeywords2" class="form-control" value="{{ $tag->metakeywords2 }}">
             </div>
             <div class="col-md-12 mb-3">
                 <label>Meta Description</label>
-                <textarea name="metadescription2" class="form-control" rows="3">{{ $tag->metadescription2 }}</textarea>
+                <textarea required name="metadescription2" class="form-control" rows="3">{{ $tag->metadescription2 }}</textarea>
             </div>
             <div class="col-md-12 mb-3">
                 <label>Tag Description Top</label>
-                <textarea name="catdesc" id="content" class="form-control" rows="5">{{ $tag->catdesc }}</textarea>
+                <textarea required name="catdesc" id="content" class="form-control" rows="5">{{ $tag->catdesc }}</textarea>
             </div>
             <div class="col-md-12 mb-3">
                 <label>Tag Description Bottom</label>
-                <textarea name="catdesc2" id="content" class="form-control" rows="5">{{ $tag->catdesc2 }}</textarea>
+                <textarea required name="catdesc2" id="content" class="form-control" rows="5">{{ $tag->catdesc2 }}</textarea>
             </div>
         </div>
 

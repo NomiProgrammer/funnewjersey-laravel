@@ -227,10 +227,7 @@
                     name: 'slide_order'
                 },
                 { data: 'customer', name: 'customer' },
-                {
-                    data: 'create_time',
-                    name: 'create_time'
-                },
+                { data: 'company', name: 'company' },
                 { data: 'category', name: 'category' },
 
                 {
@@ -252,6 +249,7 @@
                     searchable: false
                 }
             ],
+
             dom: "<'d-flex justify-content-between align-items-center mb-3'<'dt-buttons'B><'dataTables_filter'f>>" +
                 "<'table-responsive'tr>" +
                 "<'d-flex justify-content-between align-items-center mt-3'lip>",

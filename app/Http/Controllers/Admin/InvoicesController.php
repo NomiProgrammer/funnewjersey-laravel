@@ -26,11 +26,10 @@ public function index(Request $request)
         ]);
 
         return DataTables::of($data)
-            ->editColumn('description', function ($item) {
-                return $item->description
-                    ? (strlen($item->description) > 10 ? substr($item->description, 0, 10) . '...' : $item->description)
-                    : '-';
-            })
+->editColumn('description', function ($item) {
+    $cleanText = strip_tags($item->description); // remove HTML
+    return strlen($cleanText) > 10 ? substr($cleanText, 0, 10) . '...' : $cleanText;
+})
             ->editColumn('status', function ($item) {
                 if ($item->status == 1) {
                     return '<span class="badge badge-success">Paid</span>';
@@ -49,6 +48,7 @@ public function index(Request $request)
         ? trim($item->customer->first_name . ' ' . $item->customer->last_name)
         : '-';
 })
+
 ->addColumn('actions', function ($item) {
   $editUrl = route('invoices.edit', ['locale' => app()->getLocale(), 'id' => $item->id]);
     return '

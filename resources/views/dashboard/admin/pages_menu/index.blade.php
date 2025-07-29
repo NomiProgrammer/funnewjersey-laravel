@@ -203,13 +203,13 @@ $('#example2').DataTable({
         }, 5000);
     </script>
     <script>
-        $(document).on('click', '.delete-page', function(e) {
+        $(document).on('click', '.delete-pages', function(e) {
             e.preventDefault();
 
             let id = $(this).data('id');
             if (confirm('Are you sure you want to delete this Page?')) {
                 $.ajax({
-                    url: "{{ url(app()->getLocale() . '/admin/page/destroy') }}/" + id,
+                    url: "{{ url(app()->getLocale() . '/admin/pages/destroy') }}/" + id,
                     type: 'DELETE',
                     data: {
                         _token: '{{ csrf_token() }}'

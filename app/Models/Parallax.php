@@ -34,7 +34,11 @@ class Parallax extends Model
     {
         return $this->belongsTo(User::class, 'created_by');
     }
-
+public function company()
+{
+    return $this->hasOne(UserMeta::class, 'user_id', 'created_by')
+                ->where('key', 'company_name');
+}
     public function categoryid()
     {
         return $this->belongsTo(Category::class, 'category');

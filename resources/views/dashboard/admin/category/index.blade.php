@@ -193,7 +193,7 @@
             { data: 'title', name: 'title' },
             { data: 'not_public', name: 'not_public' },
             { data: 'islink', name: 'islink' },
-            { data: 'parent', name: 'parent' },
+            { data: 'parentCategory', name: 'parentCategory' },
             { data: 'featured_img', name: 'featured_img' },
             { data: 'fa_icon', name: 'fa_icon' },
                             {

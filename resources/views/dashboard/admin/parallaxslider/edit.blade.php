@@ -163,7 +163,7 @@
                 <label for="featured_img">Featured Image</label>
                 <input type="file" class="form-control" name="featured_img">
                 @if ($parallax->featured_img)
-                    <img src="{{ asset('path/to/uploads/' . $parallax->featured_img) }}" alt="" style="margin-top:10px; max-height: 100px;">
+                    <img src="{{ asset($parallax->featured_img) }}" alt="" style="margin-top:10px; max-height: 100px;">
                 @endif
             </div>
         </div>

@@ -86,20 +86,20 @@
     <div class="row">
         <div class="col-md-6 mb-3">
             <label>Name</label>
-            <input type="text" name="title" class="form-control" required>
+            <input type="text" required name="title" class="form-control" required>
         </div>
         <div class="col-md-6 mb-3">
             <label>Mini Title</label>
-            <input type="text" name="minititle" class="form-control">
+            <input type="text" required name="minititle" class="form-control">
         </div>
 
         <div class="col-md-6 mb-3">
             <label>Category URL</label>
-            <input type="text" name="url" class="form-control">
+            <input type="text" required name="url" class="form-control">
         </div>
         <div class="col-md-6 mb-3">
             <label>Make Category Private</label>
-            <select name="not_public" class="form-control">
+            <select required name="not_public" class="form-control">
                 <option value="0">Public</option>
                 <option value="1">Private</option>
             </select>
@@ -107,14 +107,14 @@
 
         <div class="col-md-6 mb-3">
             <label>Disable H1</label>
-            <select name="noh1" class="form-control">
+            <select required name="noh1" class="form-control">
                 <option value="0">No</option>
                 <option value="1">Yes</option>
             </select>
         </div>
         <div class="col-md-6 mb-3">
             <label>Hardlink Category to URL</label>
-            <select name="islink" class="form-control">
+            <select required name="islink" class="form-control">
                 <option value="0">No</option>
                 <option value="1">Yes</option>
             </select>
@@ -122,11 +122,11 @@
 
         <div class="col-md-6 mb-3">
             <label>Listing Count Override</label>
-            <input type="number" name="countoverride" class="form-control">
+            <input type="number" required name="countoverride" class="form-control">
         </div>
         <div class="col-md-6 mb-3">
             <label>Parent</label>
-            <select name="parent" class="form-control">
+            <select  name="parent" class="form-control">
                 <option value="">No Parent</option>
                 @foreach ($parent as $bc)
                     <option value="{{ $bc->id }}" {{ old('parent') == $bc->id ? 'selected' : '' }}>{{ $bc->title }}</option>
@@ -136,75 +136,75 @@
 
         <div class="col-md-6 mb-3">
             <label>FA Icon</label>
-            <input type="text" name="fa_icon" class="form-control">
+            <input type="text" required name="fa_icon" class="form-control">
         </div>
         <div class="col-md-6 mb-3">
             <label>Category Thumbnail</label>
-            <input type="file" name="featured_img" class="form-control">
+            <input type="file"  name="featured_img" class="form-control">
         </div>
         <div class="col-md-6 mb-3">
             <label>Thumbnail Alt Tag</label>
-            <input type="text" name="img_alt" class="form-control">
+            <input type="text" required name="img_alt" class="form-control">
         </div>
         <div class="col-md-6 mb-3">
             <label>Default Details Image</label>
-            <input type="file" name="featured_img2" class="form-control">
+            <input type="file"  name="featured_img2" class="form-control">
         </div>
         <div class="col-md-6 mb-3">
             <label>Default Image Alt Tag</label>
-            <input type="text" name="img_alt2" class="form-control">
+            <input type="text"  name="img_alt2" class="form-control">
         </div>
         <div class="col-md-6 mb-3">
             <label>Featured Listing Image</label>
-            <input type="file" name="featured_img3" class="form-control">
+            <input type="file"  name="featured_img3" class="form-control">
         </div>
         <div class="col-md-6 mb-3">
             <label>Featured Listing Alt Tag</label>
-            <input type="text" name="img_alt3" class="form-control">
+            <input type="text" required name="img_alt3" class="form-control">
         </div>
 
         <div class="col-md-6 mb-3">
             <label>Meta Title</label>
-            <input type="text" name="metatitle2" class="form-control">
+            <input type="text" required name="metatitle2" class="form-control">
         </div>
         <div class="col-md-6 mb-3">
             <label>Meta Keywords</label>
-            <input type="text" name="metakeywords2" class="form-control">
+            <input type="text" required name="metakeywords2" class="form-control">
         </div>
         <div class="col-md-12 mb-3">
             <label>Meta Description</label>
-            <textarea name="metadescription2" id="content" class="form-control" rows="2"></textarea>
+            <textarea required name="metadescription2" id="content" class="form-control" rows="2"></textarea>
         </div>
 
         <div class="col-md-12 mb-3">
             <label>Category Description Top</label>
-            <textarea name="catdesc" id="content" class="form-control" rows="3"></textarea>
+            <textarea required name="catdesc" id="content" class="form-control" rows="3"></textarea>
         </div>
         <div class="col-md-12 mb-3">
             <label>Category Description Bottom</label>
-            <textarea name="catdesc2" id="content" class="form-control" rows="3"></textarea>
+            <textarea required name="catdesc2" id="content" class="form-control" rows="3"></textarea>
         </div>
 
         <div class="col-md-6 mb-3">
             <label>Meta Title (Location)</label>
-            <input type="text" name="metatitle" class="form-control">
+            <input type="text" required name="metatitle" class="form-control">
         </div>
         <div class="col-md-6 mb-3">
             <label>Meta Keywords (Location)</label>
-            <input type="text" name="metakeywords" class="form-control">
+            <input type="text" required name="metakeywords" class="form-control">
         </div>
         <div class="col-md-12 mb-3">
             <label>Meta Description (Location)</label>
-            <textarea name="metadescription" class="form-control" rows="2"></textarea>
+            <textarea required name="metadescription" class="form-control" rows="2"></textarea>
         </div>
 
         <div class="col-md-12 mb-3">
             <label>Category Description Top (variables)</label>
-            <textarea name="catdescvar" class="form-control" rows="3"></textarea>
+            <textarea required name="catdescvar" class="form-control" rows="3"></textarea>
         </div>
         <div class="col-md-12 mb-3">
             <label>Category Description Bottom (variables)</label>
-            <textarea name="catdesc2var" class="form-control" rows="3"></textarea>
+            <textarea required name="catdesc2var" class="form-control" rows="3"></textarea>
         </div>
     </div>
 

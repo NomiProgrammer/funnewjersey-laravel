@@ -28,7 +28,7 @@ public function index(Request $request)
                 <a class="dropdown-item" href="' . $editUrl . '">
                     <i class="fas fa-edit"></i> &nbsp;Edit
                 </a>
-                <a class="dropdown-item text-danger delete-tag" href="javascript:void(0);" data-id="' . $item->id . '">
+                <a class="dropdown-item text-danger delete-tags" href="javascript:void(0);" data-id="' . $item->id . '">
                     <i class="fas fa-trash"></i> &nbsp;Delete
                 </a>
             </div>
@@ -112,10 +112,12 @@ public function update(Request $request, $locale, $id)
 }
 
 
-    public function destroy($locale,$id)
-    {
-        $tag = Tags::findOrFail($id);
-        $tag->delete();
-        return redirect()->route('tags.index')->with('success', 'Tag deleted successfully.');
-    }
+public function destroy($locale,$id)
+{
+    $tag = Tags::findOrFail($id);
+    $tag->delete();
+
+    return response()->json(['success' => 'Tags deleted successfully!']);
+}
+
 }

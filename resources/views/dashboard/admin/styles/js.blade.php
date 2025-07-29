@@ -36,6 +36,19 @@
 <script>
     CKEDITOR.replace('content');
 </script>
+<script>
+    // Attach submit listener to the form
+    $('form').on('submit', function (e) {
+        // Get CKEditor instance content
+        var editorContent = CKEDITOR.instances['content'].getData().trim();
+
+        if (editorContent === '') {
+            alert('Description is required.');
+            e.preventDefault(); // Prevent form from submitting
+        }
+    });
+</script>
+
     <script>
         // Hide the alert messages after 5 seconds
         setTimeout(function() {

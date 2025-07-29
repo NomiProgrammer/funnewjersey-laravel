@@ -278,21 +278,11 @@
         });
     </script>
     <script>
-        // Hide the alert messages after 5 seconds
-        setTimeout(function() {
-            document.querySelectorAll('.alert-message').forEach(function(alert) {
-                alert.style.transition = "opacity 0.5s";
-                alert.style.opacity = "0";
-                setTimeout(() => alert.remove(), 500); // Remove after fade-out
-            });
-        }, 5000);
-    </script>
-    <script>
         $(document).on('click', '.delete-banner', function(e) {
             e.preventDefault();
 
             let id = $(this).data('id');
-            if (confirm('Are you sure you want to delete this widget?')) {
+            if (confirm('Are you sure you want to delete this Banner?')) {
                 $.ajax({
                     url: "{{ url(app()->getLocale() . '/admin/banners-ads/destroy') }}/" + id,
                     type: 'DELETE',

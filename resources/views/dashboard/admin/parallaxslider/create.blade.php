@@ -132,7 +132,7 @@
 
             <div class="form-group col-md-12">
                 <label for="description">Content</label>
-                <textarea class="form-control" id="content" name="description" rows="4"></textarea>
+                <textarea class="form-control" id="content" name="description" rows="4" required></textarea>
             </div>
 
             <div class="form-group col-md-6">
@@ -146,7 +146,7 @@
 
             <div class="form-group col-md-6">
                 <label for="featured_img">Featured Image</label>
-                <input type="file" class="form-control" name="featured_img">
+                <input type="file" class="form-control" name="featured_img" required>
             </div>
         </div>
     </div>

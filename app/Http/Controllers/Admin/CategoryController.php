@@ -15,7 +15,7 @@ class CategoryController extends Controller
 public function index(Request $request)
 {
     if ($request->ajax()) {
-        $data = Category::orderBy('id', 'asc')
+        $data = Category::with(['parentCategory'])->orderBy('id', 'asc')
             ->select([
                 'id',
                 'title',
@@ -36,6 +36,9 @@ public function index(Request $request)
             ->editColumn('featured_img', function ($item) {
                 $url = asset('front_assets/uploads/category/' . $item->featured_img);
                 return '<img src="' . $url . '" alt="Image" width="80" height="50" loading="lazy">';
+            })
+            ->addColumn('parentCategory', function ($row) {
+                return $row->parentCategory ? $row->parentCategory->title : '-';
             })
 ->editColumn('fa_icon', function ($item) {
     return '<i class="fa ' . e($item->fa_icon) . '"></i>';
@@ -58,7 +61,7 @@ public function index(Request $request)
         </div>
     ';
 })
-            ->rawColumns(['featured_img', 'fa_icon', 'actions'])
+            ->rawColumns(['featured_img', 'fa_icon', 'actions','parentCategory'])
             ->make(true);
     }
 

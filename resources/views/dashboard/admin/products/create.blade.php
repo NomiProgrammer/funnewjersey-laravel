@@ -97,34 +97,34 @@
                 {{-- Title --}}
                 <div class="form-group col-md-6">
                     <label for="title">Title</label>
-                    <input type="text" class="form-control" name="title"
+                    <input type="text" class="form-control" required name="title"
                         placeholder="Enter Title" value="{{ old('title') }}">
                 </div>
 
                 {{-- Product Price --}}
                 <div class="form-group col-md-6">
                     <label for="price">Product Price</label>
-                    <input type="number" class="form-control" name="price"
+                    <input type="number" class="form-control" required name="price"
                         placeholder="Enter Price" value="{{ old('price') }}">
                 </div>
 
                 {{-- Product Shipping --}}
                 <div class="form-group col-md-6">
                     <label for="shipping">Product Shipping</label>
-                    <input type="number" class="form-control" name="shipping"
+                    <input type="number" class="form-control" required name="shipping"
                         placeholder="Enter Shipping Cost" value="{{ old('shipping') }}">
                 </div>
 
                 {{-- Content --}}
                 <div class="form-group col-md-12">
                     <label for="description">Content</label>
-                    <textarea name="description" id="content" class="form-control" rows="5">{{ old('description') }}</textarea>
+                    <textarea required name="description" id="content" class="form-control" rows="5">{{ old('description') }}</textarea>
                 </div>
 
                 {{-- Featured Image --}}
                 <div class="form-group col-md-6">
                     <label for="featured_img">Featured Image</label>
-                    <input type="file" class="form-control" name="featured_img">
+                    <input type="file" class="form-control" name="featured_img" required>
                     <small class="text-muted">Image will be uploaded to: <code>front_assets/uploads/products/</code></small>
                 </div>
 

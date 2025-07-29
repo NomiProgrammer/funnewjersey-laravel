@@ -27,6 +27,8 @@ use App\Http\Controllers\Admin\TagsController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\MegaMenusTagsController;
 use App\Http\Controllers\Admin\ListingController;
+use App\Http\Controllers\Admin\FunDealsController;
+use App\Http\Controllers\Admin\MegaMenusController;
 // Admin Includes (End)
 
 // Admin Includes (Start)
@@ -143,6 +145,9 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'en|es|fr|ur']], f
         // BlogArticleController Controller
         Route::controller(BlogArticleController::class)->group(function () {
         Route::get('/blog/manage', 'index')->name('blog.index');
+        Route::get('/blog/trash', [BlogArticleController::class, 'trashIndex'])->name('blog.trash');
+Route::post('/blog/restore/{id}', [BlogArticleController::class, 'restore'])->name('blog.restore');
+Route::delete('/blog/force-delete/{id}', [BlogArticleController::class, 'forceDelete'])->name('blog.forceDelete');
         Route::get('/blog/add', 'create')->name('blog.create');
         Route::post('/blog/store', 'store')->name('blog.store');
         Route::get('/blog/edit/{id}', 'edit')->name('blog.edit');
@@ -193,6 +198,24 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'en|es|fr|ur']], f
         Route::get('/listings/edit/{id}', 'edit')->name('listings.edit');
         Route::put('/listings/update/{id}', 'update')->name('listings.update');
         Route::delete('/listings/destroy/{id}', 'destroy')->name('listings.destroy');
+        });
+        // Fun Deal Controller
+        Route::controller(FunDealsController::class)->group(function () {
+        Route::get('/deals/manage', 'index')->name('deals.index');
+        Route::get('/deals/add', 'create')->name('deals.create');
+        Route::post('/deals/store', 'store')->name('deals.store');
+        Route::get('/deals/edit/{id}', 'edit')->name('deals.edit');
+        Route::put('/deals/update/{id}', 'update')->name('deals.update');
+        Route::delete('/deals/destroy/{id}', 'destroy')->name('deals.destroy');
+        });
+        // Mega Menus Controller
+        Route::controller(MegaMenusController::class)->group(function () {
+        Route::get('/mega_menus/manage', 'index')->name('mega_menus.index');
+        Route::get('/mega_menus/add', 'create')->name('mega_menus.create');
+        Route::post('/mega_menus/store', 'store')->name('mega_menus.store');
+        Route::get('/mega_menus/edit/{id}', 'edit')->name('mega_menus.edit');
+        Route::put('/mega_menus/update/{id}', 'update')->name('mega_menus.update');
+        Route::delete('/mega_menus/destroy/{id}', 'destroy')->name('mega_menus.destroy');
         });
     });
 

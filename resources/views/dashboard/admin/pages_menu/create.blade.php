@@ -81,94 +81,109 @@
                                         </div>
                                     @endif
                                 </div>
-                                <form action="{{ route('pages.store') }}" method="POST">
-                                    @csrf
-                                    <div class="card-body">
+                            <form action="{{ route('pages.store') }}" method="POST">
+    @csrf
+    <div class="card-body">
+        <div class="row">
+            <!-- Title -->
+            <div class="form-group col-md-6">
+                <label>Title</label>
+                <input type="text" required name="title" class="form-control" placeholder="Page Title">
+            </div>
 
-                                        <div class="form-group">
-                                            <label>Title</label>
-                                            <input type="text" name="title" class="form-control" required
-                                                placeholder="Page Title">
-                                        </div>
+            <!-- Alias -->
+            <div class="form-group col-md-6">
+                <label>Alias</label>
+                <input type="text" name="alias" class="form-control" placeholder="Auto if blank">
+            </div>
 
-                                        <div class="form-group">
-                                            <label>Alias</label>
-                                            <input type="text" name="alias" class="form-control"
-                                                placeholder="Auto if blank">
-                                        </div>
+            <!-- Show in Menu -->
+            <div class="form-group col-md-6">
+                <label>Show in Menu</label>
+                <select name="show_in_menu" class="form-control" required>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
 
-                                        <div class="form-group">
-                                            <label>Show in Menu</label>
-                                            <select name="show_in_menu" class="form-control" required>
-                                                <option value="0">No</option>
-                                                <option value="1">Yes</option>
-                                            </select>
-                                        </div>
+            <!-- Layout -->
+            <div class="form-group col-md-6">
+                <label>Layout</label>
+                <select name="layout" class="form-control" required>
+                    <option value="1">Leftbar with Content</option>
+                    <option value="2">Rightbar with Content</option>
+                    <option value="3">Only Content</option>
+                </select>
+            </div>
 
-                                        <div class="form-group">
-                                            <label>Layout</label>
-                                            <select name="layout" class="form-control" required>
-                                                <option value="1">Leftbar with Content</option>
-                                                <option value="2">Rightbar with Content</option>
-                                                <option value="3">Only Content</option>
-                                            </select>
-                                        </div>
+            <!-- Content From -->
+            <div class="form-group col-md-6">
+                <label>Content From</label>
+                <select name="content_from" class="form-control" required>
+                    <option value="url">URL</option>
+                    <option value="manual">Manual</option>
+                </select>
+            </div>
 
-                                        <div class="form-group">
-                                            <label>Content From</label>
-                                            <select name="content_from" class="form-control" required>
-                                                <option value="url">URL</option>
-                                                <option value="manual">Manual</option>
-                                            </select>
-                                        </div>
+            <!-- URL -->
+            <div class="form-group col-md-6">
+                <label>URL</label>
+                <input type="text" name="url" class="form-control" placeholder="Optional URL">
+            </div>
 
-                                        <div class="form-group">
-                                            <label>URL</label>
-                                            <input type="text" name="url" class="form-control"
-                                                placeholder="Optional URL">
-                                        </div>
+            <!-- Content -->
+            <div class="form-group col-md-12">
+                <label>Content</label>
+                <textarea id="content" name="content" class="form-control" rows="6"></textarea>
+            </div>
+        </div>
 
-                                        <div class="form-group">
-                                            <label>Content</label>
-                                            <textarea id="content" name="content" class="form-control" rows="6"></textarea>
-                                        </div>
+        <hr>
+        <h5>SEO Settings</h5>
+        <div class="row">
+            <!-- Meta Title -->
+            <div class="form-group col-md-6">
+                <label>Meta Title</label>
+                <input type="text" name="seo_settings[meta_title]" class="form-control" required>
+            </div>
 
-                                        <h5>SEO Settings</h5>
-                                        <div class="form-group">
-                                            <label>Meta Title</label>
-                                            <input type="text" name="seo_settings[meta_title]" class="form-control">
-                                        </div>
+            <!-- Crawl After -->
+            <div class="form-group col-md-6">
+                <label>Crawl After (days)</label>
+                <input type="number" name="seo_settings[crawl_after]" class="form-control" required>
+            </div>
 
-                                        <div class="form-group">
-                                            <label>Meta Description</label>
-                                            <textarea name="seo_settings[meta_description]" class="form-control" rows="3"></textarea>
-                                        </div>
+            <!-- Meta Description -->
+            <div class="form-group col-md-12">
+                <label>Meta Description</label>
+                <textarea name="seo_settings[meta_description]" class="form-control" rows="3" required></textarea>
+            </div>
 
-                                        <div class="form-group">
-                                            <label>Key Words</label>
-                                            <textarea name="seo_settings[key_words]" class="form-control" rows="2"></textarea>
-                                        </div>
+            <!-- Key Words -->
+            <div class="form-group col-md-12">
+                <label>Key Words</label>
+                <textarea name="seo_settings[key_words]" class="form-control" rows="2" required></textarea>
+            </div>
+        </div>
 
-                                        <div class="form-group">
-                                            <label>Crawl After (days)</label>
-                                            <input type="number" name="seo_settings[crawl_after]" class="form-control">
-                                        </div>
+        <div class="row">
+            <!-- Status -->
+            <div class="form-group col-md-6">
+                <label>Status</label>
+                <select name="status" class="form-control" required>
+                    <option value="1">Published</option>
+                    <option value="2">Drafted</option>
+                </select>
+            </div>
+        </div>
+    </div>
 
-                                        <div class="form-group">
-                                            <label>Status</label>
-                                            <select name="status" class="form-control" required>
-                                                <option value="1">Published</option>
-                                                <option value="2">Drafted</option>
-                                            </select>
-                                        </div>
+    <div class="card-footer d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{{ route('pages.index') }}" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
 
-                                    </div>
-
-                                    <div class="card-footer d-flex justify-content-between">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                        <a href="{{ route('pages.index') }}" class="btn btn-secondary">Cancel</a>
-                                    </div>
-                                </form>
 
 
                             </div>

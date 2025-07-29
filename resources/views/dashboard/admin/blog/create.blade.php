@@ -124,40 +124,40 @@
                                             {{-- Title --}}
                                             <div class="form-group col-md-6">
                                                 <label for="title">Title</label>
-                                                <input type="text" class="form-control" name="title"
+                                                <input type="text" class="form-control" required name="title"
                                                     placeholder="Enter Title">
                                             </div>
 
                                             {{-- Meta Title --}}
                                             <div class="form-group col-md-6">
                                                 <label for="bmetatitle">Meta Title</label>
-                                                <input type="text" class="form-control" name="bmetatitle"
+                                                <input type="text" class="form-control" required name="bmetatitle"
                                                     placeholder="Meta Title">
                                             </div>
 
                                             {{-- Meta Description --}}
                                             <div class="form-group col-md-6">
                                                 <label for="bmetadescription">Meta Description</label>
-                                                <textarea class="form-control" name="bmetadescription" rows="3"></textarea>
+                                                <textarea class="form-control" required name="bmetadescription" rows="3"></textarea>
                                             </div>
 
                                             {{-- Page H1 --}}
                                             <div class="form-group col-md-6">
                                                 <label for="pageh1">Page H1</label>
-                                                <input type="text" class="form-control" name="pageh1"
+                                                <input type="text" class="form-control" required name="pageh1"
                                                     placeholder="Page H1">
                                             </div>
 
                                             <div id="productFields" class="row d-none">
                                                 <div class="form-group col-md-6">
                                                     <label for="price">Product Price</label>
-                                                    <input type="number" class="form-control" name="price"
+                                                    <input type="number" class="form-control"  name="price"
                                                         value="{{ old('price') }}">
                                                 </div>
 
                                                 <div class="form-group col-md-6">
                                                     <label for="shipping">Product Shipping</label>
-                                                    <input type="number" class="form-control" name="shipping"
+                                                    <input type="number" class="form-control"  name="shipping"
                                                         value="{{ old('shipping') }}">
                                                 </div>
                                             </div>
@@ -166,7 +166,7 @@
                                             {{-- Content --}}
                                             <div class="form-group col-md-12">
                                                 <label for="description">Content</label>
-                                                <textarea name="description" id="content" class="form-control" rows="5"></textarea>
+                                                <textarea required name="description" id="content" class="form-control" rows="5"></textarea>
                                             </div>
 
                                             {{-- Featured Image --}}

@@ -15,7 +15,7 @@ public function index(Request $request)
 {
     if ($request->ajax()) {
         $data = Products::where('type', 'product')
-            ->select(['id', 'title', 'price', 'shipping','description', 'featured_img', 'type']); // include type
+            ->select(['id', 'title', 'price', 'shipping','description', 'featured_img', 'type','status']); // include type
 
         return datatables()->of($data)
             ->editColumn('title', function ($row) {
@@ -95,7 +95,8 @@ public function index(Request $request)
         $data['type'] = 'product'; // fixed hidden type
         $data['created_by'] = Auth::id();
         $data['create_time'] = time();
-
+    $data['title'] = json_encode(['en' => $data['title']]);
+    $data['description'] = json_encode(['en' => $data['description'] ?? '']);
         if ($request->hasFile('featured_img')) {
             $image = $request->file('featured_img');
             $imageName = time() . '_' . $image->getClientOriginalName();
@@ -126,7 +127,8 @@ public function index(Request $request)
 
         $product = Products::findOrFail($id);
         $data = $request->all();
-
+    $data['title'] = json_encode(['en' => $data['title']]);
+    $data['description'] = json_encode(['en' => $data['description'] ?? '']);
         if ($request->hasFile('featured_img')) {
             $image = $request->file('featured_img');
             $imageName = time() . '_' . $image->getClientOriginalName();

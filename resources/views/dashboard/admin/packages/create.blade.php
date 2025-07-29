@@ -89,7 +89,7 @@
             {{-- Type --}}
             <div class="form-group col-md-6">
                 <label for="type">Type</label>
-                <select class="form-control" name="type" required>
+                <select class="form-control"  name="type" required>
                     <option value="">-- Select Type --</option>
                     <option value="post_package">Post Package</option>
                     <option value="featured_package">Featured Package</option>
@@ -101,31 +101,31 @@
             {{-- Title --}}
             <div class="form-group col-md-6">
                 <label for="title">Title</label>
-                <input type="text" class="form-control" name="title" placeholder="Enter Package Title" required>
+                <input type="text" class="form-control" required name="title" placeholder="Enter Package Title" required>
             </div>
 
             {{-- Description --}}
             <div class="form-group col-md-12">
                 <label for="description">Description</label>
-                <textarea class="form-control" id="content"name="description" rows="3" placeholder="Enter Description"></textarea>
+                <textarea class="form-control" id="content" required name="description" rows="3" placeholder="Enter Description"></textarea>
             </div>
 
             {{-- Price --}}
             <div class="form-group col-md-4">
                 <label for="price">Price</label>
-                <input type="number" class="form-control" name="price" placeholder="Enter Price" step="0.01" required>
+                <input type="number" class="form-control" required name="price" placeholder="Enter Price" step="0.01" required>
             </div>
 
             {{-- Expiration Time --}}
             <div class="form-group col-md-4">
                 <label for="expiration_time">Expiration Time (Days)</label>
-                <input type="number" class="form-control" name="expiration_time" placeholder="Number of Days" required>
+                <input type="number" class="form-control" required name="expiration_time" placeholder="Number of Days" required>
             </div>
 
             {{-- Status --}}
             <div class="form-group col-md-4">
                 <label for="status">Status</label>
-                <select class="form-control" name="status" required>
+                <select class="form-control"  name="status" required>
                     <option value="1">Public</option>
                     <option value="0">Admin Only</option>
                 </select>

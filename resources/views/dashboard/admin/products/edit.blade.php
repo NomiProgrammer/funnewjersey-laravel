@@ -100,19 +100,19 @@
             {{-- Title --}}
             <div class="form-group col-md-6">
                 <label for="title">Title</label>
-                <input type="text" class="form-control" name="title" value="{{ old('title', $product->title) }}" placeholder="Enter Title">
+                <input type="text" class="form-control" required name="title" value="{{ old('title', $product->title) }}" placeholder="Enter Title">
             </div>
 
             {{-- Product Price --}}
             <div class="form-group col-md-6">
                 <label for="price">Product Price</label>
-                <input type="number" class="form-control" name="price" value="{{ old('price', $product->price) }}" placeholder="Enter Price">
+                <input type="number" class="form-control" required name="price" value="{{ old('price', $product->price) }}" placeholder="Enter Price">
             </div>
 
             {{-- Product Shipping --}}
             <div class="form-group col-md-6">
                 <label for="shipping">Product Shipping</label>
-                <input type="number" class="form-control" name="shipping" value="{{ old('shipping', $product->shipping) }}" placeholder="Enter Shipping Cost">
+                <input type="number" class="form-control" required name="shipping" value="{{ old('shipping', $product->shipping) }}" placeholder="Enter Shipping Cost">
             </div>
 
             {{-- Content --}}

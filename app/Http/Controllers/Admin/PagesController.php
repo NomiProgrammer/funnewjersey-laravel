@@ -18,8 +18,8 @@ public function index(Request $request)
 
         return datatables()->of($data)
             ->editColumn('content', function ($row) {
-                return Str::limit(strip_tags($row->content), 50);
-            })
+    return Str::limit(strip_tags($row->content), 50); // Use Illuminate\Support\Str
+})
             ->editColumn('status', function ($row) {
                 if ($row->status == 1) {
                     return '<span class="badge badge-success">Published</span>';
@@ -29,6 +29,7 @@ public function index(Request $request)
                     return '<span class="badge badge-secondary">Unknown</span>';
                 }
             })
+
 ->addColumn('actions', function ($item) {
   $editUrl = route('pages.edit', ['locale' => app()->getLocale(), 'id' => $item->id]);
     return '
@@ -40,7 +41,7 @@ public function index(Request $request)
                 <a class="dropdown-item" href="' . $editUrl . '">
                     <i class="fas fa-edit"></i> &nbsp;Edit
                 </a>
-                <a class="dropdown-item text-danger delete-page" href="javascript:void(0);" data-id="' . $item->id . '">
+                <a class="dropdown-item text-danger delete-pages" href="javascript:void(0);" data-id="' . $item->id . '">
                     <i class="fas fa-trash"></i> &nbsp;Delete
                 </a>
             </div>

@@ -91,7 +91,7 @@
             {{-- Category --}}
             <div class="form-group col-md-6">
                 <label for="category">Category</label>
-                <select class="form-control" name="category">
+                <select class="form-control"  name="category">
                     <option value="">Select Category</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}" {{ $meta->category == $category->id ? 'selected' : '' }}>
@@ -149,37 +149,37 @@
             {{-- H1 --}}
             <div class="form-group col-md-6">
                 <label for="h1">H1</label>
-                <input type="text" name="h1" class="form-control" value="{{ $meta->h1 }}" placeholder="Enter H1">
+                <input type="text" required name="h1" class="form-control" value="{{ $meta->h1 }}" placeholder="Enter H1">
             </div>
 
             {{-- Meta Title --}}
             <div class="form-group col-md-6">
                 <label for="metatitle">Meta Title</label>
-                <input type="text" name="metatitle" class="form-control" value="{{ $meta->metatitle }}" placeholder="Enter Meta Title">
+                <input type="text" required name="metatitle" class="form-control" value="{{ $meta->metatitle }}" placeholder="Enter Meta Title">
             </div>
 
             {{-- Meta Description --}}
             <div class="form-group col-md-6">
                 <label for="metadesc">Meta Description</label>
-                <textarea name="metadesc" class="form-control" rows="3">{{ $meta->metadesc }}</textarea>
+                <textarea required name="metadesc" class="form-control" rows="3">{{ $meta->metadesc }}</textarea>
             </div>
 
             {{-- Meta Keywords --}}
             <div class="form-group col-md-6">
                 <label for="metakeywords">Meta Keywords</label>
-                <textarea name="metakeywords" class="form-control" rows="3">{{ $meta->metakeywords }}</textarea>
+                <textarea required name="metakeywords" class="form-control" rows="3">{{ $meta->metakeywords }}</textarea>
             </div>
 
             {{-- Page Top Description --}}
             <div class="form-group col-md-12">
                 <label for="pagetop">Page Top Description</label>
-                <textarea name="pagetop" class="form-control" id="content" rows="4">{{ $meta->pagetop }}</textarea>
+                <textarea required name="pagetop" class="form-control" id="content" rows="4">{{ $meta->pagetop }}</textarea>
             </div>
 
             {{-- Page Bottom Description --}}
             <div class="form-group col-md-12">
                 <label for="pagebottom">Page Bottom Description</label>
-                <textarea name="pagebottom" class="form-control" rows="4">{{ $meta->pagebottom }}</textarea>
+                <textarea required name="pagebottom" class="form-control" rows="4">{{ $meta->pagebottom }}</textarea>
             </div>
         </div>
     </div>

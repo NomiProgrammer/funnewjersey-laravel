@@ -127,25 +127,25 @@
             {{-- Title --}}
             <div class="form-group col-md-6">
                 <label for="title">Title</label>
-                <input type="text" class="form-control" name="title" value="{{ old('title', $blog->title) }}" placeholder="Enter Title">
+                <input type="text" class="form-control" required name="title" value="{{ old('title', $blog->title) }}" placeholder="Enter Title">
             </div>
 
             {{-- Meta Title --}}
             <div class="form-group col-md-6">
                 <label for="bmetatitle">Meta Title</label>
-                <input type="text" class="form-control" name="bmetatitle" value="{{ old('bmetatitle', $blog->bmetatitle) }}" placeholder="Meta Title">
+                <input type="text" class="form-control" required name="bmetatitle" value="{{ old('bmetatitle', $blog->bmetatitle) }}" placeholder="Meta Title">
             </div>
 
             {{-- Meta Description --}}
             <div class="form-group col-md-6">
                 <label for="bmetadescription">Meta Description</label>
-                <textarea class="form-control" name="bmetadescription" rows="3">{{ old('bmetadescription', $blog->bmetadescription) }}</textarea>
+                <textarea class="form-control" required name="bmetadescription" rows="3">{{ old('bmetadescription', $blog->bmetadescription) }}</textarea>
             </div>
 
             {{-- Page H1 --}}
             <div class="form-group col-md-6">
                 <label for="pageh1">Page H1</label>
-                <input type="text" class="form-control" name="pageh1" value="{{ old('pageh1', $blog->pageh1) }}" placeholder="Page H1">
+                <input type="text" class="form-control" required name="pageh1" value="{{ old('pageh1', $blog->pageh1) }}" placeholder="Page H1">
             </div>
 
             {{-- Product Fields --}}
@@ -164,7 +164,7 @@
             {{-- Content --}}
             <div class="form-group col-md-12">
                 <label for="description">Content</label>
-                <textarea name="description" id="content" class="form-control" rows="5">{{ old('description', $blog->description) }}</textarea>
+                <textarea required name="description" id="content" class="form-control" rows="5">{{ old('description', $blog->description) }}</textarea>
             </div>
 
             {{-- Featured Image --}}

@@ -86,11 +86,11 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label>Name</label>
-                <input type="text" name="title" class="form-control" required>
+                <input type="text" required name="title" class="form-control" required>
             </div>
             <div class="col-md-6 mb-3">
                 <label>Parent</label>
-                <select name="parent" class="form-control">
+                <select  name="parent" class="form-control">
                     <option value="0">No Parent</option>
                     <option value="1">Dog Friendly</option>
                     <option value="2">Fun Outdoor Activities</option>
@@ -100,23 +100,23 @@
             </div>
             <div class="col-md-6 mb-3">
                 <label>Meta Title</label>
-                <input type="text" name="metatitle2" class="form-control">
+                <input type="text" required name="metatitle2" class="form-control">
             </div>
             <div class="col-md-6 mb-3">
                 <label>Meta Keywords</label>
-                <input type="text" name="metakeywords2" class="form-control">
+                <input type="text" required name="metakeywords2" class="form-control">
             </div>
             <div class="col-md-12 mb-3">
                 <label>Meta Description</label>
-                <textarea name="metadescription2" class="form-control" rows="3"></textarea>
+                <textarea required name="metadescription2" class="form-control" rows="3"></textarea>
             </div>
             <div class="col-md-12 mb-3">
                 <label>Tag Description Top</label>
-                <textarea name="catdesc" id="content" class="form-control" rows="5"></textarea>
+                <textarea required name="catdesc" id="content" class="form-control" rows="5"></textarea>
             </div>
             <div class="col-md-12 mb-3">
                 <label>Tag Description Bottom</label>
-                <textarea name="catdesc2" id="content" class="form-control" rows="5"></textarea>
+                <textarea required name="catdesc2" id="content" class="form-control" rows="5"></textarea>
             </div>
         </div>
 

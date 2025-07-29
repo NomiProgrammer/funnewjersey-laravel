@@ -187,7 +187,7 @@ $('#example2').DataTable({
 </script>
 
     <script>
-        $(document).on('click', '.delete-tag', function(e) {
+        $(document).on('click', '.delete-tags', function(e) {
             e.preventDefault();
 
             let id = $(this).data('id');
