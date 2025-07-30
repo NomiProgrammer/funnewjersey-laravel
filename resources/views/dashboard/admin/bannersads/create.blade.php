@@ -86,27 +86,27 @@
     <div class="row">
         <div class="col-md-6 mb-3">
             <label>Slide Order</label>
-            <input type="number" name="slide_order" class="form-control" required>
+            <input type="number" required name="slide_order" class="form-control" required>
         </div>
 
         <div class="col-md-6 mb-3">
             <label>Featured Image</label>
-            <input type="file" name="featured_img" class="form-control" required>
+            <input type="file" required name="featured_img" class="form-control" required>
         </div>
 
         <div class="col-md-6 mb-3">
             <label>Title</label>
-            <input type="text" name="title" class="form-control" required>
+            <input type="text" required name="title" class="form-control" required>
         </div>
 
         <div class="col-md-6 mb-3">
             <label>Notes</label>
-            <textarea name="description" id="content" class="form-control" rows="2"></textarea>
+            <textarea required name="description" id="content" class="form-control" rows="2"></textarea>
         </div>
 
         <div class="col-md-6 mb-3">
             <label>Assigned To</label>
-            <select name="assigned_to" class="form-control">
+            <select  name="assigned_to" class="form-control">
                 <option value="">-- None --</option>
                 @foreach ($users as $user)
                     <option value="{{ $user->id }}">{{ $user->first_name }} {{ $user->last_name }}</option>
@@ -116,7 +116,7 @@
 
         <div class="col-md-6 mb-3">
             <label>Status</label>
-            <select name="status" class="form-control" required>
+            <select  name="status" class="form-control" required>
                 <option value="1">Published</option>
                 <option value="2">Drafted</option>
                 <option value="0">Unpublished</option>
@@ -125,7 +125,7 @@
 
         <div class="col-md-6 mb-3">
             <label>State (County)</label>
-            <select name="state" class="form-control" required>
+            <select  name="state" class="form-control" required>
                 @foreach ($states as $state)
                     <option value="{{ $state->id }}">{{ $state->name }}</option>
                 @endforeach
@@ -134,7 +134,7 @@
 
         <div class="col-md-6 mb-3">
             <label>Created By</label>
-            <select name="created_by" class="form-control">
+            <select  name="created_by" class="form-control">
                 <option value="">-- None --</option>
                 @foreach ($users as $user)
                     <option value="{{ $user->id }}">{{ $user->first_name }} {{ $user->last_name }}</option>
@@ -144,17 +144,17 @@
 
         <div class="col-md-6 mb-3">
             <label>Link</label>
-            <input type="url" name="link" class="form-control">
+            <input type="url" required name="link" class="form-control">
         </div>
 
         <div class="col-md-6 mb-3">
             <label>Slot</label>
-            <input type="text" name="slot" class="form-control">
+            <input type="text" required name="slot" class="form-control">
         </div>
 
         <div class="col-md-6 mb-3">
             <label>Category</label>
-            <select name="category" class="form-control" required>
+            <select required name="category" class="form-control" required>
                 @foreach ($categories as $cat)
                     <option value="{{ $cat->id }}">{{ $cat->title }}</option>
                 @endforeach
@@ -163,12 +163,15 @@
 
         <div class="col-md-6 mb-3">
             <label>Date Expires</label>
-            <input type="date" name="expires" class="form-control">
+            <input type="date" required name="expires" class="form-control">
         </div>
-
+<div class="col-md-6 mb-3">
+    <label>Banner Cost</label>
+    <input type="number" required name="total" class="form-control" required>
+</div>
         <div class="col-md-6 mb-3">
             <label>Banner Type</label>
-            <select name="type" class="form-control" required>
+            <select  name="type" class="form-control" required>
                 <option value="1">Top Horizontal</option>
                 <option value="2">Sidebar Square</option>
             </select>
@@ -176,7 +179,7 @@
 
         <div class="col-md-6 mb-3">
             <label>Region</label>
-            <select name="region" class="form-control" required>
+            <select  name="region" class="form-control" required>
                 <option value="1">North NJ</option>
                 <option value="2">South NJ</option>
                 <option value="3">Southern NJ</option>

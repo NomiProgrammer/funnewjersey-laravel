@@ -105,6 +105,9 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'en|es|fr|ur']], f
         Route::get('/banners-ads/edit/{id}', 'edit')->name('banners-ads.edit');
         Route::put('/banners-ads/update/{id}', 'update')->name('banners-ads.update');
         Route::delete('/banners-ads/destroy/{id}', 'destroy')->name('banners-ads.destroy');
+        // New Pause/Unpause Routes
+        Route::get('/banners-ads/pause/{id}', 'pause')->name('banners-ads.pause');
+        Route::get('/banners-ads/unpause/{id}', 'unpause')->name('banners-ads.unpause');
         });
         // Invoice Controller
         Route::controller(InvoicesController::class)->group(function () {
