@@ -26,7 +26,7 @@
                     alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{Auth::user()->first_name;}}</a>
+                <a href="#" class="d-block">{{ Auth::user()->first_name }}</a>
             </div>
         </div>
 
@@ -60,11 +60,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item"><a href="{{ route('parallax.index') }}"
-                                class="nav-link {{ request()->routeIs('parallax.index') ? 'active' : '' }}"><i class="fas fa-images nav-icon"></i>
+                                class="nav-link {{ request()->routeIs('parallax.index') ? 'active' : '' }}"><i
+                                    class="fas fa-images nav-icon"></i>
                                 <p>All</p>
                             </a></li>
                         <li class="nav-item"><a href="{{ route('parallax.create') }}"
-                                class="nav-link {{ request()->routeIs('parallax.create') ? 'active' : '' }}"><i class="fas fa-plus nav-icon"></i>
+                                class="nav-link {{ request()->routeIs('parallax.create') ? 'active' : '' }}"><i
+                                    class="fas fa-plus nav-icon"></i>
                                 <p>Add new</p>
                             </a></li>
                     </ul>
@@ -76,11 +78,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item"><a href="{{ route('bannersads.index') }}"
-                                class="nav-link {{ request()->routeIs('bannersads.index') ? 'active' : '' }}"><i class="fas fa-flag nav-icon"></i>
+                                class="nav-link {{ request()->routeIs('bannersads.index') ? 'active' : '' }}"><i
+                                    class="fas fa-flag nav-icon"></i>
                                 <p>All</p>
                             </a></li>
                         <li class="nav-item"><a href="{{ route('banners-ads.create') }}"
-                                class="nav-link {{ request()->routeIs('banners-ads.create') ? 'active' : '' }}"><i class="fas fa-plus nav-icon"></i>
+                                class="nav-link {{ request()->routeIs('banners-ads.create') ? 'active' : '' }}"><i
+                                    class="fas fa-plus nav-icon"></i>
                                 <p>Add new</p>
                             </a></li>
                     </ul>
@@ -96,11 +100,13 @@
                                 <p>Payment History</p>
                             </a></li>
                         <li class="nav-item"><a href="{{ route('invoices.index') }}"
-                                class="nav-link {{ request()->routeIs('invoices.index') ? 'active' : '' }} "><i class="fas fa-file-invoice nav-icon"></i>
+                                class="nav-link {{ request()->routeIs('invoices.index') ? 'active' : '' }} "><i
+                                    class="fas fa-file-invoice nav-icon"></i>
                                 <p>All</p>
                             </a></li>
                         <li class="nav-item"><a href="{{ route('invoices.create') }}"
-                                class="nav-link {{ request()->routeIs('invoices.create') ? 'active' : '' }}"><i class="fas fa-plus nav-icon"></i>
+                                class="nav-link {{ request()->routeIs('invoices.create') ? 'active' : '' }}"><i
+                                    class="fas fa-plus nav-icon"></i>
                                 <p>Add new</p>
                             </a></li>
                     </ul>
@@ -113,7 +119,8 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item"><a href="{{ route('listings.index') }}"
-                                class="nav-link {{ request()->routeIs('listings.index') ? 'active' : '' }}"><i class="fas fa-list nav-icon"></i>
+                                class="nav-link {{ request()->routeIs('listings.index') ? 'active' : '' }}"><i
+                                    class="fas fa-list nav-icon"></i>
                                 <p>All Current Listings</p>
                             </a></li>
                         <li class="nav-item"><a href="https://www.funnewjersey.com/en/list-business" class="nav-link"><i
@@ -169,12 +176,14 @@
                         <p>Custom Combo Meta Tags<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="{{route('meta_tags.index')}}"
-                                class="nav-link {{ request()->routeIs('meta_tags.index') ? 'active' : '' }}"><i class="fas fa-tags nav-icon"></i>
+                        <li class="nav-item"><a href="{{ route('meta_tags.index') }}"
+                                class="nav-link {{ request()->routeIs('meta_tags.index') ? 'active' : '' }}"><i
+                                    class="fas fa-tags nav-icon"></i>
                                 <p>Custom Meta Tags</p>
                             </a></li>
-                        <li class="nav-item"><a href="{{route('meta_tags.create')}}"
-                                class="nav-link {{ request()->routeIs('meta_tags.create') ? 'active' : '' }}"><i class="fas fa-plus nav-icon"></i>
+                        <li class="nav-item"><a href="{{ route('meta_tags.create') }}"
+                                class="nav-link {{ request()->routeIs('meta_tags.create') ? 'active' : '' }}"><i
+                                    class="fas fa-plus nav-icon"></i>
                                 <p>Add New Metas</p>
                             </a></li>
                     </ul>
@@ -185,12 +194,14 @@
                         <p>Custom Mega Menus<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="{{route('mega_menus.index')}}"
-                                class="nav-link {{ request()->routeIs('mega_menus.index') ? 'active' : '' }}"><i class="fas fa-th-large nav-icon"></i>
+                        <li class="nav-item"><a href="{{ route('mega_menus.index') }}"
+                                class="nav-link {{ request()->routeIs('mega_menus.index') ? 'active' : '' }}"><i
+                                    class="fas fa-th-large nav-icon"></i>
                                 <p>Custom Mega Menus</p>
                             </a></li>
-                        <li class="nav-item"><a href="{{route('mega_menus.create')}}"
-                                class="nav-link {{ request()->routeIs('mega_menus.create') ? 'active' : '' }}"><i class="fas fa-plus nav-icon"></i>
+                        <li class="nav-item"><a href="{{ route('mega_menus.create') }}"
+                                class="nav-link {{ request()->routeIs('mega_menus.create') ? 'active' : '' }}"><i
+                                    class="fas fa-plus nav-icon"></i>
                                 <p>Add New Menu</p>
                             </a></li>
                     </ul>
@@ -201,12 +212,14 @@
                         <p>Category<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="{{route('category.index')}}"
-                                class="nav-link {{ request()->routeIs('category.index') ? 'active' : '' }}"><i class="fas fa-list nav-icon"></i>
+                        <li class="nav-item"><a href="{{ route('category.index') }}"
+                                class="nav-link {{ request()->routeIs('category.index') ? 'active' : '' }}"><i
+                                    class="fas fa-list nav-icon"></i>
                                 <p>All categories</p>
                             </a></li>
-                        <li class="nav-item"><a href="{{route('category.create')}}"
-                                class="nav-link {{ request()->routeIs('category.create') ? 'active' : '' }}"><i class="fas fa-plus nav-icon"></i>
+                        <li class="nav-item"><a href="{{ route('category.create') }}"
+                                class="nav-link {{ request()->routeIs('category.create') ? 'active' : '' }}"><i
+                                    class="fas fa-plus nav-icon"></i>
                                 <p>New category</p>
                             </a></li>
                     </ul>
@@ -217,12 +230,14 @@
                         <p>Tags<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="{{route('tags.index')}}"
-                                class="nav-link {{ request()->routeIs('tags.index') ? 'active' : '' }}"><i class="fas fa-tags nav-icon"></i>
+                        <li class="nav-item"><a href="{{ route('tags.index') }}"
+                                class="nav-link {{ request()->routeIs('tags.index') ? 'active' : '' }}"><i
+                                    class="fas fa-tags nav-icon"></i>
                                 <p>All Tags</p>
                             </a></li>
-                        <li class="nav-item"><a href="{{route('tags.create')}}"
-                                class="nav-link {{ request()->routeIs('tags.create') ? 'active' : '' }}"><i class="fas fa-plus nav-icon"></i>
+                        <li class="nav-item"><a href="{{ route('tags.create') }}"
+                                class="nav-link {{ request()->routeIs('tags.create') ? 'active' : '' }}"><i
+                                    class="fas fa-plus nav-icon"></i>
                                 <p>New Tag</p>
                             </a></li>
                     </ul>
@@ -233,12 +248,14 @@
                         <p>Fun Deals<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="{{route('deals.index')}}"
-                                class="nav-link {{ request()->routeIs('deals.index') ? 'active' : '' }}"><i class="fas fa-gift nav-icon"></i>
+                        <li class="nav-item"><a href="{{ route('deals.index') }}"
+                                class="nav-link {{ request()->routeIs('deals.index') ? 'active' : '' }}"><i
+                                    class="fas fa-gift nav-icon"></i>
                                 <p>All Fun Deals</p>
                             </a></li>
-                        <li class="nav-item"><a href="{{route('deals.create')}}"
-                                class="nav-link {{ request()->routeIs('deals.create') ? 'active' : '' }}"><i class="fas fa-plus nav-icon"></i>
+                        <li class="nav-item"><a href="{{ route('deals.create') }}"
+                                class="nav-link {{ request()->routeIs('deals.create') ? 'active' : '' }}"><i
+                                    class="fas fa-plus nav-icon"></i>
                                 <p>Add New Fun Deal</p>
                             </a></li>
                     </ul>
@@ -256,12 +273,14 @@
                         <p>Packages<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="{{route('package.index')}}"
-                                class="nav-link {{ request()->routeIs('package.index') ? 'active' : '' }}"><i class="fas fa-boxes nav-icon"></i>
+                        <li class="nav-item"><a href="{{ route('package.index') }}"
+                                class="nav-link {{ request()->routeIs('package.index') ? 'active' : '' }}"><i
+                                    class="fas fa-boxes nav-icon"></i>
                                 <p>All packages</p>
                             </a></li>
-                        <li class="nav-item"><a href="{{route('package.create')}}"
-                                class="nav-link {{ request()->routeIs('package.create') ? 'active' : '' }}"><i class="fas fa-plus nav-icon"></i>
+                        <li class="nav-item"><a href="{{ route('package.create') }}"
+                                class="nav-link {{ request()->routeIs('package.create') ? 'active' : '' }}"><i
+                                    class="fas fa-plus nav-icon"></i>
                                 <p>Create New Package</p>
                             </a></li>
                         <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/package/settings"
@@ -282,12 +301,14 @@
                         <p>Widgets<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="{{route('widgets.index')}}"
-                                class="nav-link {{ request()->routeIs('widgets.index') ? 'active' : '' }}"><i class="fas fa-th nav-icon"></i>
+                        <li class="nav-item"><a href="{{ route('widgets.index') }}"
+                                class="nav-link {{ request()->routeIs('widgets.index') ? 'active' : '' }}"><i
+                                    class="fas fa-th nav-icon"></i>
                                 <p>All Widgets</p>
                             </a></li>
-                        <li class="nav-item"><a href="{{route('widgets.create')}}"
-                                class="nav-link {{ request()->routeIs('widgets.create') ? 'active' : '' }}"><i class="fas fa-arrows-alt nav-icon"></i>
+                        <li class="nav-item"><a href="{{ route('widgets.create') }}"
+                                class="nav-link {{ request()->routeIs('widgets.create') ? 'active' : '' }}"><i
+                                    class="fas fa-arrows-alt nav-icon"></i>
                                 <p>Widget Positions</p>
                             </a></li>
                     </ul>
@@ -304,16 +325,19 @@
                         <p>Blog/News/Article<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="{{route('blog.index')}}"
-                                class="nav-link {{ request()->routeIs('blog.index') ? 'active' : '' }}"><i class="fas fa-list-alt nav-icon"></i>
+                        <li class="nav-item"><a href="{{ route('blog.index') }}"
+                                class="nav-link {{ request()->routeIs('blog.index') ? 'active' : '' }}"><i
+                                    class="fas fa-list-alt nav-icon"></i>
                                 <p>All posts</p>
                             </a></li>
-                        <li class="nav-item"><a href="{{route('blog.create')}}"
-                                class="nav-link {{ request()->routeIs('blog.create') ? 'active' : '' }}"><i class="fas fa-plus nav-icon"></i>
+                        <li class="nav-item"><a href="{{ route('blog.create') }}"
+                                class="nav-link {{ request()->routeIs('blog.create') ? 'active' : '' }}"><i
+                                    class="fas fa-plus nav-icon"></i>
                                 <p>New Post</p>
                             </a></li>
-                        <li class="nav-item"><a href="{{route('blog.trash')}}"
-                                class="nav-link {{ request()->routeIs('blog.trash') ? 'active' : '' }}"><i class="fas fa-trash nav-icon"></i>
+                        <li class="nav-item"><a href="{{ route('blog.trash') }}"
+                                class="nav-link {{ request()->routeIs('blog.trash') ? 'active' : '' }}"><i
+                                    class="fas fa-trash nav-icon"></i>
                                 <p>Trash Post</p>
                             </a></li>
                     </ul>
@@ -324,12 +348,14 @@
                         <p>Products/E-Commerce<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="{{route('products.index')}}"
-                                class="nav-link {{ request()->routeIs('products.index') ? 'active' : '' }}"><i class="fas fa-box-open nav-icon"></i>
+                        <li class="nav-item"><a href="{{ route('products.index') }}"
+                                class="nav-link {{ request()->routeIs('products.index') ? 'active' : '' }}"><i
+                                    class="fas fa-box-open nav-icon"></i>
                                 <p>All posts</p>
                             </a></li>
-                        <li class="nav-item"><a href="{{route('products.create')}}"
-                                class="nav-link {{ request()->routeIs('products.create') ? 'active' : '' }}"><i class="fas fa-plus nav-icon"></i>
+                        <li class="nav-item"><a href="{{ route('products.create') }}"
+                                class="nav-link {{ request()->routeIs('products.create') ? 'active' : '' }}"><i
+                                    class="fas fa-plus nav-icon"></i>
                                 <p>New Post</p>
                             </a></li>
                     </ul>
@@ -340,12 +366,14 @@
                         <p>Pages &amp; Menu<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="{{route('pages.index')}}"
-                                class="nav-link {{ request()->routeIs('pages.index') ? 'active' : '' }}"><i class="fas fa-file-alt nav-icon"></i>
+                        <li class="nav-item"><a href="{{ route('pages.index') }}"
+                                class="nav-link {{ request()->routeIs('pages.index') ? 'active' : '' }}"><i
+                                    class="fas fa-file-alt nav-icon"></i>
                                 <p>All pages</p>
                             </a></li>
-                        <li class="nav-item"><a href="{{route('pages.create')}}"
-                                class="nav-link {{ request()->routeIs('pages.create') ? 'active' : '' }}"><i class="fas fa-plus nav-icon"></i>
+                        <li class="nav-item"><a href="{{ route('pages.create') }}"
+                                class="nav-link {{ request()->routeIs('pages.create') ? 'active' : '' }}"><i
+                                    class="fas fa-plus nav-icon"></i>
                                 <p>New Page</p>
                             </a></li>
                         <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/page/menu"
@@ -354,46 +382,82 @@
                             </a></li>
                     </ul>
                 </li>
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                @php
+                    $systemRoutes = [
+                        'admin.backups.index',
+                        'settings.smtp.form',
+                        'system.emailview',
+                        'system.debugemail',
+                        'system.sitesettings',
+                        'system.settings',
+                        'system.sitemap',
+                    ];
+                @endphp
+
+                <li class="nav-item has-treeview {{ request()->routeIs($systemRoutes) ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs($systemRoutes) ? 'active' : '' }}">
                         <i class="nav-icon fas fa-cogs"></i>
                         <p>System<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/system/allbackups"
-                                class="nav-link"><i class="fas fa-database nav-icon"></i>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.backups.index') }}"
+                                class="nav-link {{ request()->routeIs('admin.backups.index') ? 'active' : '' }}">
+                                <i class="fas fa-database nav-icon"></i>
                                 <p>Manage Backups</p>
-                            </a></li>
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/system/smtpemailsettings"
-                                class="nav-link"><i class="fas fa-envelope nav-icon"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('settings.smtp.form') }}"
+                                class="nav-link {{ request()->routeIs('settings.smtp.form') ? 'active' : '' }}">
+                                <i class="fas fa-envelope nav-icon"></i>
                                 <p>SMTP Email Settings</p>
-                            </a></li>
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/system/translate"
-                                class="nav-link"><i class="fas fa-language nav-icon"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="https://www.funnewjersey.com/en/admin/system/translate" class="nav-link">
+                                <i class="fas fa-language nav-icon"></i>
                                 <p>Auto Translate</p>
-                            </a></li>
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/system/emailtmpl"
-                                class="nav-link"><i class="fas fa-edit nav-icon"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('system.emailview') }}"
+                                class="nav-link {{ request()->routeIs('system.emailview') ? 'active' : '' }}">
+                                <i class="fas fa-edit nav-icon"></i>
                                 <p>Edit Email Text</p>
-                            </a></li>
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/system/debugemail"
-                                class="nav-link"><i class="fas fa-bug nav-icon"></i>
-                                <p>Debug email</p>
-                            </a></li>
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/system/sitesettings"
-                                class="nav-link"><i class="fas fa-cogs nav-icon"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('system.debugemail') }}"
+                                class="nav-link {{ request()->routeIs('system.debugemail') ? 'active' : '' }}">
+                                <i class="fas fa-bug nav-icon"></i>
+                                <p>Debug Email</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('system.sitesettings') }}"
+                                class="nav-link {{ request()->routeIs('system.sitesettings') ? 'active' : '' }}">
+                                <i class="fas fa-cogs nav-icon"></i>
                                 <p>Default Site Settings</p>
-                            </a></li>
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/system/settings"
-                                class="nav-link"><i class="fas fa-cog nav-icon"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('system.settings') }}"
+                                class="nav-link {{ request()->routeIs('system.settings') ? 'active' : '' }}">
+                                <i class="fas fa-cog nav-icon"></i>
                                 <p>Web Admin Settings</p>
-                            </a></li>
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/system/generatesitemap"
-                                class="nav-link"><i class="fas fa-sitemap nav-icon"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('system.sitemap') }}"
+                                class="nav-link {{ request()->routeIs('system.sitemap') ? 'active' : '' }}">
+                                <i class="fas fa-sitemap nav-icon"></i>
                                 <p>Site Map</p>
-                            </a></li>
+                            </a>
+                        </li>
                     </ul>
                 </li>
+
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

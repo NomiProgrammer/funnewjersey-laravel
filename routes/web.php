@@ -29,6 +29,7 @@ use App\Http\Controllers\Admin\MegaMenusTagsController;
 use App\Http\Controllers\Admin\ListingController;
 use App\Http\Controllers\Admin\FunDealsController;
 use App\Http\Controllers\Admin\MegaMenusController;
+use App\Http\Controllers\Admin\SettingsController;
 // Admin Includes (End)
 
 // Admin Includes (Start)
@@ -220,6 +221,45 @@ Route::delete('/blog/force-delete/{id}', [BlogArticleController::class, 'forceDe
         Route::put('/mega_menus/update/{id}', 'update')->name('mega_menus.update');
         Route::delete('/mega_menus/destroy/{id}', 'destroy')->name('mega_menus.destroy');
         });
+        // SettingsController
+        Route::prefix('system')->controller(SettingsController::class)->group(function () {
+            // SMTP Settings
+            Route::get('/smtp-settings', 'showSettingsForm')->name('settings.smtp.form');
+            Route::post('/smtp-settings', 'updateSmtpSettings')->name('settings.smtp.update');
+
+            // Site Settings
+            Route::get('/sitesettings', 'sitesettings')->name('system.sitesettings');
+            Route::post('/sitesettings/save', 'saveSiteSettings')->name('system.sitesettings.save');
+
+            // Settings
+            Route::get('/settings/{key?}', 'settings')->name('system.settings');
+            Route::post('/settings/save', 'saveSettings')->name('admin.system.settings.save');
+
+            // Sitemap
+            Route::get('/site-map', 'sitemap')->name('system.sitemap');
+            Route::post('/generate-sitemap', 'generateSitemap')->name('admin.system.get_sitemap_xml');
+
+            // Debug Email
+            Route::get('/debugemail', 'debugemail')->name('system.debugemail');
+            Route::post('/send-debug-email', 'senddebugemail')->name('system.senddebugemail');
+
+            // Translate
+            Route::get('/translate', 'translate')->name('system.translate');
+            Route::post('/translatelang', 'translatelang')->name('system.translatelang');
+
+            // Email Template
+            Route::get('/emailview', 'emailview')->name('system.emailview');
+            Route::post('/updateemail', 'updateemail')->name('system.updateemail');
+
+            // Backups
+            Route::get('/backups', 'index')->name('admin.backups.index');
+            Route::get('/backups/create-sql', 'createSqlBackup')->name('admin.backups.create.sql');
+            Route::get('/backups/create-image', 'createImageBackup')->name('admin.backups.create.image');
+            Route::get('/backups/download/{index}', 'download')->name('admin.backups.download');
+            Route::delete('/backups/delete/{index}', 'delete')->name('admin.backups.delete');
+            Route::get('/backups/restore/{index}', 'restore')->name('admin.backups.restore');
+        });
+
     });
 
 

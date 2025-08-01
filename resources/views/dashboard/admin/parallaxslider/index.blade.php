@@ -74,7 +74,6 @@
             background-color: transparent !important;
             opacity: 0.85;
         }
-
     </style>
 @endsection
 
@@ -109,13 +108,14 @@
                             <div class="card-header">
                                 <h3 class="card-title">{{ $pageName2 }}</h3>
                                 <div class="card-tools">
-                                    <a href="{{route('parallax.create')}}" class="float-right btn btn-block btn-success btn-sm">
+                                    <a href="{{ route('parallax.create') }}"
+                                        class="float-right btn btn-block btn-success btn-sm">
                                         <i class="fas fa-plus"></i>&nbsp; Add New
                                     </a>
                                 </div>
                             </div>
                             <div class="card-body">
-                             <div id="alert-container"
+                                <div id="alert-container"
                                     style="position: fixed; top: 17px; right: 20px; z-index: 9999; max-width: 300px;">
                                     @if (session('success'))
                                         <div class="alert-message"
@@ -207,8 +207,7 @@
             responsive: false,
             autoWidth: false,
             ajax: "{{ route('parallax.index') }}",
-            columns: [
-                {
+            columns: [{
                     data: 'featured_img',
                     name: 'featured_img',
                     orderable: false,
@@ -226,9 +225,18 @@
                     data: 'slide_order',
                     name: 'slide_order'
                 },
-                { data: 'customer', name: 'customer' },
-                { data: 'company', name: 'company' },
-                { data: 'category', name: 'category' },
+                {
+                    data: 'customer',
+                    name: 'customer'
+                },
+                {
+                    data: 'company',
+                    name: 'company'
+                },
+                {
+                    data: 'category',
+                    name: 'category'
+                },
 
                 {
                     data: 'starts',
@@ -276,7 +284,7 @@
             ]
         });
     </script>
-        <script>
+    <script>
         $(document).on('click', '.delete-parallax', function(e) {
             e.preventDefault();
 
