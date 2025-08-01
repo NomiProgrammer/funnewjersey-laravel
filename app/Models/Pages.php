@@ -22,4 +22,8 @@ class Pages extends Model
     ];
 
     public $timestamps = false; // if you use create_time manually
+    public function children()
+{
+    return $this->hasMany(Pages::class, 'parent');
+}
 }

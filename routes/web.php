@@ -170,6 +170,9 @@ Route::delete('/blog/force-delete/{id}', [BlogArticleController::class, 'forceDe
         // PageController Controller
         Route::controller(PagesController::class)->group(function () {
         Route::get('/pages/manage', 'index')->name('pages.index');
+        Route::get('/pages/menu', 'menu')->name('pages.menu');
+        Route::post('/pages/menu/update', [PagesController::class, 'updateMenu'])->name('pages.menu.update');
+
         Route::get('/pages/add', 'create')->name('pages.create');
         Route::post('/pages/store', 'store')->name('pages.store');
         Route::get('/pages/edit/{id}', 'edit')->name('pages.edit');
@@ -179,9 +182,15 @@ Route::delete('/blog/force-delete/{id}', [BlogArticleController::class, 'forceDe
         // Widgets Controller
         Route::controller(WidgetsController::class)->group(function () {
         Route::get('/widgets/manage', 'index')->name('widgets.index');
+        Route::get('/widgets/widgetpositions', 'widgetpositions')->name('widgets.widgetpositions');
         Route::get('/widgets/add', 'create')->name('widgets.create');
         Route::post('/widgets/store', 'store')->name('widgets.store');
         Route::get('/widgets/edit/{id}', 'edit')->name('widgets.edit');
+Route::post('/widgetpositions/update', [WidgetsController::class, 'widgetpositionsupdate'])->name('widgetpositions.update');
+Route::get('/widgets/get-content/{alias}', [WidgetsController::class, 'getContent'])->name('admin.widgets.get-content');
+Route::post('/widgets/update-content/{alias}', [WidgetsController::class, 'updateContent'])->name('admin.widgets.update-content');
+
+
         Route::put('/widgets/update/{id}', 'update')->name('widgets.update');
         Route::delete('/widgets/destroy/{id}', 'destroy')->name('widgets.destroy');
         });

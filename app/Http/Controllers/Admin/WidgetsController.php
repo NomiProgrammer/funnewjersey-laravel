@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Widgets;
+use App\Models\Settings;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Str;
-
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 class WidgetsController extends Controller
 {
     // List all widgets
@@ -117,5 +119,66 @@ class WidgetsController extends Controller
         $widget->delete();
 
         return response()->json(['success' => 'Widget deleted successfully!']);
+    }
+public function widgetpositions(Request $request)
+{
+    $row = \App\Models\Settings::where('key', 'positions')->first();
+
+    $positions = [];
+    if ($row) {
+        $positions = json_decode($row->values, true); // decode as array
+    }
+
+    $selected_pos = $request->input('position') ?? ($positions[0]['name'] ?? '');
+
+    $active_widgets = [];
+    foreach ($positions as $pos) {
+        if ($pos['name'] === $selected_pos) {
+            $active_widgets = $pos['widgets'] ?? [];
+            break;
+        }
+    }
+
+    $widgets = \App\Models\Widgets::all(); // assuming your model is App\Models\Widgets
+
+    return view('dashboard.admin.widgets.widgetpositions', compact(
+        'positions', 'selected_pos', 'active_widgets', 'widgets'
+    ));
+}
+
+public function getContent($locale, $alias)
+{
+        Log::info('getContent() called', ['alias' => $alias]);
+    $path = resource_path("views/widgets/{$alias}.php");
+
+        Log::info("Checking for widget content file:", ['alias' => $alias, 'path' => $path]);
+
+        if (!File::exists($path)) {
+            Log::warning("File not found for alias: $alias", ['path' => $path]);
+
+            return response()->json([
+                'error' => 'File not found',
+                'path' => $path,
+            ], 404);
+        }
+
+        $content = File::get($path);
+
+        return response()->json([
+            'content' => $content
+        ]);
+    }
+
+    public function updateContent(Request $request, $locale, $alias)
+    {
+        $path = resource_path("views/widgets/{$alias}.php");
+
+        if (!File::exists($path)) {
+            return response()->json(['error' => 'File not found'], 404);
+        }
+
+        File::put($path, $request->input('content'));
+
+        return response()->json(['success' => 'Widget content updated successfully.']);
     }
 }

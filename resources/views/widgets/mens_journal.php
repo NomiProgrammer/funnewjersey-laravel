@@ -1,0 +1,1 @@
+<strong></br>Men's Journal is a rugged and refined lifestyle adventure travel, food and drink. Get in touch <a href=mailto:"mensjournalcompany@gmail.com">mensjournalcompany@gmail.com</a> to find out how we can help you reach everyday, affluent, and adventure seeking consumers on Men's Journal.</br></br></strong>
