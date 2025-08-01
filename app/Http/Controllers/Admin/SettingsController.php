@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\Role;
+use Illuminate\Support\Facades\Hash;
 class SettingsController extends Controller
 {
     //
@@ -273,6 +277,76 @@ public function debugemail(){
     return view('dashboard.admin.system.debugemail');
 
 }
+    public function editprofile()
+    {
+        $user = Auth::user();
+        $roles = Role::all();
+        // The view will expect a 'profile' variable, so we pass the user object as 'profile'.
+        return view('dashboard.admin.system.editprofile', ['profile' => $user, 'roles' => $roles]);
+    }
+
+    public function updateprofile(Request $request)
+    {
+        $user = Auth::user();
+
+        $rules = [
+            'user_name' => 'required|string|max:255|unique:users,user_name,' . $user->id,
+            'user_email' => 'required|string|email|max:255|unique:users,user_email,' . $user->id,
+            'first_name' => 'nullable|string|max:255',
+            'last_name' => 'nullable|string|max:255',
+            'phone' => 'nullable|string|max:20',
+            'gender' => 'nullable|string|in:male,female,other',
+            'address' => 'nullable|string|max:255',
+            'city' => 'nullable|string|max:255',
+            'state' => 'nullable|string|max:255',
+            'zip' => 'nullable|string|max:20',
+            'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'role_id' => 'required|exists:roles,id',
+        ];
+
+        if ($request->filled('password')) {
+            $rules['password'] = 'sometimes|required|string|min:8|confirmed';
+        }
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            $roles = Role::all();
+            return view('dashboard.admin.system.editprofile', ['profile' => $user, 'roles' => $roles])
+                   ->withErrors($validator);
+        }
+
+        $userData = $request->only([
+            'user_name', 'user_email', 'first_name', 'last_name', 'gender', 'address', 'city', 'state', 'zip'
+        ]);
+
+        if ($request->filled('password')) {
+            $userData['password'] = Hash::make($request->password);
+        }
+
+        if ($request->hasFile('profile_photo')) {
+            // Delete old photo if it exists
+            if ($user->profile_photo && Storage::disk('public')->exists($user->profile_photo)) {
+                Storage::disk('public')->delete($user->profile_photo);
+            }
+            $path = $request->file('profile_photo')->store('profile_photos', 'public');
+            $userData['profile_photo'] = $path;
+        }
+        $user->update($userData);
+
+        $user->syncRoles([$request->role_id]);
+
+        // Update user meta for phone
+        if ($request->has('phone')) {
+            $user->meta()->updateOrCreate(
+                ['user_id' => $user->id, 'key' => 'phone'],
+                ['value' => $request->phone]
+            );
+        }
+
+        return redirect()->route('system.editprofile', ['locale' => app()->getLocale()])->with('success', 'Profile updated successfully!');
+    }
+
 public function senddebugemail(Request $request)
 {
     $request->validate([

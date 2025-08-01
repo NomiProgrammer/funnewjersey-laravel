@@ -262,6 +262,9 @@ Route::post('/widgets/update-content/{alias}', [WidgetsController::class, 'updat
             Route::get('/emailview', 'emailview')->name('system.emailview');
             Route::post('/updateemail', 'updateemail')->name('system.updateemail');
 
+            Route::get('/editprofile', 'editprofile')->name('system.editprofile');
+            Route::post('/updateprofile', 'updateprofile')->name('system.updateprofile');
+
             // Backups
             Route::get('/backups', 'index')->name('admin.backups.index');
             Route::get('/backups/create-sql', 'createSqlBackup')->name('admin.backups.create.sql');

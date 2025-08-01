@@ -14,4 +14,6 @@ protected $fillable = [
     'value',
     'status',
 ];
+public $timestamps = false; // ✅ Turn off timestamps!
+
 }
