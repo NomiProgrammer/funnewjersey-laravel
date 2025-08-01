@@ -283,8 +283,8 @@
                                     class="fas fa-plus nav-icon"></i>
                                 <p>Create New Package</p>
                             </a></li>
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/package/settings"
-                                class="nav-link"><i class="fas fa-cogs nav-icon"></i>
+                        <li class="nav-item"><a href="{{ route('package.settings') }}"
+                                class="nav-link {{ request()->routeIs('package.settings') ? 'active' : '' }}"><i class="fas fa-cogs nav-icon"></i>
                                 <p>Package Settings</p>
                             </a></li>
                     </ul>
