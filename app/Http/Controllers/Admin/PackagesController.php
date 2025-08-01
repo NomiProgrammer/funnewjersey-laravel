@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Packages;
+use App\Models\Settings;
 use Yajra\DataTables\DataTables;
 
 class PackagesController extends Controller
@@ -59,6 +60,26 @@ public function index(Request $request)
     public function create()
     {
         return view('dashboard.admin.packages.create');
+    }
+    public function settings()
+    {
+        $settings_json = Settings::where('key', 'package_settings')->value('values');
+        $settings = $settings_json ? json_decode($settings_json) : (object)[];
+
+        return view('dashboard.admin.packages.settings', compact('settings'));
+    }
+
+    public function saveSettings(Request $request)
+    {
+        $data = $request->except('_token');
+        $settings_json = json_encode($data);
+
+        Settings::updateOrCreate(
+            ['key' => 'package_settings'],
+            ['values' => $settings_json]
+        );
+
+        return redirect()->route('package.settings', ['locale' => app()->getLocale()])->with('success', 'Settings saved successfully!');
     }
 
     public function store(Request $request)
