@@ -87,6 +87,10 @@ public function index(Request $request)
         $users = User::all();
         return view('dashboard.admin.invoice.create', compact('users'));
     }
+       public function payment()
+    {
+        return view('dashboard.admin.invoice.payment');
+    }
 
     public function store(Request $request)
     {

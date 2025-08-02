@@ -33,21 +33,29 @@
                             <h3 class="card-title">Edit Your Profile</h3>
                         </div>
                         <div class="card-body">
-                            @if (session('success'))
-                                <div class="alert alert-success">
-                                    {{ session('success') }}
-                                </div>
-                            @endif
+    <div id="alert-container"
+                                    style="position: fixed; top: 17px; right: 20px; z-index: 9999; max-width: 300px;">
+                                    @if (session('success'))
+                                        <div class="alert-message"
+                                            style="padding: 10px 15px; border-radius: 5px; margin-bottom: 10px; font-size: 20px; color: #fff; background: #47C363; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);height: 71px;width: 106%;align-content: center;">
+                                            {{ session('success') }}
+                                        </div>
+                                    @endif
 
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
+                                    @if (session('error'))
+                                        <div class="alert-message"
+                                            style="padding: 10px 15px; border-radius: 5px; margin-bottom: 10px; font-size: 14px; color: #fff; background: #ff0018; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);">
+                                            {{ session('error') }}
+                                        </div>
+                                    @endif
+
+                                    @if (session('info'))
+                                        <div class="alert-message"
+                                            style="padding: 10px 15px; border-radius: 5px; margin-bottom: 10px; font-size: 14px; color: #fff; background: #17a2b8; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);">
+                                            {{ session('info') }}
+                                        </div>
+                                    @endif
                                 </div>
-                            @endif
 
                             <form class="form-horizontal" action="{{ route('system.updateprofile', ['locale' => app()->getLocale()]) }}" method="post" enctype="multipart/form-data">
                                 @csrf

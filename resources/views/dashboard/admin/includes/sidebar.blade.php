@@ -95,8 +95,8 @@
                         <p>Invoices &amp; Billing<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="https://www.funnewjersey.com/en/admin/invoice/payments"
-                                class="nav-link"><i class="fas fa-money-check-alt nav-icon"></i>
+                        <li class="nav-item"><a href="{{ route('invoices.payment') }}"
+                                class="nav-link {{ request()->routeIs('invoices.payment') ? 'active' : '' }}"><i class="fas fa-money-check-alt nav-icon"></i>
                                 <p>Payment History</p>
                             </a></li>
                         <li class="nav-item"><a href="{{ route('invoices.index') }}"
@@ -262,7 +262,7 @@
                 </li>
                 <li class="nav-header">ADMIN</li>
                 <li class="nav-item">
-                    <a href="https://www.funnewjersey.com/en/admin/editprofile" class="nav-link">
+                    <a href="{{ route('system.editprofile') }}" class="nav-link {{ request()->routeIs('system.editprofile') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-user"></i>
                         <p>Profile</p>
                     </a>

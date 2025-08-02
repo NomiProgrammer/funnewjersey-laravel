@@ -30,6 +30,7 @@ use App\Http\Controllers\Admin\ListingController;
 use App\Http\Controllers\Admin\FunDealsController;
 use App\Http\Controllers\Admin\MegaMenusController;
 use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Admin\InvoiceController;
 // Admin Includes (End)
 
 // Admin Includes (Start)
@@ -273,6 +274,8 @@ Route::post('/widgets/update-content/{alias}', [WidgetsController::class, 'updat
             Route::delete('/backups/delete/{index}', 'delete')->name('admin.backups.delete');
             Route::get('/backups/restore/{index}', 'restore')->name('admin.backups.restore');
         });
+                        Route::get('/invoices/payment', [InvoiceController::class, 'payment'])->name('invoices.payment');
+            Route::delete('/payments/{payment}', [InvoiceController::class, 'destroy'])->name('payments.destroy');
 
     });
 
